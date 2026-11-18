@@ -1,24 +1,171 @@
 {
   "storeName": "Appex Collection",
   "currency": "INR",
-  "updatedAt": "2026-11-18T14:10:34.167Z",
+  "updatedAt": "2026-11-18T14:14:46.493Z",
   "products": [
     {
-      "id": "apx-1795011006715",
-      "name": "HOODIES & SWEATSHIRTS FOR MEN'S",
-      "category": "Fashion & Apparel",
-      "price": 360,
-      "description": "HOODIES & SWEATSHIRTS FOR MEN'S\nName: HOODIES & SWEATSHIRTS FOR MEN'S\nFabric: Cotton\nSleeve Length: Long Sleeves\nPattern: Printed\nNet Quantity (N): 1\nSizes:\nM (Chest Size: 34 in, Length Size: 26 in) \nL (Chest Size: 36 in, Length Size: 27 in) \nXL (Chest Size: 38 in, Length Size: 28 in) \n\nCountry of Origin: India",
+      "id": "apx-101",
+      "name": "Appex Studio ANC Wireless Headphones",
+      "category": "Electronics & Audio",
+      "price": 4999,
+      "description": "Hybrid active noise cancellation up to 42dB, 40mm dynamic drivers, 50-hour battery life with USB-C fast charging, and memory-foam protein leather ear cushions.",
       "images": [
-        "https://images.meesho.com/images/products/1089793615/h6ryx_512.avif?width=512"
+        "/src/assets/images/product_wireless_headphones_1795006533172.jpg"
       ],
       "inStock": true,
       "outOfStock": false,
       "codAvailable": true,
       "sevenDaysReturn": true,
-      "reviews": [],
-      "createdAt": "2026-11-18T14:10:06.715Z",
-      "updatedAt": "2026-11-18T14:10:06.715Z"
+      "reviews": [
+        {
+          "id": "rev-1",
+          "author": "Rohan Mehta",
+          "rating": 5,
+          "comment": "Clean acoustic separation and super comfortable during long work calls.",
+          "createdAt": "2026-10-12T09:15:00.000Z",
+          "syncedToGithub": true
+        },
+        {
+          "id": "rev-2",
+          "author": "Ananya Iyer",
+          "rating": 4,
+          "comment": "Battery easily lasts a full week of commuting. Great build finish.",
+          "createdAt": "2026-10-20T14:30:00.000Z",
+          "syncedToGithub": true
+        }
+      ],
+      "createdAt": "2026-10-01T10:00:00.000Z",
+      "updatedAt": "2026-10-20T14:30:00.000Z"
+    },
+    {
+      "id": "apx-102",
+      "name": "Chronos Steel Hybrid Smartwatch",
+      "category": "Electronics & Audio",
+      "price": 6499,
+      "description": "Brushed 316L stainless steel bezel with AMOLED display, stitched full-grain espresso leather strap, continuous heart-rate tracking, and 5ATM water resistance.",
+      "images": [
+        "/src/assets/images/product_smartwatch_steel_1795006533824.jpg"
+      ],
+      "inStock": true,
+      "outOfStock": false,
+      "codAvailable": true,
+      "sevenDaysReturn": true,
+      "reviews": [
+        {
+          "id": "rev-3",
+          "author": "Vikram Nair",
+          "rating": 5,
+          "comment": "Looks like an heirloom analog watch while tracking workouts accurately.",
+          "createdAt": "2026-10-18T11:20:00.000Z",
+          "syncedToGithub": true
+        }
+      ],
+      "createdAt": "2026-10-02T10:00:00.000Z",
+      "updatedAt": "2026-10-18T11:20:00.000Z"
+    },
+    {
+      "id": "apx-103",
+      "name": "Stride Knit Road Runners — Slate",
+      "category": "Footwear",
+      "price": 3299,
+      "description": "Breathable engineered mesh upper paired with dual-density EVA midsole cushioning and high-abrasion carbon rubber traction outsole for daily road mileage.",
+      "images": [
+        "/src/assets/images/product_urban_sneakers_1795006534560.jpg"
+      ],
+      "inStock": true,
+      "outOfStock": false,
+      "codAvailable": true,
+      "sevenDaysReturn": true,
+      "reviews": [
+        {
+          "id": "rev-4",
+          "author": "Siddharth Rao",
+          "rating": 5,
+          "comment": "Lightweight on morning 5Ks and pairs well with casual denim.",
+          "createdAt": "2026-10-25T07:45:00.000Z",
+          "syncedToGithub": true
+        }
+      ],
+      "createdAt": "2026-10-03T10:00:00.000Z",
+      "updatedAt": "2026-10-25T07:45:00.000Z"
+    },
+    {
+      "id": "apx-104",
+      "name": "Heavyweight Organic Twill Overshirt",
+      "category": "Fashion & Apparel",
+      "price": 2499,
+      "description": "340 GSM garment-washed organic cotton twill overshirt in deep navy. Features twin chest utility pockets, reinforced felled seams, and natural horn buttons.",
+      "images": [
+        "/src/assets/images/product_cotton_jacket_1795006534437.jpg"
+      ],
+      "inStock": true,
+      "outOfStock": false,
+      "codAvailable": true,
+      "sevenDaysReturn": true,
+      "reviews": [
+        {
+          "id": "rev-5",
+          "author": "Kabir Verma",
+          "rating": 4,
+          "comment": "Heavy fabric drapes sharply. True to size across the shoulders.",
+          "createdAt": "2026-11-01T16:00:00.000Z",
+          "syncedToGithub": true
+        }
+      ],
+      "createdAt": "2026-10-04T10:00:00.000Z",
+      "updatedAt": "2026-11-01T16:00:00.000Z"
+    },
+    {
+      "id": "apx-105",
+      "name": "Sculpted Ceramic & Brass Table Lamp",
+      "category": "Home & Living",
+      "price": 3799,
+      "description": "Hand-finished matte ivory stoneware base paired with a brushed solid brass collar, natural woven linen drum shade, and braided fabric power cord (E27 warm LED included).",
+      "images": [
+        "/src/assets/images/product_ceramic_lamp_1795006535676.jpg"
+      ],
+      "inStock": true,
+      "outOfStock": false,
+      "codAvailable": false,
+      "sevenDaysReturn": true,
+      "reviews": [
+        {
+          "id": "rev-6",
+          "author": "Meera Kulkarni",
+          "rating": 5,
+          "comment": "Throws a calm warm glow across my study desk. Packaging was rock solid.",
+          "createdAt": "2026-11-03T19:10:00.000Z",
+          "syncedToGithub": true
+        }
+      ],
+      "createdAt": "2026-10-05T10:00:00.000Z",
+      "updatedAt": "2026-11-03T19:10:00.000Z"
+    },
+    {
+      "id": "apx-106",
+      "name": "Ballistic Commuter 22L Backpack",
+      "category": "Accessories",
+      "price": 2899,
+      "description": "Water-resistant 1680D ballistic nylon commuter pack with full-grain leather trim, suspended 16-inch padded laptop sleeve, and YKK AquaGuard zippers.",
+      "images": [
+        "/src/assets/images/product_leather_backpack_1795006536152.jpg"
+      ],
+      "inStock": false,
+      "outOfStock": true,
+      "codAvailable": true,
+      "sevenDaysReturn": true,
+      "reviews": [
+        {
+          "id": "rev-7",
+          "author": "Devika Sen",
+          "rating": 5,
+          "comment": "Stands upright on its own and holds my laptop plus camera pouch cleanly.",
+          "createdAt": "2026-11-05T08:40:00.000Z",
+          "syncedToGithub": true
+        }
+      ],
+      "createdAt": "2026-10-06T10:00:00.000Z",
+      "updatedAt": "2026-11-05T08:40:00.000Z"
     }
   ]
 }
