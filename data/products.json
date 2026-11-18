@@ -1,42 +1,8 @@
 {
   "storeName": "Appex Collection",
   "currency": "INR",
-  "updatedAt": "2026-11-18T14:22:42.476Z",
+  "updatedAt": "2026-11-18T14:23:12.515Z",
   "products": [
-    {
-      "id": "apx-101",
-      "name": "Appex Studio ANC Wireless Headphones",
-      "category": "Electronics & Audio",
-      "price": 4999,
-      "description": "Hybrid active noise cancellation up to 42dB, 40mm dynamic drivers, 50-hour battery life with USB-C fast charging, and memory-foam protein leather ear cushions.",
-      "images": [
-        "/src/assets/images/product_wireless_headphones_1795006533172.jpg"
-      ],
-      "inStock": true,
-      "outOfStock": false,
-      "codAvailable": true,
-      "sevenDaysReturn": true,
-      "reviews": [
-        {
-          "id": "rev-1",
-          "author": "Rohan Mehta",
-          "rating": 5,
-          "comment": "Clean acoustic separation and super comfortable during long work calls.",
-          "createdAt": "2026-10-12T09:15:00.000Z",
-          "syncedToGithub": true
-        },
-        {
-          "id": "rev-2",
-          "author": "Ananya Iyer",
-          "rating": 4,
-          "comment": "Battery easily lasts a full week of commuting. Great build finish.",
-          "createdAt": "2026-10-20T14:30:00.000Z",
-          "syncedToGithub": true
-        }
-      ],
-      "createdAt": "2026-10-01T10:00:00.000Z",
-      "updatedAt": "2026-10-20T14:30:00.000Z"
-    },
     {
       "id": "apx-102",
       "name": "Chronos Steel Hybrid Smartwatch",
