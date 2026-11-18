@@ -1,30 +1,6 @@
 {
   "storeName": "Appex Collection",
   "currency": "INR",
-  "updatedAt": "2026-11-18T13:57:58.145Z",
-  "orders": [
-    {
-      "orderId": "APX079682",
-      "customerName": "Sattwik Dash",
-      "phone": "8965236589",
-      "pin": "721448",
-      "address": "Srinibas",
-      "items": [
-        {
-          "productId": "apx-101",
-          "name": "Appex Studio ANC Wireless Headphones",
-          "price": 4999,
-          "qty": 1
-        }
-      ],
-      "itemCount": 1,
-      "subtotal": 4999,
-      "shipping": 0,
-      "total": 4999,
-      "paymentMethod": "Cash on Delivery",
-      "status": "Cancelled",
-      "createdAt": "2026-11-18T13:54:39.682Z",
-      "syncedToGithub": true
-    }
-  ]
+  "updatedAt": "2026-11-18T13:58:00.806Z",
+  "orders": []
 }
