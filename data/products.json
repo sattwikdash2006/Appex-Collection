@@ -1,7 +1,7 @@
 {
   "storeName": "Appex Collection",
   "currency": "INR",
-  "updatedAt": "2026-11-18T14:10:08.429Z",
+  "updatedAt": "2026-11-18T14:10:17.981Z",
   "products": [
     {
       "id": "apx-1795011006715",
@@ -19,66 +19,6 @@
       "reviews": [],
       "createdAt": "2026-11-18T14:10:06.715Z",
       "updatedAt": "2026-11-18T14:10:06.715Z"
-    },
-    {
-      "id": "apx-101",
-      "name": "Appex Studio ANC Wireless Headphones",
-      "category": "Electronics & Audio",
-      "price": 4999,
-      "description": "Hybrid active noise cancellation up to 42dB, 40mm dynamic drivers, 50-hour battery life with USB-C fast charging, and memory-foam protein leather ear cushions.",
-      "images": [
-        "/src/assets/images/product_wireless_headphones_1795006533172.jpg"
-      ],
-      "inStock": true,
-      "outOfStock": false,
-      "codAvailable": true,
-      "sevenDaysReturn": true,
-      "reviews": [
-        {
-          "id": "rev-1",
-          "author": "Rohan Mehta",
-          "rating": 5,
-          "comment": "Clean acoustic separation and super comfortable during long work calls.",
-          "createdAt": "2026-10-12T09:15:00.000Z",
-          "syncedToGithub": true
-        },
-        {
-          "id": "rev-2",
-          "author": "Ananya Iyer",
-          "rating": 4,
-          "comment": "Battery easily lasts a full week of commuting. Great build finish.",
-          "createdAt": "2026-10-20T14:30:00.000Z",
-          "syncedToGithub": true
-        }
-      ],
-      "createdAt": "2026-10-01T10:00:00.000Z",
-      "updatedAt": "2026-10-20T14:30:00.000Z"
-    },
-    {
-      "id": "apx-102",
-      "name": "Chronos Steel Hybrid Smartwatch",
-      "category": "Electronics & Audio",
-      "price": 6499,
-      "description": "Brushed 316L stainless steel bezel with AMOLED display, stitched full-grain espresso leather strap, continuous heart-rate tracking, and 5ATM water resistance.",
-      "images": [
-        "/src/assets/images/product_smartwatch_steel_1795006533824.jpg"
-      ],
-      "inStock": true,
-      "outOfStock": false,
-      "codAvailable": true,
-      "sevenDaysReturn": true,
-      "reviews": [
-        {
-          "id": "rev-3",
-          "author": "Vikram Nair",
-          "rating": 5,
-          "comment": "Looks like an heirloom analog watch while tracking workouts accurately.",
-          "createdAt": "2026-10-18T11:20:00.000Z",
-          "syncedToGithub": true
-        }
-      ],
-      "createdAt": "2026-10-02T10:00:00.000Z",
-      "updatedAt": "2026-10-18T11:20:00.000Z"
     },
     {
       "id": "apx-103",
