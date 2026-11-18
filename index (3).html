@@ -1,0 +1,3137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Appex Collection — Curated Multi-Category Storefront</title>
+    <meta
+      name="description"
+      content="Shop curated electronics, fashion, footwear, homeware, and everyday accessories at Appex Collection with Cash on Delivery and 7-day returns."
+    />
+    <meta property="og:title" content="Appex Collection — Curated Multi-Category Storefront" />
+    <meta
+      property="og:description"
+      content="Shop curated electronics, fashion, footwear, homeware, and everyday accessories at Appex Collection with Cash on Delivery and 7-day returns."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts: Plus Jakarta Sans (Display & Body) + JetBrains Mono (Tabular Pricing & Metrics) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- FontAwesome 6 Icons via CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+            },
+            colors: {
+              brand: {
+                DEFAULT: '#2874F0',
+                dark: '#1C5ED6',
+                tint: '#EEF4FF',
+              },
+              action: {
+                DEFAULT: '#FB641B',
+                hover: '#E85710',
+                amber: '#FF9F00',
+              },
+              canvas: '#F1F3F6',
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* Minimal compositor-only motion helpers & scroll polish */
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        background-color: #f1f3f6;
+        color: #0f172a;
+      }
+      .tabular-nums {
+        font-variant-numeric: tabular-nums;
+      }
+      .text-balance {
+        text-wrap: balance;
+      }
+      .product-card {
+        transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 180ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .product-card:hover {
+        transform: translateY(-2px);
+      }
+      .drawer-panel {
+        transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .product-card,
+        .drawer-panel,
+        * {
+          transition-duration: 0.01ms !important;
+          animation-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col antialiased selection:bg-brand selection:text-white">
+    <!-- =================================================================== -->
+    <!-- TOP BAR CONTRACT: 1-row, 3-zone header (#2874F0 Royal Commerce Blue) -->
+    <!-- =================================================================== -->
+    <header class="sticky top-0 z-40 bg-brand text-white border-b border-brand-dark/30 shadow-sm">
+      <div class="max-w-[1280px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4 md:gap-8">
+        <!-- Zone 1: Single-element Brand Wordmark -->
+        <a
+          href="#top"
+          onclick="app.resetFilters(event)"
+          class="text-lg sm:text-xl font-bold tracking-tight text-white whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 rounded"
+        >
+          Appex Collection
+        </a>
+
+        <!-- Zone 2: Integrated Search & Concise Single-Line Navigation -->
+        <div class="flex-1 max-w-2xl flex items-center gap-6">
+          <div class="relative flex-1">
+            <label for="searchInput" class="sr-only">Search products</label>
+            <input
+              id="searchInput"
+              type="search"
+              placeholder="Search electronics, apparel, footwear..."
+              class="w-full h-10 pl-4 pr-10 rounded-md bg-white text-slate-900 placeholder-slate-400 text-sm border border-transparent focus:outline-none focus:ring-2 focus:ring-action-amber"
+            />
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-brand pointer-events-none">
+              <i class="fa-solid fa-magnifying-glass text-sm"></i>
+            </span>
+          </div>
+
+          <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-white/90 shrink-0">
+            <a href="#catalog" class="hover:text-white hover:underline underline-offset-4 whitespace-nowrap shrink-0">
+              Catalog
+            </a>
+            <a href="#assurance" class="hover:text-white hover:underline underline-offset-4 whitespace-nowrap shrink-0">
+              Guarantee
+            </a>
+            <a href="#site-footer" class="hover:text-white hover:underline underline-offset-4 whitespace-nowrap shrink-0">
+              Support
+            </a>
+          </nav>
+        </div>
+
+        <!-- Zone 3: 1 Primary Action (Shopping Bag Drawer Trigger) -->
+        <div class="shrink-0">
+          <button
+            id="cartToggleBtn"
+            type="button"
+            onclick="app.openCart()"
+            class="inline-flex items-center gap-2.5 h-10 px-4 rounded-md bg-white/15 hover:bg-white/25 text-white text-sm font-semibold transition-colors whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          >
+            <i class="fa-solid fa-bag-shopping text-sm"></i>
+            <span>Bag</span>
+            <span id="cartCountBadge" class="font-mono tabular-nums text-xs bg-action-amber text-slate-950 font-bold px-1.5 py-0.5 rounded">
+              0
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- =================================================================== -->
+    <!-- CATEGORY FILTER BAR (Single-Line Functional Filter Controls)        -->
+    <!-- =================================================================== -->
+    <div class="bg-white border-b border-slate-200">
+      <div class="max-w-[1280px] mx-auto px-4 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-3">
+        <div id="categoryTabs" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+          <!-- Populated dynamically by JS -->
+        </div>
+
+        <div class="flex items-center gap-3 shrink-0 ml-auto">
+          <label for="sortSelect" class="text-xs font-medium text-slate-500 hidden sm:inline whitespace-nowrap">
+            Sort by
+          </label>
+          <select
+            id="sortSelect"
+            onchange="app.setSort(this.value)"
+            class="h-9 px-3 rounded-md border border-slate-200 bg-white text-xs font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand"
+          >
+            <option value="featured">Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="rating-desc">Customer Rating</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- MAIN STOREFRONT CONTENT (Max 3 Focused Sections)                    -->
+    <!-- =================================================================== -->
+    <main id="top" class="flex-1">
+      <!-- SECTION 1: HERO CAMPAIGN SHOWCASE + TRUST STRIP -->
+      <section class="max-w-[1280px] mx-auto px-4 sm:px-6 pt-6 pb-4">
+        <div class="bg-white border border-slate-200 rounded-xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-stretch">
+          <div class="lg:col-span-6 p-6 sm:p-10 lg:p-12 flex flex-col justify-center">
+            <p class="text-xs font-semibold tracking-wide text-brand mb-3">
+              New Season Marketplace · Curated Everyday Goods
+            </p>
+            <h1 class="text-3xl sm:text-4xl lg:text-[42px] font-bold tracking-tight text-slate-900 leading-[1.15] text-balance mb-4">
+              Elevated essentials built for daily performance.
+            </h1>
+            <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-xl mb-7">
+              Discover verified electronics, tailored apparel, architectural homeware, and commuter carry—delivered across India with Cash on Delivery and 7-day hassle-free returns.
+            </p>
+            <div class="flex flex-wrap items-center gap-4">
+              <a
+                href="#catalog"
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-action hover:bg-action-hover text-white text-sm font-semibold transition-colors whitespace-nowrap shrink-0"
+              >
+                <span>Shop Collection</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </a>
+              <button
+                type="button"
+                onclick="app.setCategory('Electronics & Audio'); document.getElementById('catalog').scrollIntoView({behavior:'smooth'});"
+                class="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 text-sm font-semibold transition-colors whitespace-nowrap shrink-0"
+              >
+                <span>Explore Audio & Tech</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-6 relative min-h-[260px] lg:min-h-[380px] bg-slate-100">
+            <img
+              src="/src/assets/images/hero_appex_showcase_1795006532076.jpg"
+              alt="Appex Collection curated electronics, wristwatch, navy overshirt, and brass lamp"
+              referrerpolicy="no-referrer"
+              onerror="app.handleImgError(this, 'Appex Collection Showcase')"
+              class="w-full h-full lg:absolute lg:inset-0 object-cover"
+            />
+          </div>
+        </div>
+
+        <!-- 4-Column Storefront Trust Strip below Hero -->
+        <div class="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div class="bg-white border border-slate-200 rounded-lg px-4 py-3.5 flex items-center gap-3">
+            <span class="w-9 h-9 rounded-md bg-brand-tint text-brand flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-truck-fast text-sm"></i>
+            </span>
+            <div class="min-w-0">
+              <p class="text-xs sm:text-sm font-semibold text-slate-900 truncate">Free Delivery</p>
+              <p class="text-xs text-slate-500 truncate">On orders above ₹999</p>
+            </div>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-lg px-4 py-3.5 flex items-center gap-3">
+            <span class="w-9 h-9 rounded-md bg-brand-tint text-brand flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-money-bill-wave text-sm"></i>
+            </span>
+            <div class="min-w-0">
+              <p class="text-xs sm:text-sm font-semibold text-slate-900 truncate">Cash on Delivery</p>
+              <p class="text-xs text-slate-500 truncate">Pay at your doorstep</p>
+            </div>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-lg px-4 py-3.5 flex items-center gap-3">
+            <span class="w-9 h-9 rounded-md bg-brand-tint text-brand flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-rotate-left text-sm"></i>
+            </span>
+            <div class="min-w-0">
+              <p class="text-xs sm:text-sm font-semibold text-slate-900 truncate">7-Day Returns</p>
+              <p class="text-xs text-slate-500 truncate">Zero-hassle pickup</p>
+            </div>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-lg px-4 py-3.5 flex items-center gap-3">
+            <span class="w-9 h-9 rounded-md bg-brand-tint text-brand flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-shield-halved text-sm"></i>
+            </span>
+            <div class="min-w-0">
+              <p class="text-xs sm:text-sm font-semibold text-slate-900 truncate">Quality Checked</p>
+              <p class="text-xs text-slate-500 truncate">Verified storefront stock</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: FEATURED & FILTERABLE PRODUCT CATALOG -->
+      <section id="catalog" class="max-w-[1280px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
+          <div>
+            <h2 id="catalogHeading" class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight">
+              All Products
+            </h2>
+            <p id="catalogMeta" class="text-sm text-slate-500 mt-1 tabular-nums">
+              Showing 0 items
+            </p>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <button
+              id="syncRefreshBtn"
+              type="button"
+              onclick="app.refreshFromGitHub()"
+              class="hidden inline-flex items-center gap-2 px-3.5 py-2 rounded-md border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors"
+            >
+              <i class="fa-solid fa-arrows-rotate text-brand"></i>
+              <span>Refresh Live Stock</span>
+            </button>
+            <button
+              id="clearFiltersBtn"
+              type="button"
+              onclick="app.resetFilters()"
+              class="hidden inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 transition-colors"
+            >
+              <i class="fa-solid fa-xmark"></i>
+              <span>Clear Filters</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Loading State Skeleton -->
+        <div id="catalogLoader" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-white border border-slate-200 rounded-xl p-4 animate-pulse">
+            <div class="aspect-[4/3] bg-slate-100 rounded-lg mb-4"></div>
+            <div class="h-3 bg-slate-100 rounded w-1/3 mb-3"></div>
+            <div class="h-5 bg-slate-100 rounded w-3/4 mb-3"></div>
+            <div class="h-5 bg-slate-100 rounded w-1/4"></div>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-xl p-4 animate-pulse">
+            <div class="aspect-[4/3] bg-slate-100 rounded-lg mb-4"></div>
+            <div class="h-3 bg-slate-100 rounded w-1/3 mb-3"></div>
+            <div class="h-5 bg-slate-100 rounded w-3/4 mb-3"></div>
+            <div class="h-5 bg-slate-100 rounded w-1/4"></div>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-xl p-4 animate-pulse hidden lg:block">
+            <div class="aspect-[4/3] bg-slate-100 rounded-lg mb-4"></div>
+            <div class="h-3 bg-slate-100 rounded w-1/3 mb-3"></div>
+            <div class="h-5 bg-slate-100 rounded w-3/4 mb-3"></div>
+            <div class="h-5 bg-slate-100 rounded w-1/4"></div>
+          </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Rendered dynamically by JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div
+          id="emptyCatalogState"
+          class="hidden bg-white border border-slate-200 rounded-xl p-12 text-center max-w-lg mx-auto my-8"
+        >
+          <div class="w-12 h-12 rounded-lg bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-4">
+            <i class="fa-solid fa-box-open text-xl"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-slate-900 mb-2">No matching products found</h3>
+          <p class="text-sm text-slate-500 mb-6">
+            Try clearing your search query or switching back to all marketplace categories.
+          </p>
+          <button
+            type="button"
+            onclick="app.resetFilters()"
+            class="px-5 py-2.5 rounded-lg bg-brand hover:bg-brand-dark text-white text-sm font-semibold transition-colors"
+          >
+            View All Products
+          </button>
+        </div>
+      </section>
+
+      <!-- SECTION 3: STORE ASSURANCE & QUALITY PROMISE -->
+      <section id="assurance" class="max-w-[1280px] mx-auto px-4 sm:px-6 pt-4 pb-12">
+        <div class="bg-white border border-slate-200 rounded-xl p-6 sm:p-10">
+          <div class="max-w-2xl mb-8">
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900 tracking-tight text-balance">
+              Why customers choose Appex Collection
+            </h2>
+            <p class="text-sm text-slate-600 mt-2 leading-relaxed">
+              Every listing goes through multi-point inspection, transparent pricing in Indian Rupees, and flexible payment options designed for nationwide doorstep delivery.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-6 border-t border-slate-100">
+            <div>
+              <h3 class="text-sm font-semibold text-slate-900 mb-2">01. Transparent Stock & Pricing</h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                Real-time inventory availability, clear Cash on Delivery eligibility, and final GST-inclusive rupee pricing with zero hidden fees.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-slate-900 mb-2">02. Protected 7-Day Returns</h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                Eligible items carry an explicit 7-day replacement and return window with doorstep inspection pickup across serviceable PIN codes.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-sm font-semibold text-slate-900 mb-2">03. Verified Buyer Reviews</h3>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                Read authentic ratings and share your product experience directly on any listing page to guide fellow shoppers.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- =================================================================== -->
+    <!-- FOOTER WITH DISCREET ADMIN TRIGGER                                  -->
+    <!-- =================================================================== -->
+    <footer id="site-footer" class="bg-slate-900 text-slate-300 border-t border-slate-800">
+      <div class="max-w-[1280px] mx-auto px-4 sm:px-6 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+        <div>
+          <p class="text-base font-bold text-white">Appex Collection</p>
+          <p class="text-xs text-slate-400 mt-1">
+            &copy; <span id="currentYear">2026</span> Appex Collection. All rights reserved. Prices in INR (₹).
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-6 text-xs text-slate-400">
+          <a href="#catalog" class="hover:text-white transition-colors">Shop Catalog</a>
+          <a href="#assurance" class="hover:text-white transition-colors">Return Policy</a>
+          <button
+            type="button"
+            onclick="app.openCart()"
+            class="hover:text-white transition-colors"
+          >
+            Shopping Bag
+          </button>
+          <!-- Discreet Hidden Admin Trigger (also accessible via Ctrl+Shift+A) -->
+          <button
+            id="hiddenAdminTrigger"
+            type="button"
+            onclick="app.openAdminAuth()"
+            aria-label="Store Management"
+            title="Store Management (Ctrl+Shift+A)"
+            class="text-slate-600 hover:text-slate-300 transition-colors p-1.5 rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-500"
+          >
+            <i class="fa-solid fa-lock text-[11px]"></i>
+          </button>
+        </div>
+      </div>
+    </footer>
+
+    <!-- =================================================================== -->
+    <!-- PRODUCT DETAIL MODAL (Gallery, Purchase Module, Customer Reviews)    -->
+    <!-- =================================================================== -->
+    <div
+      id="productModal"
+      class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-[2px] flex items-center justify-center p-0 sm:p-4 overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalProductTitle"
+    >
+      <div class="bg-white w-full max-w-5xl sm:rounded-xl border border-slate-200 shadow-2xl overflow-hidden max-h-screen sm:max-h-[92vh] flex flex-col">
+        <!-- Modal Header -->
+        <div class="px-5 py-3.5 border-b border-slate-200 flex items-center justify-between gap-4 bg-white shrink-0">
+          <div class="flex items-center gap-2 text-xs text-slate-500 min-w-0">
+            <span id="modalProductCategory" class="font-medium text-brand truncate">Category</span>
+            <span aria-hidden="true">/</span>
+            <span id="modalProductBreadcrumb" class="truncate">Product Details</span>
+          </div>
+          <button
+            type="button"
+            onclick="app.closeProductModal()"
+            aria-label="Close product details"
+            class="w-9 h-9 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-900 flex items-center justify-center transition-colors shrink-0"
+          >
+            <i class="fa-solid fa-xmark text-base"></i>
+          </button>
+        </div>
+
+        <!-- Modal Scrollable Body -->
+        <div class="overflow-y-auto p-5 sm:p-8 space-y-10">
+          <!-- Contiguous Purchase Module -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <!-- Gallery Left -->
+            <div class="lg:col-span-6 space-y-3">
+              <div class="aspect-[4/3] rounded-xl bg-slate-50 border border-slate-200 overflow-hidden relative">
+                <img
+                  id="modalMainImage"
+                  src=""
+                  alt=""
+                  referrerpolicy="no-referrer"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div id="modalThumbnails" class="grid grid-cols-5 gap-2.5">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <!-- Purchase Details Right -->
+            <div class="lg:col-span-6 flex flex-col">
+              <div class="flex flex-wrap items-center gap-2 text-xs font-semibold mb-2">
+                <span id="modalStockBadge" class="inline-flex items-center gap-1.5"></span>
+                <span class="text-slate-300" aria-hidden="true">·</span>
+                <span id="modalRatingInline" class="text-slate-600 font-mono tabular-nums"></span>
+              </div>
+
+              <h2 id="modalProductTitle" class="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight text-balance">
+                Product Name
+              </h2>
+
+              <div class="mt-4 flex items-baseline gap-3">
+                <span id="modalProductPrice" class="text-3xl font-bold text-slate-900 font-mono tabular-nums">
+                  ₹0
+                </span>
+                <span class="text-xs text-slate-500">Inclusive of all taxes</span>
+              </div>
+
+              <p id="modalProductDescription" class="mt-5 text-sm sm:text-base text-slate-600 leading-relaxed">
+                Description
+              </p>
+
+              <!-- Service Terms (COD & 7 Days Return) -->
+              <div class="mt-6 pt-5 border-t border-slate-100 grid grid-cols-2 gap-3">
+                <div id="modalCodInfo" class="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-slate-700"></div>
+                <div id="modalReturnInfo" class="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-slate-700"></div>
+              </div>
+
+              <!-- Action Row -->
+              <div class="mt-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                <div class="flex items-center border border-slate-200 rounded-lg h-11 bg-white self-start">
+                  <button
+                    type="button"
+                    onclick="app.stepModalQty(-1)"
+                    aria-label="Decrease quantity"
+                    class="w-10 h-full text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-l-lg"
+                  >
+                    <i class="fa-solid fa-minus text-xs"></i>
+                  </button>
+                  <span id="modalQtyValue" class="w-10 text-center text-sm font-semibold font-mono tabular-nums">1</span>
+                  <button
+                    type="button"
+                    onclick="app.stepModalQty(1)"
+                    aria-label="Increase quantity"
+                    class="w-10 h-full text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded-r-lg"
+                  >
+                    <i class="fa-solid fa-plus text-xs"></i>
+                  </button>
+                </div>
+
+                <button
+                  id="modalAddToCartBtn"
+                  type="button"
+                  onclick="app.addModalProductToCart(false)"
+                  class="flex-1 h-11 px-5 rounded-lg bg-action-amber hover:bg-amber-500 text-slate-950 font-bold text-sm inline-flex items-center justify-center gap-2 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  <i class="fa-solid fa-cart-plus"></i>
+                  <span>Add to Bag</span>
+                </button>
+
+                <button
+                  id="modalBuyNowBtn"
+                  type="button"
+                  onclick="app.addModalProductToCart(true)"
+                  class="flex-1 h-11 px-5 rounded-lg bg-action hover:bg-action-hover text-white font-bold text-sm inline-flex items-center justify-center gap-2 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  <i class="fa-solid fa-bolt"></i>
+                  <span>Buy Now</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Customer Reviews Section -->
+          <div class="pt-8 border-t border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <!-- Review List -->
+            <div class="lg:col-span-7 space-y-4">
+              <div class="flex items-center justify-between">
+                <h3 class="text-lg font-bold text-slate-900">Customer Reviews</h3>
+                <span id="modalReviewTotal" class="text-xs font-mono tabular-nums text-slate-500">0 reviews</span>
+              </div>
+              <div id="modalReviewsList" class="space-y-4">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <!-- Submit Review Form -->
+            <div class="lg:col-span-5">
+              <form
+                id="reviewForm"
+                onsubmit="app.submitProductReview(event)"
+                class="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-4"
+              >
+                <div>
+                  <h4 class="text-base font-bold text-slate-900">Write a Review</h4>
+                  <p id="reviewSyncHint" class="text-xs text-slate-500 mt-0.5">
+                    Share your experience with this product.
+                  </p>
+                </div>
+
+                <div>
+                  <label for="reviewAuthorInput" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                    Your Name
+                  </label>
+                  <input
+                    id="reviewAuthorInput"
+                    type="text"
+                    required
+                    maxlength="60"
+                    placeholder="e.g. Aarav Sharma"
+                    class="w-full h-10 px-3 rounded-lg border border-slate-200 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
+                  />
+                </div>
+
+                <div>
+                  <span class="block text-xs font-semibold text-slate-700 mb-1.5">Rating</span>
+                  <div id="reviewStarPicker" class="flex items-center gap-1.5">
+                    <!-- Rendered dynamically -->
+                  </div>
+                </div>
+
+                <div>
+                  <label for="reviewCommentInput" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                    Review Comment
+                  </label>
+                  <textarea
+                    id="reviewCommentInput"
+                    rows="3"
+                    required
+                    maxlength="500"
+                    placeholder="How was the build quality, fit, or delivery?"
+                    class="w-full p-3 rounded-lg border border-slate-200 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
+                  ></textarea>
+                </div>
+
+                <button
+                  id="submitReviewBtn"
+                  type="submit"
+                  class="w-full h-10 rounded-lg bg-brand hover:bg-brand-dark text-white text-sm font-semibold inline-flex items-center justify-center gap-2 transition-colors disabled:opacity-60"
+                >
+                  <i class="fa-solid fa-paper-plane text-xs"></i>
+                  <span>Submit Review</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- CART & COD CHECKOUT DRAWER                                          -->
+    <!-- =================================================================== -->
+    <div id="cartDrawerBackdrop" class="hidden fixed inset-0 z-50 bg-slate-950/50 backdrop-blur-[1px]" onclick="app.closeCart()"></div>
+    <aside
+      id="cartDrawer"
+      class="fixed top-0 right-0 z-50 h-full w-full max-w-md bg-white border-l border-slate-200 shadow-2xl translate-x-full drawer-panel flex flex-col"
+      aria-label="Shopping Bag"
+    >
+      <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between">
+        <div>
+          <h2 class="text-lg font-bold text-slate-900">Your Shopping Bag</h2>
+          <p id="cartDrawerSubtitle" class="text-xs text-slate-500 font-mono tabular-nums">0 items</p>
+        </div>
+        <button
+          type="button"
+          onclick="app.closeCart()"
+          aria-label="Close bag"
+          class="w-9 h-9 rounded-lg hover:bg-slate-100 text-slate-500 hover:text-slate-900 flex items-center justify-center"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div id="cartDrawerBody" class="flex-1 overflow-y-auto p-5 space-y-5">
+        <!-- Populated dynamically -->
+      </div>
+
+      <div id="cartDrawerFooter" class="p-5 border-t border-slate-200 bg-slate-50 space-y-3">
+        <!-- Populated dynamically -->
+      </div>
+    </aside>
+
+    <!-- =================================================================== -->
+    <!-- HIDDEN ADMIN LOGIN MODAL (Password: 7908741893)                     -->
+    <!-- =================================================================== -->
+    <div
+      id="adminLoginModal"
+      class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-[2px] flex items-center justify-center p-4"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="adminLoginHeading"
+    >
+      <div class="bg-white w-full max-w-md rounded-xl border border-slate-200 shadow-2xl p-6 sm:p-7">
+        <div class="flex items-center justify-between mb-5">
+          <div class="flex items-center gap-3">
+            <span class="w-10 h-10 rounded-lg bg-brand-tint text-brand flex items-center justify-center">
+              <i class="fa-solid fa-shield-halved"></i>
+            </span>
+            <div>
+              <h2 id="adminLoginHeading" class="text-lg font-bold text-slate-900">Store Admin Access</h2>
+              <p class="text-xs text-slate-500">Appex Collection Management</p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onclick="app.closeAdminAuth()"
+            aria-label="Close login modal"
+            class="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-500 flex items-center justify-center"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <form onsubmit="app.verifyAdminPassword(event)" class="space-y-4">
+          <div>
+            <label for="adminPasswordInput" class="block text-xs font-semibold text-slate-700 mb-1.5">
+              Master Password
+            </label>
+            <div class="relative">
+              <input
+                id="adminPasswordInput"
+                type="password"
+                required
+                autocomplete="off"
+                placeholder="Enter master password"
+                class="w-full h-11 pl-3.5 pr-10 rounded-lg border border-slate-200 text-sm text-slate-900 font-mono focus:outline-none focus:ring-2 focus:ring-brand"
+              />
+              <button
+                type="button"
+                onclick="app.togglePasswordVisibility('adminPasswordInput', this)"
+                aria-label="Toggle password visibility"
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
+              >
+                <i class="fa-regular fa-eye text-sm"></i>
+              </button>
+            </div>
+            <p id="adminAuthError" class="hidden text-xs text-red-600 font-medium mt-2">
+              Incorrect master password. Please try again.
+            </p>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full h-11 rounded-lg bg-brand hover:bg-brand-dark text-white text-sm font-semibold transition-colors"
+          >
+            Unlock Admin Dashboard
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- ADMIN MANAGEMENT DASHBOARD MODAL                                    -->
+    <!-- =================================================================== -->
+    <div
+      id="adminDashboardModal"
+      class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-[2px] flex items-center justify-center p-0 sm:p-4 overflow-y-auto"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="adminDashboardHeading"
+    >
+      <div class="bg-white w-full max-w-6xl sm:rounded-xl border border-slate-200 shadow-2xl overflow-hidden max-h-screen sm:max-h-[94vh] flex flex-col">
+        <!-- Admin Top Bar -->
+        <div class="px-5 sm:px-6 py-4 bg-slate-900 text-white flex flex-wrap items-center justify-between gap-4 shrink-0">
+          <div class="flex items-center gap-3">
+            <span class="w-9 h-9 rounded-lg bg-brand text-white flex items-center justify-center">
+              <i class="fa-solid fa-sliders text-sm"></i>
+            </span>
+            <div>
+              <h2 id="adminDashboardHeading" class="text-base sm:text-lg font-bold">
+                Appex Collection — Admin Console
+              </h2>
+              <p id="adminRepoStatusLine" class="text-xs text-slate-300">
+                GitHub Repo: Not Connected (Session Mode)
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2.5">
+            <button
+              type="button"
+              onclick="app.lockAdminPanel()"
+              class="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition-colors"
+            >
+              <i class="fa-solid fa-right-from-bracket mr-1.5"></i>Lock & Close
+            </button>
+          </div>
+        </div>
+
+        <!-- Admin Navigation Tabs -->
+        <div class="px-5 sm:px-6 py-2.5 bg-slate-50 border-b border-slate-200 flex items-center gap-2 overflow-x-auto no-scrollbar shrink-0">
+          <button
+            type="button"
+            data-admin-tab="editor"
+            onclick="app.switchAdminTab('editor')"
+            class="admin-tab-btn px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap shrink-0 transition-colors"
+          >
+            <i class="fa-solid fa-plus-circle mr-1.5"></i>Add / Edit Product
+          </button>
+          <button
+            type="button"
+            data-admin-tab="catalog"
+            onclick="app.switchAdminTab('catalog')"
+            class="admin-tab-btn px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap shrink-0 transition-colors"
+          >
+            <i class="fa-solid fa-boxes-stacked mr-1.5"></i>Manage Catalog (<span id="adminCatalogCount" class="font-mono tabular-nums">0</span>)
+          </button>
+          <button
+            type="button"
+            data-admin-tab="reviews"
+            onclick="app.switchAdminTab('reviews')"
+            class="admin-tab-btn px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap shrink-0 transition-colors"
+          >
+            <i class="fa-solid fa-comments mr-1.5"></i>Review Queue (<span id="adminPendingReviewCount" class="font-mono tabular-nums">0</span>)
+          </button>
+          <button
+            type="button"
+            data-admin-tab="github"
+            onclick="app.switchAdminTab('github')"
+            class="admin-tab-btn px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap shrink-0 transition-colors"
+          >
+            <i class="fa-brands fa-github mr-1.5"></i>GitHub Sync Settings
+          </button>
+        </div>
+
+        <!-- Admin Tab Content Area -->
+        <div class="flex-1 overflow-y-auto p-5 sm:p-7">
+          <!-- TAB 1: ADD / EDIT PRODUCT -->
+          <div id="adminTab-editor" class="admin-tab-panel space-y-6">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h3 id="productFormTitle" class="text-lg font-bold text-slate-900">Add New Product</h3>
+                <p class="text-xs text-slate-500 mt-0.5">
+                  Uploads images to <code class="font-mono bg-slate-100 px-1 py-0.5 rounded">assets/products/</code> and syncs <code class="font-mono bg-slate-100 px-1 py-0.5 rounded">data/products.json</code> live.
+                </p>
+              </div>
+              <button
+                id="resetProductFormBtn"
+                type="button"
+                onclick="app.resetAdminProductForm()"
+                class="px-3.5 py-2 rounded-lg border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700"
+              >
+                Clear Form
+              </button>
+            </div>
+
+            <form id="adminProductForm" onsubmit="app.saveAdminProduct(event)" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              <input id="editProductId" type="hidden" value="" />
+
+              <!-- Left Column: Product Details & 4 Checkboxes -->
+              <div class="lg:col-span-6 space-y-4">
+                <div>
+                  <label for="prodNameInput" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                    Product Name *
+                  </label>
+                  <input
+                    id="prodNameInput"
+                    type="text"
+                    required
+                    placeholder="e.g. Appex Studio ANC Wireless Headphones"
+                    class="w-full h-10 px-3.5 rounded-lg border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
+                  />
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="prodPriceInput" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Price (INR ₹) *
+                    </label>
+                    <input
+                      id="prodPriceInput"
+                      type="number"
+                      min="1"
+                      step="1"
+                      required
+                      placeholder="4999"
+                      class="w-full h-10 px-3.5 rounded-lg border border-slate-200 text-sm font-mono tabular-nums text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
+                    />
+                  </div>
+                  <div>
+                    <label for="prodCategoryInput" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Category *
+                    </label>
+                    <select
+                      id="prodCategoryInput"
+                      required
+                      class="w-full h-10 px-3 rounded-lg border border-slate-200 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
+                    >
+                      <option value="Electronics & Audio">Electronics & Audio</option>
+                      <option value="Fashion & Apparel">Fashion & Apparel</option>
+                      <option value="Footwear">Footwear</option>
+                      <option value="Home & Living">Home & Living</option>
+                      <option value="Accessories">Accessories</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="prodDescInput" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                    Description *
+                  </label>
+                  <textarea
+                    id="prodDescInput"
+                    rows="4"
+                    required
+                    placeholder="Write clear product specifications, materials, sizing, or warranty details..."
+                    class="w-full p-3.5 rounded-lg border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
+                  ></textarea>
+                </div>
+
+                <!-- 4 Explicit Status Checkboxes -->
+                <div class="pt-2">
+                  <span class="block text-xs font-semibold text-slate-700 mb-2.5">
+                    Availability & Order Policies
+                  </span>
+                  <div class="grid grid-cols-2 gap-3 bg-slate-50 border border-slate-200 rounded-xl p-4">
+                    <label class="flex items-center gap-2.5 text-sm font-medium text-slate-800 cursor-pointer select-none">
+                      <input
+                        id="chkOutOfStock"
+                        type="checkbox"
+                        onchange="app.handleStockCheckbox('outOfStock')"
+                        class="w-4 h-4 rounded border-slate-300 text-red-600 focus:ring-red-500"
+                      />
+                      <span>Out of Stock</span>
+                    </label>
+
+                    <label class="flex items-center gap-2.5 text-sm font-medium text-slate-800 cursor-pointer select-none">
+                      <input
+                        id="chkInStock"
+                        type="checkbox"
+                        checked
+                        onchange="app.handleStockCheckbox('inStock')"
+                        class="w-4 h-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
+                      />
+                      <span>In Stock</span>
+                    </label>
+
+                    <label class="flex items-center gap-2.5 text-sm font-medium text-slate-800 cursor-pointer select-none">
+                      <input
+                        id="chkCodAvailable"
+                        type="checkbox"
+                        checked
+                        class="w-4 h-4 rounded border-slate-300 text-brand focus:ring-brand"
+                      />
+                      <span>COD Available</span>
+                    </label>
+
+                    <label class="flex items-center gap-2.5 text-sm font-medium text-slate-800 cursor-pointer select-none">
+                      <input
+                        id="chkSevenDaysReturn"
+                        type="checkbox"
+                        checked
+                        class="w-4 h-4 rounded border-slate-300 text-brand focus:ring-brand"
+                      />
+                      <span>7 Days Return</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Column: Media Upload (Up to 10 Files + Direct Image URLs) -->
+              <div class="lg:col-span-6 space-y-4">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs font-semibold text-slate-700">
+                    Product Images (Upload files or paste URLs)
+                  </span>
+                  <span id="adminImageCountLabel" class="text-xs font-mono tabular-nums text-slate-500">
+                    0 / 10 images
+                  </span>
+                </div>
+
+                <!-- File Upload Dropzone -->
+                <label
+                  for="prodImageFilesInput"
+                  class="block border border-dashed border-slate-300 hover:border-brand rounded-xl p-5 text-center bg-slate-50 hover:bg-brand-tint/40 transition-colors cursor-pointer"
+                >
+                  <i class="fa-solid fa-cloud-arrow-up text-2xl text-brand mb-2"></i>
+                  <p class="text-sm font-semibold text-slate-800">Upload up to 10 product images</p>
+                  <p class="text-xs text-slate-500 mt-1">
+                    PNG, JPG, or WebP · Uploaded to <code class="font-mono">assets/products/</code> in GitHub
+                  </p>
+                  <input
+                    id="prodImageFilesInput"
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onchange="app.handleAdminImageFiles(this.files); this.value='';"
+                    class="hidden"
+                  />
+                </label>
+
+                <!-- Alternative Direct Image URL Input -->
+                <div class="flex items-center gap-2">
+                  <input
+                    id="prodImageUrlInput"
+                    type="url"
+                    placeholder="Or paste direct Image URL (https://...)"
+                    class="flex-1 h-10 px-3.5 rounded-lg border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
+                  />
+                  <button
+                    type="button"
+                    onclick="app.addAdminImageUrl()"
+                    class="h-10 px-4 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-800 whitespace-nowrap shrink-0"
+                  >
+                    Add URL
+                  </button>
+                </div>
+
+                <!-- Staged Image Gallery Preview -->
+                <div id="adminMediaPreviewGrid" class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 min-h-[96px]">
+                  <!-- Populated dynamically -->
+                </div>
+
+                <div class="pt-4 border-t border-slate-200 flex items-center justify-end gap-3">
+                  <button
+                    id="saveProductSubmitBtn"
+                    type="submit"
+                    class="w-full sm:w-auto px-6 h-11 rounded-lg bg-action hover:bg-action-hover text-white text-sm font-bold inline-flex items-center justify-center gap-2 transition-colors disabled:opacity-60"
+                  >
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Save & Sync Live</span>
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <!-- TAB 2: MANAGE CATALOG -->
+          <div id="adminTab-catalog" class="admin-tab-panel hidden space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900">Live Product Inventory</h3>
+                <p class="text-xs text-slate-500">Edit details, flip stock status, or remove items from the repository.</p>
+              </div>
+              <button
+                type="button"
+                onclick="app.switchAdminTab('editor'); app.resetAdminProductForm();"
+                class="px-4 py-2 rounded-lg bg-brand hover:bg-brand-dark text-white text-xs font-semibold"
+              >
+                <i class="fa-solid fa-plus mr-1.5"></i>New Product
+              </button>
+            </div>
+
+            <div class="overflow-x-auto border border-slate-200 rounded-xl">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-50 border-b border-slate-200 text-xs font-semibold text-slate-600">
+                    <th class="py-3 px-4">Product</th>
+                    <th class="py-3 px-4">Category</th>
+                    <th class="py-3 px-4">Price</th>
+                    <th class="py-3 px-4">Status</th>
+                    <th class="py-3 px-4">Policies</th>
+                    <th class="py-3 px-4 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminCatalogTableBody" class="divide-y divide-slate-100 text-sm">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- TAB 3: PENDING VISITOR REVIEWS -->
+          <div id="adminTab-reviews" class="admin-tab-panel hidden space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900">Visitor Review Sync Queue</h3>
+                <p class="text-xs text-slate-500">
+                  Reviews submitted by visitors without a public review token wait here for admin approval and GitHub commit.
+                </p>
+              </div>
+              <button
+                id="syncAllReviewsBtn"
+                type="button"
+                onclick="app.commitAllPendingReviews()"
+                class="px-4 py-2 rounded-lg bg-brand hover:bg-brand-dark text-white text-xs font-semibold disabled:opacity-50"
+              >
+                <i class="fa-solid fa-check-double mr-1.5"></i>Approve & Commit All to GitHub
+              </button>
+            </div>
+
+            <div id="adminReviewQueueList" class="space-y-3">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- TAB 4: GITHUB SYNC SETTINGS -->
+          <div id="adminTab-github" class="admin-tab-panel hidden space-y-6">
+            <div class="max-w-3xl space-y-6">
+              <div>
+                <h3 class="text-lg font-bold text-slate-900">GitHub Repository Backend</h3>
+                <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                  Zero browser <code class="font-mono bg-slate-100 px-1 py-0.5 rounded">localStorage</code> is used. Credentials stay strictly in memory for this session and sync directly with <code class="font-mono bg-slate-100 px-1 py-0.5 rounded">data/products.json</code> and <code class="font-mono bg-slate-100 px-1 py-0.5 rounded">assets/products/</code> via the GitHub REST API.
+                </p>
+              </div>
+
+              <form onsubmit="app.connectAndSyncGitHub(event)" class="bg-slate-50 border border-slate-200 rounded-xl p-5 sm:p-6 space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label for="ghOwnerInput" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                      GitHub Username / Org *
+                    </label>
+                    <input
+                      id="ghOwnerInput"
+                      type="text"
+                      required
+                      placeholder="e.g. octocat"
+                      class="w-full h-10 px-3.5 rounded-lg border border-slate-200 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
+                    />
+                  </div>
+                  <div>
+                    <label for="ghRepoInput" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Repository Name *
+                    </label>
+                    <input
+                      id="ghRepoInput"
+                      type="text"
+                      required
+                      placeholder="e.g. appex-collection-store"
+                      class="w-full h-10 px-3.5 rounded-lg border border-slate-200 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
+                    />
+                  </div>
+                  <div>
+                    <label for="ghBranchInput" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                      Branch *
+                    </label>
+                    <input
+                      id="ghBranchInput"
+                      type="text"
+                      required
+                      value="main"
+                      class="w-full h-10 px-3.5 rounded-lg border border-slate-200 bg-white text-sm font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label for="ghAdminTokenInput" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                    Admin Personal Access Token (PAT with Contents: Read &amp; Write)
+                  </label>
+                  <div class="relative">
+                    <input
+                      id="ghAdminTokenInput"
+                      type="password"
+                      autocomplete="off"
+                      placeholder="ghp_... or github_pat_..."
+                      class="w-full h-10 pl-3.5 pr-10 rounded-lg border border-slate-200 bg-white text-sm font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
+                    />
+                    <button
+                      type="button"
+                      onclick="app.togglePasswordVisibility('ghAdminTokenInput', this)"
+                      aria-label="Toggle token visibility"
+                      class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
+                    >
+                      <i class="fa-regular fa-eye text-sm"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="ghReviewTokenInput" class="block text-xs font-semibold text-slate-700 mb-1.5">
+                    Optional Scoped Review Token (Enables automatic visitor review commits)
+                  </label>
+                  <input
+                    id="ghReviewTokenInput"
+                    type="password"
+                    autocomplete="off"
+                    placeholder="Optional fine-grained PAT for visitor reviews"
+                    class="w-full h-10 px-3.5 rounded-lg border border-slate-200 bg-white text-sm font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
+                  />
+                </div>
+
+                <div class="pt-2 flex flex-wrap items-center gap-3">
+                  <button
+                    id="ghConnectPullBtn"
+                    type="submit"
+                    class="px-5 h-10 rounded-lg bg-brand hover:bg-brand-dark text-white text-xs font-semibold inline-flex items-center gap-2 transition-colors"
+                  >
+                    <i class="fa-solid fa-plug-circle-check"></i>
+                    <span>Connect &amp; Pull data/products.json</span>
+                  </button>
+
+                  <button
+                    id="ghSeedPushBtn"
+                    type="button"
+                    onclick="app.pushCurrentCatalogToGitHub()"
+                    class="px-5 h-10 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 text-slate-800 text-xs font-semibold inline-flex items-center gap-2 transition-colors"
+                  >
+                    <i class="fa-solid fa-upload"></i>
+                    <span>Push Current Catalog to GitHub</span>
+                  </button>
+                </div>
+              </form>
+
+              <!-- Shareable Storefront Link Helper (No localStorage needed for visitors) -->
+              <div class="bg-white border border-slate-200 rounded-xl p-5 space-y-2">
+                <p class="text-xs font-semibold text-slate-900">Shareable Visitor Storefront URL</p>
+                <p class="text-xs text-slate-500">
+                  Share this URL so shoppers load your live <code class="font-mono">data/products.json</code> directly from GitHub without using browser storage:
+                </p>
+                <div class="flex items-center gap-2 pt-1">
+                  <input
+                    id="shareableRepoUrl"
+                    type="text"
+                    readonly
+                    value="Connect a GitHub repository above to generate link"
+                    class="flex-1 h-9 px-3 rounded-lg border border-slate-200 bg-slate-50 text-xs font-mono text-slate-700"
+                  />
+                  <button
+                    type="button"
+                    onclick="app.copyShareableUrl()"
+                    class="h-9 px-3.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700 shrink-0"
+                  >
+                    Copy
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- TOAST NOTIFICATION STACK                                            -->
+    <!-- =================================================================== -->
+    <div id="toastContainer" class="fixed bottom-4 right-4 z-[60] flex flex-col gap-2 max-w-sm w-[calc(100%-2rem)] pointer-events-none"></div>
+
+    <!-- =================================================================== -->
+    <!-- MODULAR APPLICATION SCRIPT (ZERO LOCALSTORAGE / GITHUB REST API)    -->
+    <!-- =================================================================== -->
+    <script>
+      (() => {
+        'use strict';
+
+        // Strict Admin Master Password per specification
+        const ADMIN_MASTER_PASS = '7908741893';
+        const MAX_PRODUCT_IMAGES = 10;
+        const FREE_DELIVERY_THRESHOLD = 999;
+        const DELIVERY_FEE = 49;
+
+        // Optional default public repo constants (leave blank for in-app setup or ?repo=owner/name)
+        const DEFAULT_REPO_CONFIG = {
+          owner: '',
+          repo: '',
+          branch: 'main',
+          adminToken: '',
+          reviewToken: '',
+        };
+
+        const CATEGORIES = [
+          'All',
+          'Electronics & Audio',
+          'Fashion & Apparel',
+          'Footwear',
+          'Home & Living',
+          'Accessories',
+        ];
+
+        // Initial curated catalog rendered in-memory prior to connecting a live GitHub repo
+        const STARTER_PRODUCTS = [
+          {
+            id: 'apx-101',
+            name: 'Appex Studio ANC Wireless Headphones',
+            category: 'Electronics & Audio',
+            price: 4999,
+            description:
+              'Hybrid active noise cancellation up to 42dB, 40mm dynamic drivers, 50-hour battery life with USB-C fast charging, and memory-foam protein leather ear cushions.',
+            images: ['/src/assets/images/product_wireless_headphones_1795006533172.jpg'],
+            inStock: true,
+            outOfStock: false,
+            codAvailable: true,
+            sevenDaysReturn: true,
+            reviews: [
+              {
+                id: 'rev-1',
+                author: 'Rohan Mehta',
+                rating: 5,
+                comment: 'Clean acoustic separation and super comfortable during long work calls.',
+                createdAt: '2026-10-12T09:15:00.000Z',
+                syncedToGithub: true,
+              },
+              {
+                id: 'rev-2',
+                author: 'Ananya Iyer',
+                rating: 4,
+                comment: 'Battery easily lasts a full week of commuting. Great build finish.',
+                createdAt: '2026-10-20T14:30:00.000Z',
+                syncedToGithub: true,
+              },
+            ],
+            createdAt: '2026-10-01T10:00:00.000Z',
+            updatedAt: '2026-10-20T14:30:00.000Z',
+          },
+          {
+            id: 'apx-102',
+            name: 'Chronos Steel Hybrid Smartwatch',
+            category: 'Electronics & Audio',
+            price: 6499,
+            description:
+              'Brushed 316L stainless steel bezel with AMOLED display, stitched full-grain espresso leather strap, continuous heart-rate tracking, and 5ATM water resistance.',
+            images: ['/src/assets/images/product_smartwatch_steel_1795006533824.jpg'],
+            inStock: true,
+            outOfStock: false,
+            codAvailable: true,
+            sevenDaysReturn: true,
+            reviews: [
+              {
+                id: 'rev-3',
+                author: 'Vikram Nair',
+                rating: 5,
+                comment: 'Looks like an heirloom analog watch while tracking workouts accurately.',
+                createdAt: '2026-10-18T11:20:00.000Z',
+                syncedToGithub: true,
+              },
+            ],
+            createdAt: '2026-10-02T10:00:00.000Z',
+            updatedAt: '2026-10-18T11:20:00.000Z',
+          },
+          {
+            id: 'apx-103',
+            name: 'Stride Knit Road Runners — Slate',
+            category: 'Footwear',
+            price: 3299,
+            description:
+              'Breathable engineered mesh upper paired with dual-density EVA midsole cushioning and high-abrasion carbon rubber traction outsole for daily road mileage.',
+            images: ['/src/assets/images/product_urban_sneakers_1795006534560.jpg'],
+            inStock: true,
+            outOfStock: false,
+            codAvailable: true,
+            sevenDaysReturn: true,
+            reviews: [
+              {
+                id: 'rev-4',
+                author: 'Siddharth Rao',
+                rating: 5,
+                comment: 'Lightweight on morning 5Ks and pairs well with casual denim.',
+                createdAt: '2026-10-25T07:45:00.000Z',
+                syncedToGithub: true,
+              },
+            ],
+            createdAt: '2026-10-03T10:00:00.000Z',
+            updatedAt: '2026-10-25T07:45:00.000Z',
+          },
+          {
+            id: 'apx-104',
+            name: 'Heavyweight Organic Twill Overshirt',
+            category: 'Fashion & Apparel',
+            price: 2499,
+            description:
+              '340 GSM garment-washed organic cotton twill overshirt in deep navy. Features twin chest utility pockets, reinforced felled seams, and natural horn buttons.',
+            images: ['/src/assets/images/product_cotton_jacket_1795006534437.jpg'],
+            inStock: true,
+            outOfStock: false,
+            codAvailable: true,
+            sevenDaysReturn: true,
+            reviews: [
+              {
+                id: 'rev-5',
+                author: 'Kabir Verma',
+                rating: 4,
+                comment: 'Heavy fabric drapes sharply. True to size across the shoulders.',
+                createdAt: '2026-11-01T16:00:00.000Z',
+                syncedToGithub: true,
+              },
+            ],
+            createdAt: '2026-10-04T10:00:00.000Z',
+            updatedAt: '2026-11-01T16:00:00.000Z',
+          },
+          {
+            id: 'apx-105',
+            name: 'Sculpted Ceramic & Brass Table Lamp',
+            category: 'Home & Living',
+            price: 3799,
+            description:
+              'Hand-finished matte ivory stoneware base paired with a brushed solid brass collar, natural woven linen drum shade, and braided fabric power cord (E27 warm LED included).',
+            images: ['/src/assets/images/product_ceramic_lamp_1795006535676.jpg'],
+            inStock: true,
+            outOfStock: false,
+            codAvailable: false,
+            sevenDaysReturn: true,
+            reviews: [
+              {
+                id: 'rev-6',
+                author: 'Meera Kulkarni',
+                rating: 5,
+                comment: 'Throws a calm warm glow across my study desk. Packaging was rock solid.',
+                createdAt: '2026-11-03T19:10:00.000Z',
+                syncedToGithub: true,
+              },
+            ],
+            createdAt: '2026-10-05T10:00:00.000Z',
+            updatedAt: '2026-11-03T19:10:00.000Z',
+          },
+          {
+            id: 'apx-106',
+            name: 'Ballistic Commuter 22L Backpack',
+            category: 'Accessories',
+            price: 2899,
+            description:
+              'Water-resistant 1680D ballistic nylon commuter pack with full-grain leather trim, suspended 16-inch padded laptop sleeve, and YKK AquaGuard zippers.',
+            images: ['/src/assets/images/product_leather_backpack_1795006536152.jpg'],
+            inStock: false,
+            outOfStock: true,
+            codAvailable: true,
+            sevenDaysReturn: true,
+            reviews: [
+              {
+                id: 'rev-7',
+                author: 'Devika Sen',
+                rating: 5,
+                comment: 'Stands upright on its own and holds my laptop plus camera pouch cleanly.',
+                createdAt: '2026-11-05T08:40:00.000Z',
+                syncedToGithub: true,
+              },
+            ],
+            createdAt: '2026-10-06T10:00:00.000Z',
+            updatedAt: '2026-11-05T08:40:00.000Z',
+          },
+        ];
+
+        // -----------------------------------------------------------------
+        // IN-MEMORY APPLICATION STATE (Strictly Zero localStorage)
+        // -----------------------------------------------------------------
+        const state = {
+          products: structuredClone(STARTER_PRODUCTS),
+          pendingReviews: [], // Holds reviews submitted in read-only mode awaiting Admin GitHub sync
+          cart: [], // { productId, qty }
+          activeCategory: 'All',
+          searchQuery: '',
+          sortBy: 'featured',
+          isLoadingCatalog: false,
+          activeProductId: null,
+          modalImageIndex: 0,
+          modalQty: 1,
+          reviewRating: 5,
+          isAdminAuthenticated: false,
+          adminActiveTab: 'editor',
+          stagedImages: [], // { id, type: 'url' | 'file', src, file?, name }
+          github: {
+            owner: DEFAULT_REPO_CONFIG.owner,
+            repo: DEFAULT_REPO_CONFIG.repo,
+            branch: DEFAULT_REPO_CONFIG.branch,
+            adminToken: DEFAULT_REPO_CONFIG.adminToken,
+            reviewToken: DEFAULT_REPO_CONFIG.reviewToken,
+            connected: false,
+            lastSha: null,
+            lastSyncedAt: null,
+          },
+          checkoutOrderReceipt: null,
+        };
+
+        // -----------------------------------------------------------------
+        // UTILITY HELPERS
+        // -----------------------------------------------------------------
+        function formatINR(amount) {
+          const num = Number(amount) || 0;
+          return '₹' + num.toLocaleString('en-IN');
+        }
+
+        function escapeHtml(str) {
+          return String(str ?? '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+        }
+
+        function slugify(str) {
+          return (
+            String(str || 'product')
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, '-')
+              .replace(/^-+|-+$/g, '')
+              .slice(0, 40) || 'product'
+          );
+        }
+
+        // UTF-8 safe Base64 encoding/decoding for GitHub Contents API (supports ₹ & Unicode)
+        function encodeBase64Utf8(str) {
+          const bytes = new TextEncoder().encode(str);
+          let binary = '';
+          const chunk = 0x8000;
+          for (let i = 0; i < bytes.length; i += chunk) {
+            binary += String.fromCharCode(...bytes.subarray(i, i + chunk));
+          }
+          return btoa(binary);
+        }
+
+        function decodeBase64Utf8(base64) {
+          const clean = base64.replace(/\s+/g, '');
+          const binary = atob(clean);
+          const bytes = new Uint8Array(binary.length);
+          for (let i = 0; i < binary.length; i++) {
+            bytes[i] = binary.charCodeAt(i);
+          }
+          return new TextDecoder().decode(bytes);
+        }
+
+        function fileToBase64Payload(file) {
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              const result = String(reader.result || '');
+              const commaIndex = result.indexOf(',');
+              if (commaIndex === -1) {
+                reject(new Error('Could not encode image file.'));
+                return;
+              }
+              resolve({
+                dataUrl: result,
+                base64: result.slice(commaIndex + 1),
+              });
+            };
+            reader.onerror = () => reject(new Error('Failed to read image file.'));
+            reader.readAsDataURL(file);
+          });
+        }
+
+        function computeAverageRating(reviews) {
+          if (!Array.isArray(reviews) || reviews.length === 0) return { avg: 0, count: 0 };
+          const sum = reviews.reduce((acc, r) => acc + (Number(r.rating) || 0), 0);
+          return {
+            avg: Math.round((sum / reviews.length) * 10) / 10,
+            count: reviews.length,
+          };
+        }
+
+        function showToast(message, type = 'info') {
+          const container = document.getElementById('toastContainer');
+          const id = 'toast-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6);
+          const styles = {
+            success: 'bg-slate-900 text-white border-emerald-500/40',
+            error: 'bg-red-950 text-white border-red-500/50',
+            warning: 'bg-amber-950 text-amber-50 border-amber-500/50',
+            info: 'bg-slate-900 text-white border-slate-700',
+          };
+          const icons = {
+            success: 'fa-circle-check text-emerald-400',
+            error: 'fa-circle-exclamation text-red-400',
+            warning: 'fa-triangle-exclamation text-amber-400',
+            info: 'fa-circle-info text-blue-400',
+          };
+
+          const toastEl = document.createElement('div');
+          toastEl.id = id;
+          toastEl.className = `pointer-events-auto border rounded-lg px-4 py-3 shadow-lg flex items-start gap-3 text-xs sm:text-sm font-medium ${styles[type] || styles.info}`;
+          toastEl.innerHTML = `
+            <i class="fa-solid ${icons[type] || icons.info} mt-0.5 shrink-0"></i>
+            <span class="flex-1 leading-snug">${escapeHtml(message)}</span>
+            <button type="button" onclick="this.parentElement.remove()" class="text-white/60 hover:text-white shrink-0" aria-label="Dismiss">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          `;
+          container.appendChild(toastEl);
+          setTimeout(() => {
+            const el = document.getElementById(id);
+            if (el) el.remove();
+          }, 4800);
+        }
+
+        function handleImgError(imgEl, label) {
+          if (!imgEl || imgEl.dataset.fallbackApplied === '1') return;
+          imgEl.dataset.fallbackApplied = '1';
+          const parent = imgEl.parentElement;
+          if (!parent) return;
+          imgEl.classList.add('hidden');
+          const fallback = document.createElement('div');
+          fallback.className =
+            'w-full h-full flex flex-col items-center justify-center p-4 text-center bg-gradient-to-br from-slate-100 to-slate-200 text-slate-500';
+          fallback.innerHTML = `
+            <i class="fa-solid fa-image text-2xl text-slate-400 mb-2"></i>
+            <span class="text-xs font-medium text-slate-600 line-clamp-2">${escapeHtml(label || 'Product Image')}</span>
+          `;
+          parent.appendChild(fallback);
+        }
+
+        // -----------------------------------------------------------------
+        // GITHUB REST API SYNC ENGINE
+        // -----------------------------------------------------------------
+        function getActiveWriteToken(allowReviewToken = false) {
+          if (state.github.adminToken && state.github.adminToken.trim()) {
+            return state.github.adminToken.trim();
+          }
+          if (allowReviewToken && state.github.reviewToken && state.github.reviewToken.trim()) {
+            return state.github.reviewToken.trim();
+          }
+          return '';
+        }
+
+        function buildGitHubHeaders(token) {
+          const headers = {
+            Accept: 'application/vnd.github+json',
+          };
+          if (token) {
+            headers.Authorization = `Bearer ${token}`;
+          }
+          return headers;
+        }
+
+        async function parseGitHubError(res) {
+          let detail = `GitHub API error (${res.status})`;
+          try {
+            const body = await res.json();
+            if (body && body.message) {
+              detail = body.message;
+            }
+          } catch {
+            // ignore JSON parse failure
+          }
+          if (res.status === 401) return 'GitHub authentication failed (401). Verify your Personal Access Token.';
+          if (res.status === 403) return `GitHub access denied or rate limited (403): ${detail}`;
+          if (res.status === 404) return `Repository or file not found (404): ${detail}`;
+          if (res.status === 409) return 'Repository conflict (409). Please retry sync.';
+          return detail;
+        }
+
+        async function fetchCatalogFromGitHub(silent = false) {
+          const { owner, repo, branch } = state.github;
+          if (!owner || !repo) return false;
+
+          state.isLoadingCatalog = true;
+          renderCatalogLoader(true);
+
+          const token = getActiveWriteToken(true);
+          const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data/products.json?ref=${encodeURIComponent(branch || 'main')}&_t=${Date.now()}`;
+
+          try {
+            const res = await fetch(apiUrl, { headers: buildGitHubHeaders(token) });
+            if (res.status === 404) {
+              state.github.connected = true;
+              state.github.lastSha = null;
+              if (!silent) {
+                showToast('Repo connected. data/products.json does not exist yet—push catalog to initialize it.', 'warning');
+              }
+              updateAdminRepoUI();
+              return false;
+            }
+
+            if (!res.ok) {
+              // Try raw GitHub fallback for unauthenticated public reads if rate-limited
+              if (!token && (res.status === 403 || res.status === 429)) {
+                const rawUrl = `https://raw.githubusercontent.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/${encodeURIComponent(branch || 'main')}/data/products.json?_t=${Date.now()}`;
+                const rawRes = await fetch(rawUrl);
+                if (rawRes.ok) {
+                  const rawJson = await rawRes.json();
+                  applyLoadedCatalog(rawJson, null);
+                  if (!silent) showToast('Storefront synced from GitHub.', 'success');
+                  return true;
+                }
+              }
+              throw new Error(await parseGitHubError(res));
+            }
+
+            const payload = await res.json();
+            const decodedText = decodeBase64Utf8(payload.content || '');
+            const parsed = JSON.parse(decodedText);
+            applyLoadedCatalog(parsed, payload.sha || null);
+            if (!silent) {
+              showToast(`Loaded ${state.products.length} products from ${owner}/${repo}.`, 'success');
+            }
+            return true;
+          } catch (err) {
+            if (!silent) {
+              showToast(err.message || 'Unable to fetch catalog from GitHub.', 'error');
+            }
+            return false;
+          } finally {
+            state.isLoadingCatalog = false;
+            renderCatalogLoader(false);
+            renderStorefront();
+            updateAdminRepoUI();
+          }
+        }
+
+        function applyLoadedCatalog(json, sha) {
+          const list = Array.isArray(json) ? json : Array.isArray(json.products) ? json.products : [];
+          state.products = list.map(normalizeProduct);
+          state.github.connected = true;
+          state.github.lastSha = sha;
+          state.github.lastSyncedAt = new Date().toISOString();
+        }
+
+        function normalizeProduct(raw) {
+          const inStock = raw.outOfStock === true ? false : raw.inStock !== false;
+          return {
+            id: String(raw.id || 'apx-' + Date.now()),
+            name: String(raw.name || 'Untitled Product'),
+            category: String(raw.category || 'Accessories'),
+            price: Number(raw.price) || 0,
+            description: String(raw.description || ''),
+            images: Array.isArray(raw.images) ? raw.images.filter(Boolean).slice(0, MAX_PRODUCT_IMAGES) : [],
+            inStock: inStock,
+            outOfStock: !inStock,
+            codAvailable: Boolean(raw.codAvailable),
+            sevenDaysReturn: Boolean(raw.sevenDaysReturn),
+            reviews: Array.isArray(raw.reviews) ? raw.reviews : [],
+            createdAt: raw.createdAt || new Date().toISOString(),
+            updatedAt: raw.updatedAt || new Date().toISOString(),
+          };
+        }
+
+        async function uploadImageFileToGitHub(file, productSlug, index) {
+          const { owner, repo, branch } = state.github;
+          const token = getActiveWriteToken(false);
+          if (!owner || !repo || !token) {
+            throw new Error('GitHub repo and Admin PAT are required to upload images.');
+          }
+
+          const extMatch = (file.name || '').match(/\.([a-zA-Z0-9]+)$/);
+          const ext = extMatch ? extMatch[1].toLowerCase() : 'jpg';
+          const fileName = `${productSlug}-${Date.now()}-${index}.${ext}`;
+          const filePath = `assets/products/${fileName}`;
+
+          const { base64 } = await fileToBase64Payload(file);
+          const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${filePath}`;
+
+          const res = await fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+              ...buildGitHubHeaders(token),
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              message: `Upload product image ${fileName} via Appex Collection`,
+              content: base64,
+              branch: branch || 'main',
+            }),
+          });
+
+          if (!res.ok) {
+            throw new Error(await parseGitHubError(res));
+          }
+
+          const data = await res.json();
+          if (data?.content?.download_url) {
+            return data.content.download_url;
+          }
+          return `https://raw.githubusercontent.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/${encodeURIComponent(branch || 'main')}/${filePath}`;
+        }
+
+        async function fetchLatestProductsSha(token) {
+          const { owner, repo, branch } = state.github;
+          const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data/products.json?ref=${encodeURIComponent(branch || 'main')}&_t=${Date.now()}`;
+          const res = await fetch(apiUrl, { headers: buildGitHubHeaders(token) });
+          if (res.status === 404) return null;
+          if (!res.ok) throw new Error(await parseGitHubError(res));
+          const data = await res.json();
+          return data.sha || null;
+        }
+
+        async function commitCatalogToGitHub(commitMessage, allowReviewToken = false, retryCount = 0) {
+          const { owner, repo, branch } = state.github;
+          const token = getActiveWriteToken(allowReviewToken);
+
+          if (!owner || !repo || !token) {
+            throw new Error('GitHub repository and token must be configured to commit changes.');
+          }
+
+          const latestSha = await fetchLatestProductsSha(token);
+          const payloadObj = {
+            storeName: 'Appex Collection',
+            currency: 'INR',
+            updatedAt: new Date().toISOString(),
+            products: state.products,
+          };
+
+          const encodedContent = encodeBase64Utf8(JSON.stringify(payloadObj, null, 2));
+          const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data/products.json`;
+
+          const body = {
+            message: commitMessage,
+            content: encodedContent,
+            branch: branch || 'main',
+          };
+          if (latestSha) {
+            body.sha = latestSha;
+          }
+
+          const res = await fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+              ...buildGitHubHeaders(token),
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(body),
+          });
+
+          if (res.status === 409 && retryCount < 1) {
+            return commitCatalogToGitHub(commitMessage, allowReviewToken, retryCount + 1);
+          }
+
+          if (!res.ok) {
+            throw new Error(await parseGitHubError(res));
+          }
+
+          const result = await res.json();
+          state.github.connected = true;
+          state.github.lastSha = result?.content?.sha || null;
+          state.github.lastSyncedAt = new Date().toISOString();
+          updateAdminRepoUI();
+          return result;
+        }
+
+        // -----------------------------------------------------------------
+        // STOREFRONT RENDERING
+        // -----------------------------------------------------------------
+        function getFilteredProducts() {
+          const q = state.searchQuery.trim().toLowerCase();
+          let list = state.products.filter((p) => {
+            const matchesCat = state.activeCategory === 'All' || p.category === state.activeCategory;
+            const matchesQuery =
+              !q ||
+              p.name.toLowerCase().includes(q) ||
+              p.category.toLowerCase().includes(q) ||
+              p.description.toLowerCase().includes(q);
+            return matchesCat && matchesQuery;
+          });
+
+          if (state.sortBy === 'price-asc') {
+            list = [...list].sort((a, b) => a.price - b.price);
+          } else if (state.sortBy === 'price-desc') {
+            list = [...list].sort((a, b) => b.price - a.price);
+          } else if (state.sortBy === 'rating-desc') {
+            list = [...list].sort(
+              (a, b) => computeAverageRating(b.reviews).avg - computeAverageRating(a.reviews).avg
+            );
+          }
+          return list;
+        }
+
+        function renderCategoryTabs() {
+          const container = document.getElementById('categoryTabs');
+          container.innerHTML = CATEGORIES.map((cat) => {
+            const active = state.activeCategory === cat;
+            return `
+              <button
+                type="button"
+                onclick="app.setCategory('${escapeHtml(cat)}')"
+                class="px-3.5 py-1.5 rounded-md text-xs font-semibold whitespace-nowrap shrink-0 transition-colors ${
+                  active
+                    ? 'bg-brand text-white'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                }"
+              >
+                ${escapeHtml(cat)}
+              </button>
+            `;
+          }).join('');
+        }
+
+        function renderCatalogLoader(show) {
+          const loader = document.getElementById('catalogLoader');
+          const grid = document.getElementById('productGrid');
+          if (show) {
+            loader.classList.remove('hidden');
+            grid.classList.add('hidden');
+          } else {
+            loader.classList.add('hidden');
+            grid.classList.remove('hidden');
+          }
+        }
+
+        function renderStorefront() {
+          renderCategoryTabs();
+
+          const list = getFilteredProducts();
+          const grid = document.getElementById('productGrid');
+          const emptyEl = document.getElementById('emptyCatalogState');
+          const headingEl = document.getElementById('catalogHeading');
+          const metaEl = document.getElementById('catalogMeta');
+          const clearBtn = document.getElementById('clearFiltersBtn');
+          const refreshBtn = document.getElementById('syncRefreshBtn');
+
+          headingEl.textContent =
+            state.activeCategory === 'All' ? 'All Products' : state.activeCategory;
+          metaEl.textContent = `Showing ${list.length} ${list.length === 1 ? 'item' : 'items'}`;
+
+          if (state.activeCategory !== 'All' || state.searchQuery.trim() !== '') {
+            clearBtn.classList.remove('hidden');
+          } else {
+            clearBtn.classList.add('hidden');
+          }
+
+          if (state.github.owner && state.github.repo) {
+            refreshBtn.classList.remove('hidden');
+          } else {
+            refreshBtn.classList.add('hidden');
+          }
+
+          if (list.length === 0) {
+            grid.innerHTML = '';
+            emptyEl.classList.remove('hidden');
+            return;
+          }
+
+          emptyEl.classList.add('hidden');
+          grid.innerHTML = list
+            .map((product) => {
+              const primaryImage = product.images[0] || '';
+              const { avg, count } = computeAverageRating(product.reviews);
+              const stockText = product.inStock ? 'In Stock' : 'Out of Stock';
+              const stockClass = product.inStock ? 'text-emerald-700' : 'text-red-700';
+
+              return `
+                <article
+                  onclick="app.openProductModal('${escapeHtml(product.id)}')"
+                  class="product-card bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col cursor-pointer hover:shadow-md focus-within:ring-2 focus-within:ring-brand"
+                >
+                  <div class="aspect-[4/3] bg-slate-50 border-b border-slate-100 overflow-hidden relative">
+                    ${
+                      primaryImage
+                        ? `<img
+                            src="${escapeHtml(primaryImage)}"
+                            alt="${escapeHtml(product.name)}"
+                            loading="lazy"
+                            referrerpolicy="no-referrer"
+                            onerror="app.handleImgError(this, '${escapeHtml(product.name)}')"
+                            class="w-full h-full object-cover"
+                          />`
+                        : `<div class="w-full h-full flex flex-col items-center justify-center p-4 text-center bg-slate-100 text-slate-400">
+                            <i class="fa-solid fa-image text-2xl mb-1.5"></i>
+                            <span class="text-xs font-medium text-slate-500">${escapeHtml(product.name)}</span>
+                          </div>`
+                    }
+                  </div>
+
+                  <div class="p-5 flex-1 flex flex-col">
+                    <div class="flex items-center justify-between gap-2 text-xs mb-1.5">
+                      <span class="font-medium text-slate-500 truncate">${escapeHtml(product.category)}</span>
+                      <span class="font-semibold ${stockClass} whitespace-nowrap shrink-0">
+                        <i class="fa-solid ${product.inStock ? 'fa-circle-check' : 'fa-circle-xmark'} mr-1"></i>${stockText}
+                      </span>
+                    </div>
+
+                    <h3 class="text-base font-semibold text-slate-900 leading-snug line-clamp-2 mb-3">
+                      ${escapeHtml(product.name)}
+                    </h3>
+
+                    <div class="mt-auto space-y-3">
+                      <div class="flex items-baseline justify-between gap-3">
+                        <span class="text-xl font-bold text-slate-900 font-mono tabular-nums">
+                          ${formatINR(product.price)}
+                        </span>
+                        <span class="text-xs font-mono tabular-nums text-slate-600 shrink-0">
+                          <i class="fa-solid fa-star text-amber-500 mr-1"></i>${count > 0 ? `${avg.toFixed(1)} (${count})` : 'New'}
+                        </span>
+                      </div>
+
+                      <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2 text-xs text-slate-600">
+                        <div class="flex items-center gap-2 min-w-0 truncate">
+                          <span>${product.codAvailable ? 'COD Available' : 'Prepaid Only'}</span>
+                          <span aria-hidden="true" class="text-slate-300">·</span>
+                          <span>${product.sevenDaysReturn ? '7 Days Return' : 'No Return'}</span>
+                        </div>
+                        <button
+                          type="button"
+                          onclick="event.stopPropagation(); app.quickAddToCart('${escapeHtml(product.id)}')"
+                          ${product.inStock ? '' : 'disabled'}
+                          class="px-3 py-1.5 rounded-md text-xs font-semibold transition-colors whitespace-nowrap shrink-0 ${
+                            product.inStock
+                              ? 'bg-brand-tint text-brand hover:bg-brand hover:text-white'
+                              : 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                          }"
+                        >
+                          ${product.inStock ? 'Add to Bag' : 'Unavailable'}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              `;
+            })
+            .join('');
+        }
+
+        // -----------------------------------------------------------------
+        // PRODUCT DETAIL MODAL & CUSTOMER REVIEWS
+        // -----------------------------------------------------------------
+        function openProductModal(productId) {
+          const product = state.products.find((p) => p.id === productId);
+          if (!product) return;
+
+          state.activeProductId = productId;
+          state.modalImageIndex = 0;
+          state.modalQty = 1;
+          state.reviewRating = 5;
+
+          renderProductModalContent();
+          document.getElementById('productModal').classList.remove('hidden');
+          document.body.classList.add('overflow-hidden');
+        }
+
+        function closeProductModal() {
+          document.getElementById('productModal').classList.add('hidden');
+          document.body.classList.remove('overflow-hidden');
+          state.activeProductId = null;
+        }
+
+        function renderProductModalContent() {
+          const product = state.products.find((p) => p.id === state.activeProductId);
+          if (!product) return;
+
+          document.getElementById('modalProductCategory').textContent = product.category;
+          document.getElementById('modalProductBreadcrumb').textContent = product.name;
+          document.getElementById('modalProductTitle').textContent = product.name;
+          document.getElementById('modalProductPrice').textContent = formatINR(product.price);
+          document.getElementById('modalProductDescription').textContent = product.description;
+          document.getElementById('modalQtyValue').textContent = String(state.modalQty);
+
+          const { avg, count } = computeAverageRating(product.reviews);
+          document.getElementById('modalRatingInline').innerHTML =
+            count > 0
+              ? `<i class="fa-solid fa-star text-amber-500 mr-1"></i>${avg.toFixed(1)} (${count} ${count === 1 ? 'review' : 'reviews'})`
+              : 'No reviews yet';
+
+          const stockBadge = document.getElementById('modalStockBadge');
+          if (product.inStock) {
+            stockBadge.className = 'inline-flex items-center gap-1.5 text-emerald-700';
+            stockBadge.innerHTML = '<i class="fa-solid fa-circle-check"></i><span>In Stock</span>';
+          } else {
+            stockBadge.className = 'inline-flex items-center gap-1.5 text-red-700';
+            stockBadge.innerHTML = '<i class="fa-solid fa-circle-xmark"></i><span>Out of Stock</span>';
+          }
+
+          document.getElementById('modalCodInfo').innerHTML = product.codAvailable
+            ? '<i class="fa-solid fa-money-bill-wave text-emerald-600"></i><span>Cash on Delivery Available</span>'
+            : '<i class="fa-solid fa-credit-card text-slate-400"></i><span>Online Payment Only</span>';
+
+          document.getElementById('modalReturnInfo').innerHTML = product.sevenDaysReturn
+            ? '<i class="fa-solid fa-rotate-left text-brand"></i><span>7 Days Easy Return</span>'
+            : '<i class="fa-solid fa-ban text-slate-400"></i><span>Final Sale (Non-returnable)</span>';
+
+          const addBtn = document.getElementById('modalAddToCartBtn');
+          const buyBtn = document.getElementById('modalBuyNowBtn');
+          addBtn.disabled = !product.inStock;
+          buyBtn.disabled = !product.inStock;
+
+          // Gallery rendering
+          const images = product.images.length ? product.images : [''];
+          const safeIndex = Math.min(state.modalImageIndex, images.length - 1);
+          const mainImgEl = document.getElementById('modalMainImage');
+          // Reset previous fallback node if any
+          const prevFallback = mainImgEl.parentElement.querySelector('div');
+          if (prevFallback) prevFallback.remove();
+          mainImgEl.classList.remove('hidden');
+          delete mainImgEl.dataset.fallbackApplied;
+
+          if (images[safeIndex]) {
+            mainImgEl.src = images[safeIndex];
+            mainImgEl.alt = product.name;
+            mainImgEl.onerror = () => handleImgError(mainImgEl, product.name);
+          } else {
+            mainImgEl.src = '';
+            handleImgError(mainImgEl, product.name);
+          }
+
+          const thumbsContainer = document.getElementById('modalThumbnails');
+          if (images.length > 1 || (images.length === 1 && images[0])) {
+            thumbsContainer.innerHTML = images
+              .map(
+                (src, idx) => `
+                  <button
+                    type="button"
+                    onclick="app.selectModalImage(${idx})"
+                    class="aspect-[4/3] rounded-lg overflow-hidden border-2 transition-colors bg-slate-50 ${
+                      idx === safeIndex ? 'border-brand' : 'border-slate-200 hover:border-slate-300'
+                    }"
+                  >
+                    <img src="${escapeHtml(src)}" alt="Preview ${idx + 1}" referrerpolicy="no-referrer" class="w-full h-full object-cover" />
+                  </button>
+                `
+              )
+              .join('');
+          } else {
+            thumbsContainer.innerHTML = '';
+          }
+
+          // Review List & Star Picker
+          renderModalReviews(product);
+          renderReviewStarPicker();
+        }
+
+        function renderModalReviews(product) {
+          const list = Array.isArray(product.reviews) ? product.reviews : [];
+          document.getElementById('modalReviewTotal').textContent = `${list.length} ${list.length === 1 ? 'review' : 'reviews'}`;
+
+          const container = document.getElementById('modalReviewsList');
+          const hintEl = document.getElementById('reviewSyncHint');
+          if (getActiveWriteToken(true) && state.github.owner && state.github.repo) {
+            hintEl.textContent = 'Reviews sync directly to the live store catalog.';
+          } else if (state.github.owner && state.github.repo) {
+            hintEl.textContent = 'Reviews display immediately and queue for admin approval sync.';
+          } else {
+            hintEl.textContent = 'Share your experience with this product.';
+          }
+
+          if (list.length === 0) {
+            container.innerHTML = `
+              <div class="border border-slate-200 rounded-xl p-6 text-center text-sm text-slate-500">
+                No customer reviews yet. Be the first to review ${escapeHtml(product.name)}.
+              </div>
+            `;
+            return;
+          }
+
+          container.innerHTML = [...list]
+            .reverse()
+            .map((rev) => {
+              const stars = Array.from({ length: 5 }, (_, i) =>
+                `<i class="fa-solid fa-star text-xs ${i < rev.rating ? 'text-amber-500' : 'text-slate-200'}"></i>`
+              ).join('');
+              const dateStr = rev.createdAt
+                ? new Date(rev.createdAt).toLocaleDateString('en-IN', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric',
+                  })
+                : '';
+
+              return `
+                <div class="border border-slate-200 rounded-xl p-4 bg-white">
+                  <div class="flex items-center justify-between gap-2 mb-1.5">
+                    <div class="flex items-center gap-2">
+                      <span class="text-sm font-semibold text-slate-900">${escapeHtml(rev.author)}</span>
+                      ${
+                        rev.syncedToGithub === false
+                          ? '<span class="text-[11px] text-amber-700 font-medium">· Pending sync</span>'
+                          : ''
+                      }
+                    </div>
+                    <span class="text-xs text-slate-400 font-mono tabular-nums">${escapeHtml(dateStr)}</span>
+                  </div>
+                  <div class="flex items-center gap-1 mb-2">${stars}</div>
+                  <p class="text-sm text-slate-600 leading-relaxed">${escapeHtml(rev.comment)}</p>
+                </div>
+              `;
+            })
+            .join('');
+        }
+
+        function renderReviewStarPicker() {
+          const picker = document.getElementById('reviewStarPicker');
+          picker.innerHTML = [1, 2, 3, 4, 5]
+            .map(
+              (val) => `
+                <button
+                  type="button"
+                  onclick="app.setReviewRating(${val})"
+                  aria-label="Rate ${val} stars"
+                  class="w-9 h-9 rounded-lg border transition-colors flex items-center justify-center ${
+                    val <= state.reviewRating
+                      ? 'border-amber-300 bg-amber-50 text-amber-500'
+                      : 'border-slate-200 bg-white text-slate-300 hover:text-amber-400'
+                  }"
+                >
+                  <i class="fa-solid fa-star text-sm"></i>
+                </button>
+              `
+            )
+            .join('');
+        }
+
+        async function submitProductReview(event) {
+          event.preventDefault();
+          const product = state.products.find((p) => p.id === state.activeProductId);
+          if (!product) return;
+
+          const author = document.getElementById('reviewAuthorInput').value.trim();
+          const comment = document.getElementById('reviewCommentInput').value.trim();
+          if (!author || !comment) return;
+
+          const btn = document.getElementById('submitReviewBtn');
+          btn.disabled = true;
+          btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-xs"></i><span>Submitting...</span>';
+
+          const reviewObj = {
+            id: 'rev-' + Date.now(),
+            author,
+            rating: state.reviewRating,
+            comment,
+            createdAt: new Date().toISOString(),
+            syncedToGithub: false,
+          };
+
+          const canDirectSync = Boolean(state.github.owner && state.github.repo && getActiveWriteToken(true));
+
+          try {
+            if (canDirectSync) {
+              reviewObj.syncedToGithub = true;
+              product.reviews.push(reviewObj);
+              product.updatedAt = new Date().toISOString();
+              await commitCatalogToGitHub(`Add customer review for ${product.name}`, true);
+              showToast('Review published and synced to GitHub!', 'success');
+            } else {
+              product.reviews.push(reviewObj);
+              state.pendingReviews.push({
+                productId: product.id,
+                productName: product.name,
+                review: reviewObj,
+              });
+              showToast(
+                state.github.owner
+                  ? 'Review posted in session & queued for Admin GitHub approval.'
+                  : 'Review added to this session.',
+                'info'
+              );
+            }
+
+            document.getElementById('reviewAuthorInput').value = '';
+            document.getElementById('reviewCommentInput').value = '';
+            state.reviewRating = 5;
+            renderProductModalContent();
+            renderStorefront();
+            if (state.isAdminAuthenticated) renderAdminReviewQueue();
+          } catch (err) {
+            // Rollback optimistic push on hard GitHub error
+            product.reviews = product.reviews.filter((r) => r.id !== reviewObj.id);
+            showToast(err.message || 'Could not save review to GitHub.', 'error');
+          } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-paper-plane text-xs"></i><span>Submit Review</span>';
+          }
+        }
+
+        // -----------------------------------------------------------------
+        // SHOPPING BAG & COD CHECKOUT DRAWER
+        // -----------------------------------------------------------------
+        function addToCart(productId, qty = 1, openDrawerAfter = false) {
+          const product = state.products.find((p) => p.id === productId);
+          if (!product || !product.inStock) {
+            showToast('This product is currently out of stock.', 'warning');
+            return;
+          }
+
+          state.checkoutOrderReceipt = null;
+          const existing = state.cart.find((item) => item.productId === productId);
+          if (existing) {
+            existing.qty += qty;
+          } else {
+            state.cart.push({ productId, qty });
+          }
+
+          updateCartBadge();
+          renderCartDrawer();
+
+          if (openDrawerAfter) {
+            closeProductModal();
+            openCart();
+          } else {
+            showToast(`Added "${product.name}" to your bag.`, 'success');
+          }
+        }
+
+        function updateCartBadge() {
+          const totalItems = state.cart.reduce((sum, i) => sum + i.qty, 0);
+          document.getElementById('cartCountBadge').textContent = String(totalItems);
+        }
+
+        function openCart() {
+          renderCartDrawer();
+          document.getElementById('cartDrawerBackdrop').classList.remove('hidden');
+          document.getElementById('cartDrawer').classList.remove('translate-x-full');
+          document.body.classList.add('overflow-hidden');
+        }
+
+        function closeCart() {
+          document.getElementById('cartDrawerBackdrop').classList.add('hidden');
+          document.getElementById('cartDrawer').classList.add('translate-x-full');
+          document.body.classList.remove('overflow-hidden');
+        }
+
+        function stepCartItem(productId, delta) {
+          const item = state.cart.find((c) => c.productId === productId);
+          if (!item) return;
+          item.qty += delta;
+          if (item.qty <= 0) {
+            state.cart = state.cart.filter((c) => c.productId !== productId);
+          }
+          updateCartBadge();
+          renderCartDrawer();
+        }
+
+        function renderCartDrawer() {
+          const bodyEl = document.getElementById('cartDrawerBody');
+          const footerEl = document.getElementById('cartDrawerFooter');
+          const subtitleEl = document.getElementById('cartDrawerSubtitle');
+
+          if (state.checkoutOrderReceipt) {
+            const receipt = state.checkoutOrderReceipt;
+            subtitleEl.textContent = 'Order Confirmed';
+            bodyEl.innerHTML = `
+              <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-6 text-center space-y-3">
+                <span class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 inline-flex items-center justify-center">
+                  <i class="fa-solid fa-check text-xl"></i>
+                </span>
+                <h3 class="text-lg font-bold text-slate-900">Order #${escapeHtml(receipt.orderId)} Confirmed</h3>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  Thank you, <strong>${escapeHtml(receipt.customerName)}</strong>. Your Cash on Delivery order is scheduled for dispatch to PIN <strong>${escapeHtml(receipt.pin)}</strong>.
+                </p>
+                <div class="pt-3 border-t border-emerald-200 text-xs text-left space-y-1.5 text-slate-700">
+                  <div class="flex justify-between"><span>Items (${receipt.itemCount})</span><span class="font-mono tabular-nums">${formatINR(receipt.subtotal)}</span></div>
+                  <div class="flex justify-between"><span>Delivery</span><span class="font-mono tabular-nums">${receipt.shipping === 0 ? 'FREE' : formatINR(receipt.shipping)}</span></div>
+                  <div class="flex justify-between font-bold text-slate-900 pt-1 border-t border-emerald-200"><span>Payable on Delivery</span><span class="font-mono tabular-nums">${formatINR(receipt.total)}</span></div>
+                </div>
+              </div>
+            `;
+            footerEl.innerHTML = `
+              <button
+                type="button"
+                onclick="app.clearReceiptAndCloseCart()"
+                class="w-full h-11 rounded-lg bg-brand hover:bg-brand-dark text-white text-sm font-semibold transition-colors"
+              >
+                Continue Shopping
+              </button>
+            `;
+            return;
+          }
+
+          const totalCount = state.cart.reduce((s, i) => s + i.qty, 0);
+          subtitleEl.textContent = `${totalCount} ${totalCount === 1 ? 'item' : 'items'}`;
+
+          if (state.cart.length === 0) {
+            bodyEl.innerHTML = `
+              <div class="py-16 text-center space-y-3">
+                <div class="w-14 h-14 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
+                  <i class="fa-solid fa-bag-shopping text-2xl"></i>
+                </div>
+                <p class="text-sm font-semibold text-slate-900">Your shopping bag is empty</p>
+                <p class="text-xs text-slate-500 max-w-xs mx-auto">
+                  Explore Appex Collection and add items to proceed with Cash on Delivery checkout.
+                </p>
+              </div>
+            `;
+            footerEl.innerHTML = `
+              <button
+                type="button"
+                onclick="app.closeCart()"
+                class="w-full h-11 rounded-lg bg-brand hover:bg-brand-dark text-white text-sm font-semibold transition-colors"
+              >
+                Browse Products
+              </button>
+            `;
+            return;
+          }
+
+          let subtotal = 0;
+          let allCodEligible = true;
+
+          const itemsHtml = state.cart
+            .map((entry) => {
+              const p = state.products.find((prod) => prod.id === entry.productId);
+              if (!p) return '';
+              subtotal += p.price * entry.qty;
+              if (!p.codAvailable) allCodEligible = false;
+              return `
+                <div class="flex gap-3.5 pb-4 border-b border-slate-100">
+                  <div class="w-20 h-16 rounded-lg bg-slate-100 overflow-hidden shrink-0 border border-slate-200">
+                    ${
+                      p.images[0]
+                        ? `<img src="${escapeHtml(p.images[0])}" alt="${escapeHtml(p.name)}" referrerpolicy="no-referrer" class="w-full h-full object-cover" />`
+                        : `<div class="w-full h-full flex items-center justify-center text-slate-400"><i class="fa-solid fa-image"></i></div>`
+                    }
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <p class="text-sm font-semibold text-slate-900 truncate">${escapeHtml(p.name)}</p>
+                    <p class="text-xs text-slate-500 mt-0.5">${p.codAvailable ? 'COD Eligible' : 'Prepaid Only'}</p>
+                    <div class="mt-2 flex items-center justify-between gap-2">
+                      <span class="text-sm font-bold font-mono tabular-nums text-slate-900">${formatINR(p.price * entry.qty)}</span>
+                      <div class="flex items-center border border-slate-200 rounded-md h-7">
+                        <button type="button" onclick="app.stepCartItem('${escapeHtml(p.id)}', -1)" class="w-7 h-full text-xs text-slate-600 hover:bg-slate-100">-</button>
+                        <span class="w-7 text-center text-xs font-mono tabular-nums font-semibold">${entry.qty}</span>
+                        <button type="button" onclick="app.stepCartItem('${escapeHtml(p.id)}', 1)" class="w-7 h-full text-xs text-slate-600 hover:bg-slate-100">+</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `;
+            })
+            .join('');
+
+          const shipping = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE;
+          const total = subtotal + shipping;
+
+          bodyEl.innerHTML = `
+            <div class="space-y-4">${itemsHtml}</div>
+            <form id="codCheckoutForm" onsubmit="app.placeCodOrder(event)" class="pt-2 space-y-3">
+              <p class="text-xs font-bold text-slate-900 uppercase tracking-wide">
+                ${allCodEligible ? 'Cash on Delivery Details' : 'Delivery & Order Details (Prepaid items included)'}
+              </p>
+              <input id="chkCustomerName" type="text" required placeholder="Full Name" class="w-full h-10 px-3 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand" />
+              <div class="grid grid-cols-2 gap-2.5">
+                <input id="chkCustomerPhone" type="tel" required pattern="[0-9]{10}" maxlength="10" placeholder="10-digit Mobile" class="w-full h-10 px-3 rounded-lg border border-slate-200 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-brand" />
+                <input id="chkCustomerPin" type="text" required pattern="[0-9]{6}" maxlength="6" placeholder="6-digit PIN" class="w-full h-10 px-3 rounded-lg border border-slate-200 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-brand" />
+              </div>
+              <textarea id="chkCustomerAddress" rows="2" required placeholder="House/Flat No, Street, City" class="w-full p-3 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand"></textarea>
+            </form>
+          `;
+
+          footerEl.innerHTML = `
+            <div class="space-y-1.5 text-xs text-slate-600">
+              <div class="flex justify-between">
+                <span>Subtotal</span>
+                <span class="font-mono tabular-nums font-medium text-slate-900">${formatINR(subtotal)}</span>
+              </div>
+              <div class="flex justify-between">
+                <span>Delivery ${subtotal < FREE_DELIVERY_THRESHOLD ? `(Free above ${formatINR(FREE_DELIVERY_THRESHOLD)})` : ''}</span>
+                <span class="font-mono tabular-nums font-medium ${shipping === 0 ? 'text-emerald-700' : 'text-slate-900'}">${shipping === 0 ? 'FREE' : formatINR(shipping)}</span>
+              </div>
+              <div class="flex justify-between text-sm font-bold text-slate-900 pt-2 border-t border-slate-200">
+                <span>Total Payable</span>
+                <span class="font-mono tabular-nums">${formatINR(total)}</span>
+              </div>
+            </div>
+            <button
+              type="submit"
+              form="codCheckoutForm"
+              class="w-full h-11 rounded-lg bg-action hover:bg-action-hover text-white text-sm font-bold transition-colors"
+            >
+              Confirm Order (${formatINR(total)})
+            </button>
+          `;
+        }
+
+        function placeCodOrder(event) {
+          event.preventDefault();
+          const name = document.getElementById('chkCustomerName').value.trim();
+          const phone = document.getElementById('chkCustomerPhone').value.trim();
+          const pin = document.getElementById('chkCustomerPin').value.trim();
+          const address = document.getElementById('chkCustomerAddress').value.trim();
+          if (!name || !phone || !pin || !address) return;
+
+          let subtotal = 0;
+          let itemCount = 0;
+          state.cart.forEach((entry) => {
+            const p = state.products.find((prod) => prod.id === entry.productId);
+            if (p) {
+              subtotal += p.price * entry.qty;
+              itemCount += entry.qty;
+            }
+          });
+          const shipping = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE;
+
+          state.checkoutOrderReceipt = {
+            orderId: 'APX' + String(Date.now()).slice(-6),
+            customerName: name,
+            pin,
+            itemCount,
+            subtotal,
+            shipping,
+            total: subtotal + shipping,
+          };
+          state.cart = [];
+          updateCartBadge();
+          renderCartDrawer();
+          showToast('Order confirmed! Thank you for shopping with Appex Collection.', 'success');
+        }
+
+        // -----------------------------------------------------------------
+        // HIDDEN ADMIN PANEL & PRODUCT MANAGEMENT
+        // -----------------------------------------------------------------
+        function openAdminAuth() {
+          if (state.isAdminAuthenticated) {
+            openAdminDashboard();
+            return;
+          }
+          document.getElementById('adminPasswordInput').value = '';
+          document.getElementById('adminAuthError').classList.add('hidden');
+          document.getElementById('adminLoginModal').classList.remove('hidden');
+          setTimeout(() => document.getElementById('adminPasswordInput').focus(), 50);
+        }
+
+        function closeAdminAuth() {
+          document.getElementById('adminLoginModal').classList.add('hidden');
+        }
+
+        function verifyAdminPassword(event) {
+          event.preventDefault();
+          const input = document.getElementById('adminPasswordInput').value.trim();
+          const errorEl = document.getElementById('adminAuthError');
+          if (input === ADMIN_MASTER_PASS) {
+            state.isAdminAuthenticated = true;
+            errorEl.classList.add('hidden');
+            closeAdminAuth();
+            openAdminDashboard();
+            showToast('Admin Console unlocked.', 'success');
+          } else {
+            errorEl.classList.remove('hidden');
+          }
+        }
+
+        function openAdminDashboard() {
+          document.getElementById('adminDashboardModal').classList.remove('hidden');
+          document.body.classList.add('overflow-hidden');
+          syncGitHubInputsFromState();
+          updateAdminRepoUI();
+          renderAdminMediaPreviews();
+          renderAdminCatalogTable();
+          renderAdminReviewQueue();
+          switchAdminTab(state.adminActiveTab);
+        }
+
+        function lockAdminPanel() {
+          document.getElementById('adminDashboardModal').classList.add('hidden');
+          document.body.classList.remove('overflow-hidden');
+        }
+
+        function switchAdminTab(tabKey) {
+          state.adminActiveTab = tabKey;
+          document.querySelectorAll('.admin-tab-panel').forEach((panel) => panel.classList.add('hidden'));
+          document.getElementById(`adminTab-${tabKey}`).classList.remove('hidden');
+
+          document.querySelectorAll('.admin-tab-btn').forEach((btn) => {
+            const active = btn.dataset.adminTab === tabKey;
+            btn.className = `admin-tab-btn px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap shrink-0 transition-colors ${
+              active ? 'bg-brand text-white' : 'text-slate-600 hover:bg-slate-200/70'
+            }`;
+          });
+        }
+
+        function updateAdminRepoUI() {
+          const lineEl = document.getElementById('adminRepoStatusLine');
+          const { owner, repo, branch, connected, adminToken } = state.github;
+          if (owner && repo) {
+            const authState = adminToken ? 'Read & Write Token Active' : 'Public Read-Only';
+            lineEl.textContent = `GitHub Repo: ${owner}/${repo} (${branch}) · ${connected ? 'Synced' : 'Configured'} · ${authState}`;
+          } else {
+            lineEl.textContent = 'GitHub Repo: Not Connected (Configure in GitHub Sync Settings tab)';
+          }
+
+          const shareInput = document.getElementById('shareableRepoUrl');
+          if (owner && repo) {
+            const base = window.location.href.split('?')[0].split('#')[0];
+            shareInput.value = `${base}?repo=${encodeURIComponent(owner)}/${encodeURIComponent(repo)}&branch=${encodeURIComponent(branch || 'main')}`;
+          } else {
+            shareInput.value = 'Connect a GitHub repository above to generate link';
+          }
+
+          document.getElementById('adminCatalogCount').textContent = String(state.products.length);
+          document.getElementById('adminPendingReviewCount').textContent = String(state.pendingReviews.length);
+        }
+
+        function syncGitHubInputsFromState() {
+          document.getElementById('ghOwnerInput').value = state.github.owner;
+          document.getElementById('ghRepoInput').value = state.github.repo;
+          document.getElementById('ghBranchInput').value = state.github.branch || 'main';
+          document.getElementById('ghAdminTokenInput').value = state.github.adminToken;
+          document.getElementById('ghReviewTokenInput').value = state.github.reviewToken;
+        }
+
+        async function connectAndSyncGitHub(event) {
+          event.preventDefault();
+          state.github.owner = document.getElementById('ghOwnerInput').value.trim();
+          state.github.repo = document.getElementById('ghRepoInput').value.trim();
+          state.github.branch = document.getElementById('ghBranchInput').value.trim() || 'main';
+          state.github.adminToken = document.getElementById('ghAdminTokenInput').value.trim();
+          state.github.reviewToken = document.getElementById('ghReviewTokenInput').value.trim();
+
+          const btn = document.getElementById('ghConnectPullBtn');
+          btn.disabled = true;
+          btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Connecting...</span>';
+
+          try {
+            await fetchCatalogFromGitHub(false);
+            renderAdminCatalogTable();
+            renderAdminReviewQueue();
+          } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-plug-circle-check"></i><span>Connect &amp; Pull data/products.json</span>';
+          }
+        }
+
+        async function pushCurrentCatalogToGitHub() {
+          state.github.owner = document.getElementById('ghOwnerInput').value.trim();
+          state.github.repo = document.getElementById('ghRepoInput').value.trim();
+          state.github.branch = document.getElementById('ghBranchInput').value.trim() || 'main';
+          state.github.adminToken = document.getElementById('ghAdminTokenInput').value.trim();
+          state.github.reviewToken = document.getElementById('ghReviewTokenInput').value.trim();
+
+          if (!state.github.owner || !state.github.repo || !state.github.adminToken) {
+            showToast('Enter GitHub Owner, Repo Name, and Admin PAT first.', 'warning');
+            return;
+          }
+
+          const btn = document.getElementById('ghSeedPushBtn');
+          btn.disabled = true;
+          btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Pushing JSON...</span>';
+          try {
+            await commitCatalogToGitHub('Sync Appex Collection catalog via Admin Console');
+            showToast('Catalog pushed to data/products.json on GitHub!', 'success');
+          } catch (err) {
+            showToast(err.message || 'Failed to push catalog to GitHub.', 'error');
+          } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-upload"></i><span>Push Current Catalog to GitHub</span>';
+          }
+        }
+
+        // Enforce 4 stock/policy checkboxes clearly while keeping In Stock / Out of Stock synchronized
+        function handleStockCheckbox(source) {
+          const chkOut = document.getElementById('chkOutOfStock');
+          const chkIn = document.getElementById('chkInStock');
+          if (source === 'outOfStock') {
+            chkIn.checked = !chkOut.checked;
+          } else {
+            chkOut.checked = !chkIn.checked;
+          }
+        }
+
+        async function handleAdminImageFiles(fileList) {
+          const files = Array.from(fileList || []);
+          if (!files.length) return;
+
+          const remainingSlots = MAX_PRODUCT_IMAGES - state.stagedImages.length;
+          if (remainingSlots <= 0) {
+            showToast(`Maximum ${MAX_PRODUCT_IMAGES} images allowed per product.`, 'warning');
+            return;
+          }
+
+          const accepted = files.slice(0, remainingSlots);
+          if (files.length > remainingSlots) {
+            showToast(`Only ${remainingSlots} additional image(s) allowed (max 10).`, 'warning');
+          }
+
+          for (const file of accepted) {
+            try {
+              const { dataUrl } = await fileToBase64Payload(file);
+              state.stagedImages.push({
+                id: 'img-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+                type: 'file',
+                src: dataUrl,
+                file,
+                name: file.name,
+              });
+            } catch {
+              showToast(`Skipped unreadable file: ${file.name}`, 'error');
+            }
+          }
+          renderAdminMediaPreviews();
+        }
+
+        function addAdminImageUrl() {
+          const input = document.getElementById('prodImageUrlInput');
+          const url = input.value.trim();
+          if (!url) return;
+
+          if (state.stagedImages.length >= MAX_PRODUCT_IMAGES) {
+            showToast(`Maximum ${MAX_PRODUCT_IMAGES} images allowed per product.`, 'warning');
+            return;
+          }
+
+          try {
+            new URL(url);
+          } catch {
+            showToast('Please enter a valid https:// image URL.', 'warning');
+            return;
+          }
+
+          state.stagedImages.push({
+            id: 'img-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+            type: 'url',
+            src: url,
+            name: 'Direct URL',
+          });
+          input.value = '';
+          renderAdminMediaPreviews();
+        }
+
+        function removeStagedImage(imgId) {
+          state.stagedImages = state.stagedImages.filter((img) => img.id !== imgId);
+          renderAdminMediaPreviews();
+        }
+
+        function renderAdminMediaPreviews() {
+          document.getElementById('adminImageCountLabel').textContent = `${state.stagedImages.length} / ${MAX_PRODUCT_IMAGES} images`;
+          const grid = document.getElementById('adminMediaPreviewGrid');
+
+          if (state.stagedImages.length === 0) {
+            grid.innerHTML = `
+              <div class="col-span-full border border-slate-200 rounded-lg p-4 text-center text-xs text-slate-400">
+                No images staged yet. Upload up to 10 images or paste a direct URL above.
+              </div>
+            `;
+            return;
+          }
+
+          grid.innerHTML = state.stagedImages
+            .map(
+              (img, idx) => `
+                <div class="relative aspect-[4/3] rounded-lg border border-slate-200 overflow-hidden bg-slate-50 group">
+                  <img src="${escapeHtml(img.src)}" alt="Staged ${idx + 1}" referrerpolicy="no-referrer" class="w-full h-full object-cover" />
+                  <span class="absolute bottom-1 left-1 px-1.5 py-0.5 rounded bg-slate-900/75 text-white text-[10px] font-mono">
+                    ${img.type === 'file' ? 'Upload' : 'URL'}
+                  </span>
+                  <button
+                    type="button"
+                    onclick="app.removeStagedImage('${escapeHtml(img.id)}')"
+                    aria-label="Remove image"
+                    class="absolute top-1 right-1 w-6 h-6 rounded-full bg-red-600 text-white text-[10px] flex items-center justify-center opacity-90 hover:opacity-100"
+                  >
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+              `
+            )
+            .join('');
+        }
+
+        function resetAdminProductForm() {
+          document.getElementById('editProductId').value = '';
+          document.getElementById('productFormTitle').textContent = 'Add New Product';
+          document.getElementById('prodNameInput').value = '';
+          document.getElementById('prodPriceInput').value = '';
+          document.getElementById('prodCategoryInput').value = 'Electronics & Audio';
+          document.getElementById('prodDescInput').value = '';
+          document.getElementById('chkOutOfStock').checked = false;
+          document.getElementById('chkInStock').checked = true;
+          document.getElementById('chkCodAvailable').checked = true;
+          document.getElementById('chkSevenDaysReturn').checked = true;
+          state.stagedImages = [];
+          renderAdminMediaPreviews();
+        }
+
+        function editAdminProduct(productId) {
+          const p = state.products.find((item) => item.id === productId);
+          if (!p) return;
+
+          document.getElementById('editProductId').value = p.id;
+          document.getElementById('productFormTitle').textContent = `Edit: ${p.name}`;
+          document.getElementById('prodNameInput').value = p.name;
+          document.getElementById('prodPriceInput').value = String(p.price);
+          document.getElementById('prodCategoryInput').value = p.category;
+          document.getElementById('prodDescInput').value = p.description;
+          document.getElementById('chkInStock').checked = p.inStock;
+          document.getElementById('chkOutOfStock').checked = p.outOfStock;
+          document.getElementById('chkCodAvailable').checked = p.codAvailable;
+          document.getElementById('chkSevenDaysReturn').checked = p.sevenDaysReturn;
+
+          state.stagedImages = p.images.map((src, idx) => ({
+            id: 'existing-' + idx + '-' + Date.now(),
+            type: 'url',
+            src,
+            name: 'Existing',
+          }));
+          renderAdminMediaPreviews();
+          switchAdminTab('editor');
+        }
+
+        async function saveAdminProduct(event) {
+          event.preventDefault();
+
+          const editId = document.getElementById('editProductId').value.trim();
+          const name = document.getElementById('prodNameInput').value.trim();
+          const price = Number(document.getElementById('prodPriceInput').value);
+          const category = document.getElementById('prodCategoryInput').value;
+          const description = document.getElementById('prodDescInput').value.trim();
+          const inStock = document.getElementById('chkInStock').checked && !document.getElementById('chkOutOfStock').checked;
+          const outOfStock = !inStock;
+          const codAvailable = document.getElementById('chkCodAvailable').checked;
+          const sevenDaysReturn = document.getElementById('chkSevenDaysReturn').checked;
+
+          if (!name || price <= 0 || !description) {
+            showToast('Please fill in Product Name, valid Price, and Description.', 'warning');
+            return;
+          }
+
+          const submitBtn = document.getElementById('saveProductSubmitBtn');
+          submitBtn.disabled = true;
+
+          const hasGitHubWrite = Boolean(state.github.owner && state.github.repo && getActiveWriteToken(false));
+          const slug = slugify(name);
+          const finalImageUrls = [];
+
+          try {
+            const fileItems = state.stagedImages.filter((i) => i.type === 'file');
+            let uploadedCount = 0;
+
+            for (const item of state.stagedImages) {
+              if (item.type === 'url') {
+                finalImageUrls.push(item.src);
+              } else if (item.type === 'file') {
+                if (hasGitHubWrite) {
+                  uploadedCount++;
+                  submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i><span>Uploading image ${uploadedCount}/${fileItems.length}...</span>`;
+                  const uploadedUrl = await uploadImageFileToGitHub(item.file, slug, uploadedCount);
+                  finalImageUrls.push(uploadedUrl);
+                } else {
+                  // Session preview fallback if Admin hasn't entered GitHub PAT yet
+                  finalImageUrls.push(item.src);
+                }
+              }
+            }
+
+            const existingProduct = editId ? state.products.find((p) => p.id === editId) : null;
+            const now = new Date().toISOString();
+
+            const productRecord = {
+              id: existingProduct ? existingProduct.id : 'apx-' + Date.now(),
+              name,
+              category,
+              price,
+              description,
+              images: finalImageUrls.slice(0, MAX_PRODUCT_IMAGES),
+              inStock,
+              outOfStock,
+              codAvailable,
+              sevenDaysReturn,
+              reviews: existingProduct ? existingProduct.reviews : [],
+              createdAt: existingProduct ? existingProduct.createdAt : now,
+              updatedAt: now,
+            };
+
+            if (existingProduct) {
+              state.products = state.products.map((p) => (p.id === editId ? productRecord : p));
+            } else {
+              state.products.unshift(productRecord);
+            }
+
+            if (hasGitHubWrite) {
+              submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Committing data/products.json...</span>';
+              await commitCatalogToGitHub(`${existingProduct ? 'Update' : 'Add'} product: ${name}`);
+              showToast(`"${name}" saved and pushed live to GitHub!`, 'success');
+            } else {
+              showToast(
+                `"${name}" updated in live session. Configure GitHub Sync Settings to persist to repository.`,
+                'warning'
+              );
+            }
+
+            renderStorefront();
+            renderAdminCatalogTable();
+            updateAdminRepoUI();
+            resetAdminProductForm();
+          } catch (err) {
+            showToast(err.message || 'Failed to save product.', 'error');
+          } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i><span>Save &amp; Sync Live</span>';
+          }
+        }
+
+        async function deleteAdminProduct(productId) {
+          const target = state.products.find((p) => p.id === productId);
+          if (!target) return;
+
+          const previousProducts = [...state.products];
+          state.products = state.products.filter((p) => p.id !== productId);
+          renderStorefront();
+          renderAdminCatalogTable();
+          updateAdminRepoUI();
+
+          if (state.github.owner && state.github.repo && getActiveWriteToken(false)) {
+            try {
+              await commitCatalogToGitHub(`Remove product: ${target.name}`);
+              showToast(`Deleted "${target.name}" and synced GitHub.`, 'success');
+            } catch (err) {
+              state.products = previousProducts;
+              renderStorefront();
+              renderAdminCatalogTable();
+              showToast(err.message || 'Failed to delete from GitHub.', 'error');
+            }
+          } else {
+            showToast(`Removed "${target.name}" from session catalog.`, 'info');
+          }
+        }
+
+        function renderAdminCatalogTable() {
+          const tbody = document.getElementById('adminCatalogTableBody');
+          if (state.products.length === 0) {
+            tbody.innerHTML = `
+              <tr>
+                <td colspan="6" class="py-8 text-center text-slate-500 text-sm">No products in catalog.</td>
+              </tr>
+            `;
+            return;
+          }
+
+          tbody.innerHTML = state.products
+            .map(
+              (p) => `
+                <tr class="hover:bg-slate-50">
+                  <td class="py-3 px-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-11 h-9 rounded bg-slate-100 border border-slate-200 overflow-hidden shrink-0">
+                        ${
+                          p.images[0]
+                            ? `<img src="${escapeHtml(p.images[0])}" alt="" referrerpolicy="no-referrer" class="w-full h-full object-cover" />`
+                            : ''
+                        }
+                      </div>
+                      <span class="font-semibold text-slate-900 line-clamp-1">${escapeHtml(p.name)}</span>
+                    </div>
+                  </td>
+                  <td class="py-3 px-4 text-xs text-slate-600 whitespace-nowrap">${escapeHtml(p.category)}</td>
+                  <td class="py-3 px-4 font-mono tabular-nums font-semibold text-slate-900 whitespace-nowrap">${formatINR(p.price)}</td>
+                  <td class="py-3 px-4 text-xs font-semibold whitespace-nowrap ${p.inStock ? 'text-emerald-700' : 'text-red-700'}">
+                    ${p.inStock ? 'In Stock' : 'Out of Stock'}
+                  </td>
+                  <td class="py-3 px-4 text-xs text-slate-600 whitespace-nowrap">
+                    ${p.codAvailable ? 'COD' : 'Prepaid'} · ${p.sevenDaysReturn ? '7d Return' : 'No Return'}
+                  </td>
+                  <td class="py-3 px-4 text-right whitespace-nowrap space-x-2">
+                    <button
+                      type="button"
+                      onclick="app.editAdminProduct('${escapeHtml(p.id)}')"
+                      class="px-2.5 py-1.5 rounded border border-slate-200 hover:bg-slate-100 text-xs font-semibold text-slate-700"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      onclick="app.deleteAdminProduct('${escapeHtml(p.id)}')"
+                      class="px-2.5 py-1.5 rounded border border-red-200 hover:bg-red-50 text-xs font-semibold text-red-700"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              `
+            )
+            .join('');
+        }
+
+        function renderAdminReviewQueue() {
+          const container = document.getElementById('adminReviewQueueList');
+          const syncAllBtn = document.getElementById('syncAllReviewsBtn');
+          syncAllBtn.disabled = state.pendingReviews.length === 0;
+
+          if (state.pendingReviews.length === 0) {
+            container.innerHTML = `
+              <div class="border border-slate-200 rounded-xl p-8 text-center text-sm text-slate-500">
+                No pending visitor reviews in the queue.
+              </div>
+            `;
+            return;
+          }
+
+          container.innerHTML = state.pendingReviews
+            .map(
+              (entry) => `
+                <div class="border border-slate-200 rounded-xl p-4 bg-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div>
+                    <p class="text-xs font-semibold text-brand">${escapeHtml(entry.productName)}</p>
+                    <p class="text-sm font-bold text-slate-900 mt-0.5">
+                      ${escapeHtml(entry.review.author)} · <span class="font-mono text-amber-600">${entry.review.rating}/5 ★</span>
+                    </p>
+                    <p class="text-sm text-slate-600 mt-1">${escapeHtml(entry.review.comment)}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onclick="app.dismissPendingReview('${escapeHtml(entry.review.id)}')"
+                    class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-600 self-start sm:self-center shrink-0"
+                  >
+                    Dismiss
+                  </button>
+                </div>
+              `
+            )
+            .join('');
+        }
+
+        async function commitAllPendingReviews() {
+          if (state.pendingReviews.length === 0) return;
+          if (!state.github.owner || !state.github.repo || !getActiveWriteToken(false)) {
+            showToast('Configure GitHub repository and Admin PAT in GitHub Sync Settings first.', 'warning');
+            switchAdminTab('github');
+            return;
+          }
+
+          const btn = document.getElementById('syncAllReviewsBtn');
+          btn.disabled = true;
+          btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1.5"></i>Syncing...';
+
+          try {
+            state.pendingReviews.forEach((entry) => {
+              entry.review.syncedToGithub = true;
+            });
+            await commitCatalogToGitHub(`Approve & sync ${state.pendingReviews.length} customer review(s)`);
+            state.pendingReviews = [];
+            renderAdminReviewQueue();
+            updateAdminRepoUI();
+            renderStorefront();
+            showToast('All pending customer reviews committed to GitHub!', 'success');
+          } catch (err) {
+            showToast(err.message || 'Failed to sync pending reviews.', 'error');
+          } finally {
+            btn.disabled = state.pendingReviews.length === 0;
+            btn.innerHTML = '<i class="fa-solid fa-check-double mr-1.5"></i>Approve &amp; Commit All to GitHub';
+          }
+        }
+
+        function dismissPendingReview(reviewId) {
+          const entry = state.pendingReviews.find((e) => e.review.id === reviewId);
+          if (entry) {
+            const p = state.products.find((prod) => prod.id === entry.productId);
+            if (p) {
+              p.reviews = p.reviews.filter((r) => r.id !== reviewId);
+            }
+          }
+          state.pendingReviews = state.pendingReviews.filter((e) => e.review.id !== reviewId);
+          renderAdminReviewQueue();
+          updateAdminRepoUI();
+          renderStorefront();
+        }
+
+        // -----------------------------------------------------------------
+        // INITIALIZATION & EVENT BINDING
+        // -----------------------------------------------------------------
+        function parseQueryRepoParams() {
+          const params = new URLSearchParams(window.location.search);
+          const repoParam = params.get('repo');
+          const branchParam = params.get('branch');
+          if (repoParam && repoParam.includes('/')) {
+            const [owner, repo] = repoParam.split('/');
+            if (owner && repo) {
+              state.github.owner = owner.trim();
+              state.github.repo = repo.trim();
+              if (branchParam) state.github.branch = branchParam.trim();
+            }
+          }
+        }
+
+        function init() {
+          document.getElementById('currentYear').textContent = String(new Date().getFullYear());
+
+          const searchEl = document.getElementById('searchInput');
+          searchEl.addEventListener('input', (e) => {
+            state.searchQuery = e.target.value;
+            renderStorefront();
+          });
+
+          // Hidden Admin Keyboard Shortcut: Ctrl+Shift+A or Alt+Shift+A
+          document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey || e.altKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
+              e.preventDefault();
+              openAdminAuth();
+            }
+            if (e.key === 'Escape') {
+              closeProductModal();
+              closeCart();
+              closeAdminAuth();
+            }
+          });
+
+          parseQueryRepoParams();
+          renderStorefront();
+          updateCartBadge();
+
+          if (state.github.owner && state.github.repo) {
+            fetchCatalogFromGitHub(true);
+          }
+        }
+
+        // Public API exposed for clean inline handlers
+        window.app = {
+          setCategory: (cat) => {
+            state.activeCategory = cat;
+            renderStorefront();
+          },
+          setSort: (sort) => {
+            state.sortBy = sort;
+            renderStorefront();
+          },
+          resetFilters: (e) => {
+            if (e) e.preventDefault();
+            state.activeCategory = 'All';
+            state.searchQuery = '';
+            state.sortBy = 'featured';
+            document.getElementById('searchInput').value = '';
+            document.getElementById('sortSelect').value = 'featured';
+            renderStorefront();
+          },
+          refreshFromGitHub: () => fetchCatalogFromGitHub(false),
+          handleImgError,
+          openProductModal,
+          closeProductModal,
+          selectModalImage: (idx) => {
+            state.modalImageIndex = idx;
+            renderProductModalContent();
+          },
+          stepModalQty: (delta) => {
+            state.modalQty = Math.max(1, Math.min(10, state.modalQty + delta));
+            document.getElementById('modalQtyValue').textContent = String(state.modalQty);
+          },
+          addModalProductToCart: (buyNow) => {
+            if (state.activeProductId) {
+              addToCart(state.activeProductId, state.modalQty, buyNow);
+            }
+          },
+          quickAddToCart: (id) => addToCart(id, 1, false),
+          setReviewRating: (val) => {
+            state.reviewRating = val;
+            renderReviewStarPicker();
+          },
+          submitProductReview,
+          openCart,
+          closeCart,
+          stepCartItem,
+          placeCodOrder,
+          clearReceiptAndCloseCart: () => {
+            state.checkoutOrderReceipt = null;
+            closeCart();
+          },
+          openAdminAuth,
+          closeAdminAuth,
+          verifyAdminPassword,
+          lockAdminPanel,
+          switchAdminTab,
+          connectAndSyncGitHub,
+          pushCurrentCatalogToGitHub,
+          handleStockCheckbox,
+          handleAdminImageFiles,
+          addAdminImageUrl,
+          removeStagedImage,
+          resetAdminProductForm,
+          editAdminProduct,
+          saveAdminProduct,
+          deleteAdminProduct,
+          commitAllPendingReviews,
+          dismissPendingReview,
+          togglePasswordVisibility: (inputId, btnEl) => {
+            const el = document.getElementById(inputId);
+            const icon = btnEl.querySelector('i');
+            if (el.type === 'password') {
+              el.type = 'text';
+              icon.className = 'fa-regular fa-eye-slash text-sm';
+            } else {
+              el.type = 'password';
+              icon.className = 'fa-regular fa-eye text-sm';
+            }
+          },
+          copyShareableUrl: async () => {
+            const val = document.getElementById('shareableRepoUrl').value;
+            if (!val || val.startsWith('Connect')) return;
+            try {
+              await navigator.clipboard.writeText(val);
+              showToast('Storefront URL copied to clipboard.', 'success');
+            } catch {
+              showToast('Select and copy the URL manually.', 'info');
+            }
+          },
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+      })();
+    </script>
+  </body>
+</html>
