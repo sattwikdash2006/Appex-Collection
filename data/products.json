@@ -1,34 +1,8 @@
 {
   "storeName": "Appex Collection",
   "currency": "INR",
-  "updatedAt": "2026-11-18T14:23:22.597Z",
+  "updatedAt": "2026-11-18T14:23:25.308Z",
   "products": [
-    {
-      "id": "apx-105",
-      "name": "Sculpted Ceramic & Brass Table Lamp",
-      "category": "Home & Living",
-      "price": 3799,
-      "description": "Hand-finished matte ivory stoneware base paired with a brushed solid brass collar, natural woven linen drum shade, and braided fabric power cord (E27 warm LED included).",
-      "images": [
-        "/src/assets/images/product_ceramic_lamp_1795006535676.jpg"
-      ],
-      "inStock": true,
-      "outOfStock": false,
-      "codAvailable": false,
-      "sevenDaysReturn": true,
-      "reviews": [
-        {
-          "id": "rev-6",
-          "author": "Meera Kulkarni",
-          "rating": 5,
-          "comment": "Throws a calm warm glow across my study desk. Packaging was rock solid.",
-          "createdAt": "2026-11-03T19:10:00.000Z",
-          "syncedToGithub": true
-        }
-      ],
-      "createdAt": "2026-10-05T10:00:00.000Z",
-      "updatedAt": "2026-11-03T19:10:00.000Z"
-    },
     {
       "id": "apx-106",
       "name": "Ballistic Commuter 22L Backpack",
