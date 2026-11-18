@@ -1,7 +1,7 @@
 {
   "storeName": "Appex Collection",
   "currency": "INR",
-  "updatedAt": "2026-11-18T13:55:09.792Z",
+  "updatedAt": "2026-11-18T13:57:16.877Z",
   "orders": [
     {
       "orderId": "APX082090",
@@ -45,7 +45,7 @@
       "shipping": 0,
       "total": 4999,
       "paymentMethod": "Cash on Delivery",
-      "status": "Pending",
+      "status": "Cancelled",
       "createdAt": "2026-11-18T13:54:39.682Z",
       "syncedToGithub": true
     }
