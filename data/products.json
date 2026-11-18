@@ -1,7 +1,7 @@
 {
   "storeName": "Appex Collection",
   "currency": "INR",
-  "updatedAt": "2026-11-18T14:10:20.615Z",
+  "updatedAt": "2026-11-18T14:10:22.525Z",
   "products": [
     {
       "id": "apx-1795011006715",
@@ -19,6 +19,84 @@
       "reviews": [],
       "createdAt": "2026-11-18T14:10:06.715Z",
       "updatedAt": "2026-11-18T14:10:06.715Z"
+    },
+    {
+      "id": "apx-102",
+      "name": "Chronos Steel Hybrid Smartwatch",
+      "category": "Electronics & Audio",
+      "price": 6499,
+      "description": "Brushed 316L stainless steel bezel with AMOLED display, stitched full-grain espresso leather strap, continuous heart-rate tracking, and 5ATM water resistance.",
+      "images": [
+        "/src/assets/images/product_smartwatch_steel_1795006533824.jpg"
+      ],
+      "inStock": true,
+      "outOfStock": false,
+      "codAvailable": true,
+      "sevenDaysReturn": true,
+      "reviews": [
+        {
+          "id": "rev-3",
+          "author": "Vikram Nair",
+          "rating": 5,
+          "comment": "Looks like an heirloom analog watch while tracking workouts accurately.",
+          "createdAt": "2026-10-18T11:20:00.000Z",
+          "syncedToGithub": true
+        }
+      ],
+      "createdAt": "2026-10-02T10:00:00.000Z",
+      "updatedAt": "2026-10-18T11:20:00.000Z"
+    },
+    {
+      "id": "apx-103",
+      "name": "Stride Knit Road Runners — Slate",
+      "category": "Footwear",
+      "price": 3299,
+      "description": "Breathable engineered mesh upper paired with dual-density EVA midsole cushioning and high-abrasion carbon rubber traction outsole for daily road mileage.",
+      "images": [
+        "/src/assets/images/product_urban_sneakers_1795006534560.jpg"
+      ],
+      "inStock": true,
+      "outOfStock": false,
+      "codAvailable": true,
+      "sevenDaysReturn": true,
+      "reviews": [
+        {
+          "id": "rev-4",
+          "author": "Siddharth Rao",
+          "rating": 5,
+          "comment": "Lightweight on morning 5Ks and pairs well with casual denim.",
+          "createdAt": "2026-10-25T07:45:00.000Z",
+          "syncedToGithub": true
+        }
+      ],
+      "createdAt": "2026-10-03T10:00:00.000Z",
+      "updatedAt": "2026-10-25T07:45:00.000Z"
+    },
+    {
+      "id": "apx-104",
+      "name": "Heavyweight Organic Twill Overshirt",
+      "category": "Fashion & Apparel",
+      "price": 2499,
+      "description": "340 GSM garment-washed organic cotton twill overshirt in deep navy. Features twin chest utility pockets, reinforced felled seams, and natural horn buttons.",
+      "images": [
+        "/src/assets/images/product_cotton_jacket_1795006534437.jpg"
+      ],
+      "inStock": true,
+      "outOfStock": false,
+      "codAvailable": true,
+      "sevenDaysReturn": true,
+      "reviews": [
+        {
+          "id": "rev-5",
+          "author": "Kabir Verma",
+          "rating": 4,
+          "comment": "Heavy fabric drapes sharply. True to size across the shoulders.",
+          "createdAt": "2026-11-01T16:00:00.000Z",
+          "syncedToGithub": true
+        }
+      ],
+      "createdAt": "2026-10-04T10:00:00.000Z",
+      "updatedAt": "2026-11-01T16:00:00.000Z"
     },
     {
       "id": "apx-105",
