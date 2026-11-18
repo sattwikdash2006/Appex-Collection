@@ -1,8 +1,25 @@
 {
   "storeName": "Appex Collection",
   "currency": "INR",
-  "updatedAt": "2026-11-18T14:09:04.505Z",
+  "updatedAt": "2026-11-18T14:10:08.429Z",
   "products": [
+    {
+      "id": "apx-1795011006715",
+      "name": "HOODIES & SWEATSHIRTS FOR MEN'S",
+      "category": "Fashion & Apparel",
+      "price": 360,
+      "description": "HOODIES & SWEATSHIRTS FOR MEN'S\nName: HOODIES & SWEATSHIRTS FOR MEN'S\nFabric: Cotton\nSleeve Length: Long Sleeves\nPattern: Printed\nNet Quantity (N): 1\nSizes:\nM (Chest Size: 34 in, Length Size: 26 in) \nL (Chest Size: 36 in, Length Size: 27 in) \nXL (Chest Size: 38 in, Length Size: 28 in) \n\nCountry of Origin: India",
+      "images": [
+        "https://images.meesho.com/images/products/1089793615/h6ryx_512.avif?width=512"
+      ],
+      "inStock": true,
+      "outOfStock": false,
+      "codAvailable": true,
+      "sevenDaysReturn": true,
+      "reviews": [],
+      "createdAt": "2026-11-18T14:10:06.715Z",
+      "updatedAt": "2026-11-18T14:10:06.715Z"
+    },
     {
       "id": "apx-101",
       "name": "Appex Studio ANC Wireless Headphones",
