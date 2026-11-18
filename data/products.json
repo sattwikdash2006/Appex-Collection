@@ -1,7 +1,7 @@
 {
   "storeName": "Appex Collection",
   "currency": "INR",
-  "updatedAt": "2026-11-18T14:10:32.720Z",
+  "updatedAt": "2026-11-18T14:10:34.167Z",
   "products": [
     {
       "id": "apx-1795011006715",
@@ -19,32 +19,6 @@
       "reviews": [],
       "createdAt": "2026-11-18T14:10:06.715Z",
       "updatedAt": "2026-11-18T14:10:06.715Z"
-    },
-    {
-      "id": "apx-106",
-      "name": "Ballistic Commuter 22L Backpack",
-      "category": "Accessories",
-      "price": 2899,
-      "description": "Water-resistant 1680D ballistic nylon commuter pack with full-grain leather trim, suspended 16-inch padded laptop sleeve, and YKK AquaGuard zippers.",
-      "images": [
-        "/src/assets/images/product_leather_backpack_1795006536152.jpg"
-      ],
-      "inStock": false,
-      "outOfStock": true,
-      "codAvailable": true,
-      "sevenDaysReturn": true,
-      "reviews": [
-        {
-          "id": "rev-7",
-          "author": "Devika Sen",
-          "rating": 5,
-          "comment": "Stands upright on its own and holds my laptop plus camera pouch cleanly.",
-          "createdAt": "2026-11-05T08:40:00.000Z",
-          "syncedToGithub": true
-        }
-      ],
-      "createdAt": "2026-10-06T10:00:00.000Z",
-      "updatedAt": "2026-11-05T08:40:00.000Z"
     }
   ]
 }
