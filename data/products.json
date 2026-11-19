@@ -1,8 +1,29 @@
 {
   "storeName": "Appex Collection",
   "currency": "INR",
-  "updatedAt": "2026-11-19T14:01:33.135Z",
+  "updatedAt": "2026-11-19T14:06:40.277Z",
   "products": [
+    {
+      "id": "apx-1795097164130",
+      "name": "Hakim chacha",
+      "category": "Home & Living",
+      "price": 10,
+      "description": "Halu lulu",
+      "images": [
+        "https://raw.githubusercontent.com/sattwikdash2006/Appex-Collection/main/assets/products/hakim-chacha-1795097180029-1.webp",
+        "https://raw.githubusercontent.com/sattwikdash2006/Appex-Collection/main/assets/products/hakim-chacha-1795097183379-2.webp",
+        "https://raw.githubusercontent.com/sattwikdash2006/Appex-Collection/main/assets/products/hakim-chacha-1795097186907-3.webp",
+        "https://raw.githubusercontent.com/sattwikdash2006/Appex-Collection/main/assets/products/hakim-chacha-1795097190240-4.jpg",
+        "https://raw.githubusercontent.com/sattwikdash2006/Appex-Collection/main/assets/products/hakim-chacha-1795097194441-5.jpg"
+      ],
+      "inStock": true,
+      "outOfStock": false,
+      "codAvailable": true,
+      "sevenDaysReturn": true,
+      "reviews": [],
+      "createdAt": "2026-11-19T14:06:04.130Z",
+      "updatedAt": "2026-11-19T14:06:04.130Z"
+    },
     {
       "id": "apx-1795011877907",
       "name": "HOODIES & SWEATSHIRTS FOR MEN'S",
