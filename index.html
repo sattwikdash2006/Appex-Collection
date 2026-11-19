@@ -16,7 +16,6 @@
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Fonts: Plus Jakarta Sans (Display & Body) + JetBrains Mono (Tabular Pricing & Metrics) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -24,7 +23,6 @@
       rel="stylesheet"
     />
 
-    <!-- FontAwesome 6 Icons via CDN -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -32,7 +30,6 @@
       referrerpolicy="no-referrer"
     />
 
-    <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -61,7 +58,6 @@
     </script>
 
     <style>
-      /* Minimal compositor-only motion helpers & scroll polish */
       html {
         scroll-behavior: smooth;
       }
@@ -103,12 +99,9 @@
     </style>
   </head>
   <body class="min-h-screen flex flex-col antialiased selection:bg-brand selection:text-white">
-    <!-- =================================================================== -->
-    <!-- TOP BAR CONTRACT: 1-row, 3-zone header (#2874F0 Royal Commerce Blue) -->
-    <!-- =================================================================== -->
+    <!-- TOP BAR: 1-row, 3-zone header (#2874F0 Royal Commerce Blue) -->
     <header class="sticky top-0 z-40 bg-brand text-white border-b border-brand-dark/30 shadow-sm">
       <div class="max-w-[1280px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4 md:gap-8">
-        <!-- Zone 1: Single-element Brand Wordmark -->
         <a
           href="#top"
           onclick="app.resetFilters(event)"
@@ -117,9 +110,8 @@
           Appex Collection
         </a>
 
-        <!-- Zone 2: Integrated Search & Concise Single-Line Navigation -->
         <div class="flex-1 max-w-2xl flex items-center gap-6">
-          <div class="relative flex-1">
+          <div class="relative flex-1 hidden sm:block">
             <label for="searchInput" class="sr-only">Search products</label>
             <input
               id="searchInput"
@@ -145,12 +137,12 @@
           </nav>
         </div>
 
-        <!-- Zone 3: 1 Primary Action (Shopping Bag Drawer Trigger) -->
         <div class="shrink-0">
           <button
             id="cartToggleBtn"
             type="button"
             onclick="app.openCart()"
+            aria-label="Open shopping bag"
             class="inline-flex items-center gap-2.5 h-10 px-4 rounded-md bg-white/15 hover:bg-white/25 text-white text-sm font-semibold transition-colors whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
           >
             <i class="fa-solid fa-bag-shopping text-sm"></i>
@@ -163,14 +155,25 @@
       </div>
     </header>
 
-    <!-- =================================================================== -->
-    <!-- CATEGORY FILTER BAR (Single-Line Functional Filter Controls)        -->
-    <!-- =================================================================== -->
+    <!-- CATEGORY FILTER BAR + SPACIOUS MOBILE SEARCH -->
     <div class="bg-white border-b border-slate-200">
-      <div class="max-w-[1280px] mx-auto px-4 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-3">
-        <div id="categoryTabs" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
-          <!-- Populated dynamically by JS -->
+      <div class="max-w-[1280px] mx-auto px-4 sm:px-6 pt-2.5 sm:hidden">
+        <div class="relative">
+          <label for="mobileSearchInput" class="sr-only">Search products</label>
+          <input
+            id="mobileSearchInput"
+            type="search"
+            placeholder="Search electronics, apparel, footwear..."
+            class="w-full h-10 pl-3.5 pr-10 rounded-md bg-slate-50 text-slate-900 placeholder-slate-400 text-sm border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand"
+          />
+          <span class="absolute right-3 top-1/2 -translate-y-1/2 text-brand pointer-events-none">
+            <i class="fa-solid fa-magnifying-glass text-sm"></i>
+          </span>
         </div>
+      </div>
+
+      <div class="max-w-[1280px] mx-auto px-4 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-3">
+        <div id="categoryTabs" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5"></div>
 
         <div class="flex items-center gap-3 shrink-0 ml-auto">
           <label for="sortSelect" class="text-xs font-medium text-slate-500 hidden sm:inline whitespace-nowrap">
@@ -190,9 +193,7 @@
       </div>
     </div>
 
-    <!-- =================================================================== -->
-    <!-- MAIN STOREFRONT CONTENT (Max 3 Focused Sections)                    -->
-    <!-- =================================================================== -->
+    <!-- MAIN STOREFRONT CONTENT -->
     <main id="top" class="flex-1">
       <!-- SECTION 1: HERO CAMPAIGN SHOWCASE + TRUST STRIP -->
       <section class="max-w-[1280px] mx-auto px-4 sm:px-6 pt-6 pb-4">
@@ -220,23 +221,22 @@
                 onclick="app.setCategory('Electronics & Audio'); document.getElementById('catalog').scrollIntoView({behavior:'smooth'});"
                 class="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 text-sm font-semibold transition-colors whitespace-nowrap shrink-0"
               >
-                <span>Explore Audio & Tech</span>
+                <span>Explore Audio &amp; Tech</span>
               </button>
             </div>
           </div>
 
           <div class="lg:col-span-6 relative min-h-[260px] lg:min-h-[380px] bg-slate-100">
             <img
-              src="/src/assets/images/hero_appex_showcase_1795006532076.jpg"
+              id="heroShowcaseImg"
+              src=""
               alt="Appex Collection curated electronics, wristwatch, navy overshirt, and brass lamp"
               referrerpolicy="no-referrer"
-              onerror="app.handleImgError(this, 'Appex Collection Showcase')"
               class="w-full h-full lg:absolute lg:inset-0 object-cover"
             />
           </div>
         </div>
 
-        <!-- 4-Column Storefront Trust Strip below Hero -->
         <div class="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           <div class="bg-white border border-slate-200 rounded-lg px-4 py-3.5 flex items-center gap-3">
             <span class="w-9 h-9 rounded-md bg-brand-tint text-brand flex items-center justify-center shrink-0">
@@ -277,7 +277,7 @@
         </div>
       </section>
 
-      <!-- SECTION 2: FEATURED & FILTERABLE PRODUCT CATALOG -->
+      <!-- SECTION 2: FILTERABLE PRODUCT CATALOG -->
       <section id="catalog" class="max-w-[1280px] mx-auto px-4 sm:px-6 py-6 sm:py-8">
         <div class="flex flex-wrap items-end justify-between gap-4 mb-6">
           <div>
@@ -311,7 +311,6 @@
           </div>
         </div>
 
-        <!-- Loading State Skeleton -->
         <div id="catalogLoader" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div class="bg-white border border-slate-200 rounded-xl p-4 animate-pulse">
             <div class="aspect-[4/3] bg-slate-100 rounded-lg mb-4"></div>
@@ -333,12 +332,8 @@
           </div>
         </div>
 
-        <!-- Product Grid -->
-        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Rendered dynamically by JS -->
-        </div>
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
 
-        <!-- Empty State -->
         <div
           id="emptyCatalogState"
           class="hidden bg-white border border-slate-200 rounded-xl p-12 text-center max-w-lg mx-auto my-8"
@@ -360,7 +355,7 @@
         </div>
       </section>
 
-      <!-- SECTION 3: STORE ASSURANCE & QUALITY PROMISE -->
+      <!-- SECTION 3: STORE ASSURANCE -->
       <section id="assurance" class="max-w-[1280px] mx-auto px-4 sm:px-6 pt-4 pb-12">
         <div class="bg-white border border-slate-200 rounded-xl p-6 sm:p-10">
           <div class="max-w-2xl mb-8">
@@ -373,7 +368,7 @@
           </div>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-6 border-t border-slate-100">
             <div>
-              <h3 class="text-sm font-semibold text-slate-900 mb-2">01. Transparent Stock & Pricing</h3>
+              <h3 class="text-sm font-semibold text-slate-900 mb-2">01. Transparent Stock &amp; Pricing</h3>
               <p class="text-sm text-slate-600 leading-relaxed">
                 Real-time inventory availability, clear Cash on Delivery eligibility, and final GST-inclusive rupee pricing with zero hidden fees.
               </p>
@@ -395,10 +390,8 @@
       </section>
     </main>
 
-    <!-- =================================================================== -->
-    <!-- FOOTER WITH DISCREET ADMIN TRIGGER                                  -->
-    <!-- =================================================================== -->
-    <footer id="site-footer" class="bg-slate-900 text-slate-300 border-t border-slate-800">
+    <!-- FOOTER WITH DISCREET ADMIN TRIGGER -->
+    <footer id="site-footer" class="bg-slate-900 text-slate-300 border-t border-slate-800 mt-auto">
       <div class="max-w-[1280px] mx-auto px-4 sm:px-6 py-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
         <div>
           <p class="text-base font-bold text-white">Appex Collection</p>
@@ -410,14 +403,9 @@
         <div class="flex flex-wrap items-center gap-6 text-xs text-slate-400">
           <a href="#catalog" class="hover:text-white transition-colors">Shop Catalog</a>
           <a href="#assurance" class="hover:text-white transition-colors">Return Policy</a>
-          <button
-            type="button"
-            onclick="app.openCart()"
-            class="hover:text-white transition-colors"
-          >
+          <button type="button" onclick="app.openCart()" class="hover:text-white transition-colors">
             Shopping Bag
           </button>
-          <!-- Discreet Hidden Admin Trigger (also accessible via Ctrl+Shift+A) -->
           <button
             id="hiddenAdminTrigger"
             type="button"
@@ -432,18 +420,16 @@
       </div>
     </footer>
 
-    <!-- =================================================================== -->
-    <!-- PRODUCT DETAIL MODAL (Gallery, Purchase Module, Customer Reviews)    -->
-    <!-- =================================================================== -->
+    <!-- PRODUCT DETAIL MODAL -->
     <div
       id="productModal"
+      onclick="if (event.target === this) app.closeProductModal();"
       class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-[2px] flex items-center justify-center p-0 sm:p-4 overflow-y-auto"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modalProductTitle"
     >
       <div class="bg-white w-full max-w-5xl sm:rounded-xl border border-slate-200 shadow-2xl overflow-hidden max-h-screen sm:max-h-[92vh] flex flex-col">
-        <!-- Modal Header -->
         <div class="px-5 py-3.5 border-b border-slate-200 flex items-center justify-between gap-4 bg-white shrink-0">
           <div class="flex items-center gap-2 text-xs text-slate-500 min-w-0">
             <span id="modalProductCategory" class="font-medium text-brand truncate">Category</span>
@@ -460,11 +446,8 @@
           </button>
         </div>
 
-        <!-- Modal Scrollable Body -->
         <div class="overflow-y-auto p-5 sm:p-8 space-y-10">
-          <!-- Contiguous Purchase Module -->
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <!-- Gallery Left -->
             <div class="lg:col-span-6 space-y-3">
               <div class="aspect-[4/3] rounded-xl bg-slate-50 border border-slate-200 overflow-hidden relative">
                 <img
@@ -475,12 +458,9 @@
                   class="w-full h-full object-cover"
                 />
               </div>
-              <div id="modalThumbnails" class="grid grid-cols-5 gap-2.5">
-                <!-- Populated dynamically -->
-              </div>
+              <div id="modalThumbnails" class="grid grid-cols-5 gap-2.5"></div>
             </div>
 
-            <!-- Purchase Details Right -->
             <div class="lg:col-span-6 flex flex-col">
               <div class="flex flex-wrap items-center gap-2 text-xs font-semibold mb-2">
                 <span id="modalStockBadge" class="inline-flex items-center gap-1.5"></span>
@@ -503,13 +483,11 @@
                 Description
               </p>
 
-              <!-- Service Terms (COD & 7 Days Return) -->
               <div class="mt-6 pt-5 border-t border-slate-100 grid grid-cols-2 gap-3">
                 <div id="modalCodInfo" class="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-slate-700"></div>
                 <div id="modalReturnInfo" class="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-slate-700"></div>
               </div>
 
-              <!-- Action Row -->
               <div class="mt-7 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 <div class="flex items-center border border-slate-200 rounded-lg h-11 bg-white self-start">
                   <button
@@ -554,20 +532,15 @@
             </div>
           </div>
 
-          <!-- Customer Reviews Section -->
           <div class="pt-8 border-t border-slate-200 grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <!-- Review List -->
             <div class="lg:col-span-7 space-y-4">
               <div class="flex items-center justify-between">
                 <h3 class="text-lg font-bold text-slate-900">Customer Reviews</h3>
                 <span id="modalReviewTotal" class="text-xs font-mono tabular-nums text-slate-500">0 reviews</span>
               </div>
-              <div id="modalReviewsList" class="space-y-4">
-                <!-- Populated dynamically -->
-              </div>
+              <div id="modalReviewsList" class="space-y-4"></div>
             </div>
 
-            <!-- Submit Review Form -->
             <div class="lg:col-span-5">
               <form
                 id="reviewForm"
@@ -597,9 +570,7 @@
 
                 <div>
                   <span class="block text-xs font-semibold text-slate-700 mb-1.5">Rating</span>
-                  <div id="reviewStarPicker" class="flex items-center gap-1.5">
-                    <!-- Rendered dynamically -->
-                  </div>
+                  <div id="reviewStarPicker" class="flex items-center gap-1.5"></div>
                 </div>
 
                 <div>
@@ -631,9 +602,7 @@
       </div>
     </div>
 
-    <!-- =================================================================== -->
-    <!-- CART & COD CHECKOUT DRAWER                                          -->
-    <!-- =================================================================== -->
+    <!-- CART & COD CHECKOUT DRAWER -->
     <div id="cartDrawerBackdrop" class="hidden fixed inset-0 z-50 bg-slate-950/50 backdrop-blur-[1px]" onclick="app.closeCart()"></div>
     <aside
       id="cartDrawer"
@@ -655,20 +624,14 @@
         </button>
       </div>
 
-      <div id="cartDrawerBody" class="flex-1 overflow-y-auto p-5 space-y-5">
-        <!-- Populated dynamically -->
-      </div>
-
-      <div id="cartDrawerFooter" class="p-5 border-t border-slate-200 bg-slate-50 space-y-3">
-        <!-- Populated dynamically -->
-      </div>
+      <div id="cartDrawerBody" class="flex-1 overflow-y-auto p-5 space-y-5"></div>
+      <div id="cartDrawerFooter" class="p-5 border-t border-slate-200 bg-slate-50 space-y-3"></div>
     </aside>
 
-    <!-- =================================================================== -->
-    <!-- HIDDEN ADMIN LOGIN MODAL (Password: 7908741893)                     -->
-    <!-- =================================================================== -->
+    <!-- ADMIN LOGIN MODAL (Password: 7908741893) -->
     <div
       id="adminLoginModal"
+      onclick="if (event.target === this) app.closeAdminAuth();"
       class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-[2px] flex items-center justify-center p-4"
       role="dialog"
       aria-modal="true"
@@ -733,18 +696,16 @@
       </div>
     </div>
 
-    <!-- =================================================================== -->
-    <!-- ADMIN MANAGEMENT DASHBOARD MODAL                                    -->
-    <!-- =================================================================== -->
+    <!-- ADMIN MANAGEMENT DASHBOARD MODAL -->
     <div
       id="adminDashboardModal"
+      onclick="if (event.target === this) app.lockAdminPanel();"
       class="hidden fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-[2px] flex items-center justify-center p-0 sm:p-4 overflow-y-auto"
       role="dialog"
       aria-modal="true"
       aria-labelledby="adminDashboardHeading"
     >
       <div class="bg-white w-full max-w-6xl sm:rounded-xl border border-slate-200 shadow-2xl overflow-hidden max-h-screen sm:max-h-[94vh] flex flex-col">
-        <!-- Admin Top Bar -->
         <div class="px-5 sm:px-6 py-4 bg-slate-900 text-white flex flex-wrap items-center justify-between gap-4 shrink-0">
           <div class="flex items-center gap-3">
             <span class="w-9 h-9 rounded-lg bg-brand text-white flex items-center justify-center">
@@ -755,23 +716,20 @@
                 Appex Collection — Admin Console
               </h2>
               <p id="adminRepoStatusLine" class="text-xs text-slate-300">
-                GitHub Repo: Not Connected (Session Mode)
+                GitHub Repo: Not Connected (Configure in GitHub Sync Settings)
               </p>
             </div>
           </div>
 
-          <div class="flex items-center gap-2.5">
-            <button
-              type="button"
-              onclick="app.lockAdminPanel()"
-              class="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition-colors"
-            >
-              <i class="fa-solid fa-right-from-bracket mr-1.5"></i>Lock & Close
-            </button>
-          </div>
+          <button
+            type="button"
+            onclick="app.lockAdminPanel()"
+            class="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 transition-colors"
+          >
+            <i class="fa-solid fa-right-from-bracket mr-1.5"></i>Lock &amp; Close
+          </button>
         </div>
 
-        <!-- Admin Navigation Tabs -->
         <div class="px-5 sm:px-6 py-2.5 bg-slate-50 border-b border-slate-200 flex items-center gap-2 overflow-x-auto no-scrollbar shrink-0">
           <button
             type="button"
@@ -815,7 +773,6 @@
           </button>
         </div>
 
-        <!-- Admin Tab Content Area -->
         <div class="flex-1 overflow-y-auto p-5 sm:p-7">
           <!-- TAB 1: ADD / EDIT PRODUCT -->
           <div id="adminTab-editor" class="admin-tab-panel space-y-6">
@@ -823,11 +780,10 @@
               <div>
                 <h3 id="productFormTitle" class="text-lg font-bold text-slate-900">Add New Product</h3>
                 <p class="text-xs text-slate-500 mt-0.5">
-                  Uploads images to <code class="font-mono bg-slate-100 px-1 py-0.5 rounded">assets/products/</code> and syncs <code class="font-mono bg-slate-100 px-1 py-0.5 rounded">data/products.json</code> live.
+                  Uploads images to <code class="font-mono bg-slate-100 px-1 py-0.5 rounded">assets/products/</code> and syncs <code class="font-mono bg-slate-100 px-1 py-0.5 rounded">data/products.json</code> live across tabs and devices.
                 </p>
               </div>
               <button
-                id="resetProductFormBtn"
                 type="button"
                 onclick="app.resetAdminProductForm()"
                 class="px-3.5 py-2 rounded-lg border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-700"
@@ -839,7 +795,6 @@
             <form id="adminProductForm" onsubmit="app.saveAdminProduct(event)" class="grid grid-cols-1 lg:grid-cols-12 gap-8">
               <input id="editProductId" type="hidden" value="" />
 
-              <!-- Left Column: Product Details & 4 Checkboxes -->
               <div class="lg:col-span-6 space-y-4">
                 <div>
                   <label for="prodNameInput" class="block text-xs font-semibold text-slate-700 mb-1.5">
@@ -878,10 +833,10 @@
                       required
                       class="w-full h-10 px-3 rounded-lg border border-slate-200 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-brand"
                     >
-                      <option value="Electronics & Audio">Electronics & Audio</option>
-                      <option value="Fashion & Apparel">Fashion & Apparel</option>
+                      <option value="Electronics & Audio">Electronics &amp; Audio</option>
+                      <option value="Fashion & Apparel">Fashion &amp; Apparel</option>
                       <option value="Footwear">Footwear</option>
-                      <option value="Home & Living">Home & Living</option>
+                      <option value="Home & Living">Home &amp; Living</option>
                       <option value="Accessories">Accessories</option>
                     </select>
                   </div>
@@ -900,10 +855,9 @@
                   ></textarea>
                 </div>
 
-                <!-- 4 Explicit Status Checkboxes -->
                 <div class="pt-2">
                   <span class="block text-xs font-semibold text-slate-700 mb-2.5">
-                    Availability & Order Policies
+                    Availability &amp; Order Policies
                   </span>
                   <div class="grid grid-cols-2 gap-3 bg-slate-50 border border-slate-200 rounded-xl p-4">
                     <label class="flex items-center gap-2.5 text-sm font-medium text-slate-800 cursor-pointer select-none">
@@ -950,7 +904,6 @@
                 </div>
               </div>
 
-              <!-- Right Column: Media Upload (Up to 10 Files + Direct Image URLs) -->
               <div class="lg:col-span-6 space-y-4">
                 <div class="flex items-center justify-between">
                   <span class="text-xs font-semibold text-slate-700">
@@ -961,7 +914,6 @@
                   </span>
                 </div>
 
-                <!-- File Upload Dropzone -->
                 <label
                   for="prodImageFilesInput"
                   class="block border border-dashed border-slate-300 hover:border-brand rounded-xl p-5 text-center bg-slate-50 hover:bg-brand-tint/40 transition-colors cursor-pointer"
@@ -981,7 +933,6 @@
                   />
                 </label>
 
-                <!-- Alternative Direct Image URL Input -->
                 <div class="flex items-center gap-2">
                   <input
                     id="prodImageUrlInput"
@@ -998,10 +949,7 @@
                   </button>
                 </div>
 
-                <!-- Staged Image Gallery Preview -->
-                <div id="adminMediaPreviewGrid" class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 min-h-[96px]">
-                  <!-- Populated dynamically -->
-                </div>
+                <div id="adminMediaPreviewGrid" class="grid grid-cols-2 sm:grid-cols-5 gap-2.5 min-h-[96px]"></div>
 
                 <div class="pt-4 border-t border-slate-200 flex items-center justify-end gap-3">
                   <button
@@ -1010,7 +958,7 @@
                     class="w-full sm:w-auto px-6 h-11 rounded-lg bg-action hover:bg-action-hover text-white text-sm font-bold inline-flex items-center justify-center gap-2 transition-colors disabled:opacity-60"
                   >
                     <i class="fa-solid fa-cloud-arrow-up"></i>
-                    <span>Save & Sync Live</span>
+                    <span>Save &amp; Sync Live</span>
                   </button>
                 </div>
               </div>
@@ -1045,9 +993,7 @@
                     <th class="py-3 px-4 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody id="adminCatalogTableBody" class="divide-y divide-slate-100 text-sm">
-                  <!-- Rendered dynamically -->
-                </tbody>
+                <tbody id="adminCatalogTableBody" class="divide-y divide-slate-100 text-sm"></tbody>
               </table>
             </div>
           </div>
@@ -1080,9 +1026,7 @@
               </div>
             </div>
 
-            <div id="adminOrdersList" class="space-y-3">
-              <!-- Populated dynamically -->
-            </div>
+            <div id="adminOrdersList" class="space-y-3"></div>
           </div>
 
           <!-- TAB 4: PENDING VISITOR REVIEWS -->
@@ -1100,22 +1044,20 @@
                 onclick="app.commitAllPendingReviews()"
                 class="px-4 py-2 rounded-lg bg-brand hover:bg-brand-dark text-white text-xs font-semibold disabled:opacity-50"
               >
-                <i class="fa-solid fa-check-double mr-1.5"></i>Approve & Commit All to GitHub
+                <i class="fa-solid fa-check-double mr-1.5"></i>Approve &amp; Commit All to GitHub
               </button>
             </div>
 
-            <div id="adminReviewQueueList" class="space-y-3">
-              <!-- Populated dynamically -->
-            </div>
+            <div id="adminReviewQueueList" class="space-y-3"></div>
           </div>
 
-          <!-- TAB 4: GITHUB SYNC SETTINGS -->
+          <!-- TAB 5: GITHUB SYNC SETTINGS -->
           <div id="adminTab-github" class="admin-tab-panel hidden space-y-6">
             <div class="max-w-3xl space-y-6">
               <div>
                 <h3 class="text-lg font-bold text-slate-900">GitHub Repository Backend</h3>
                 <p class="text-xs text-slate-500 mt-1 leading-relaxed">
-                  Zero browser <code class="font-mono bg-slate-100 px-1 py-0.5 rounded">localStorage</code> is used. Credentials stay strictly in memory for this session and sync directly with <code class="font-mono bg-slate-100 px-1 py-0.5 rounded">data/products.json</code> and <code class="font-mono bg-slate-100 px-1 py-0.5 rounded">assets/products/</code> via the GitHub REST API.
+                  Zero browser <code class="font-mono bg-slate-100 px-1 py-0.5 rounded">localStorage</code> is used anywhere. Credentials stay strictly in memory for this session while all products, images, reviews, and orders store directly in GitHub and sync across all tabs and devices.
                 </p>
               </div>
 
@@ -1217,11 +1159,10 @@
                 </div>
               </form>
 
-              <!-- Shareable Storefront Link Helper (No localStorage needed for visitors) -->
               <div class="bg-white border border-slate-200 rounded-xl p-5 space-y-2">
-                <p class="text-xs font-semibold text-slate-900">Shareable Visitor Storefront URL</p>
+                <p class="text-xs font-semibold text-slate-900">Shareable Cross-Device Storefront URL</p>
                 <p class="text-xs text-slate-500">
-                  Share this URL so shoppers load your live <code class="font-mono">data/products.json</code> directly from GitHub without using browser storage:
+                  Share this URL so any phone or desktop loads your live <code class="font-mono">data/products.json</code> directly from GitHub without using browser storage:
                 </p>
                 <div class="flex items-center gap-2 pt-1">
                   <input
@@ -1246,25 +1187,24 @@
       </div>
     </div>
 
-    <!-- =================================================================== -->
-    <!-- TOAST NOTIFICATION STACK                                            -->
-    <!-- =================================================================== -->
     <div id="toastContainer" class="fixed bottom-4 right-4 z-[60] flex flex-col gap-2 max-w-sm w-[calc(100%-2rem)] pointer-events-none"></div>
 
-    <!-- =================================================================== -->
-    <!-- MODULAR APPLICATION SCRIPT (ZERO LOCALSTORAGE / GITHUB REST API)    -->
-    <!-- =================================================================== -->
     <script>
       (() => {
         'use strict';
 
-        // Strict Admin Master Password per specification
         const ADMIN_MASTER_PASS = '7908741893';
         const MAX_PRODUCT_IMAGES = 10;
         const FREE_DELIVERY_THRESHOLD = 999;
         const DELIVERY_FEE = 49;
+        const POLL_INTERVAL_MS = 15000;
+        const BROADCAST_CHANNEL_NAME = 'appex_collection_live_sync_v1';
 
-        // Optional default public repo constants (leave blank for in-app setup or ?repo=owner/name)
+        /**
+         * Optional built-in GitHub repository defaults for static hosting without localStorage.
+         * Put only your public owner/repo/branch here (NEVER hardcode private PAT tokens).
+         * When hosted on GitHub Pages (<owner>.github.io/<repo>/), it auto-detects automatically.
+         */
         const DEFAULT_REPO_CONFIG = {
           owner: '',
           repo: '',
@@ -1282,7 +1222,63 @@
           'Accessories',
         ];
 
-        // Initial curated catalog rendered in-memory prior to connecting a live GitHub repo
+        function svgDataUri(svg) {
+          return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg.trim());
+        }
+
+        const HERO_SHOWCASE_IMG = svgDataUri(`
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="960" y2="540" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#F6F4EF"/>
+      <stop offset="100%" stop-color="#EAE5DC"/>
+    </linearGradient>
+    <linearGradient id="pedestal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E5E0D5"/>
+    </linearGradient>
+    <linearGradient id="brass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E5C16C"/>
+      <stop offset="100%" stop-color="#B08935"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="540" fill="url(#bg)"/>
+  <circle cx="760" cy="120" r="210" fill="#2874F0" opacity="0.06"/>
+  <circle cx="190" cy="430" r="180" fill="#FB641B" opacity="0.05"/>
+  <rect x="90" y="395" width="780" height="58" rx="10" fill="url(#pedestal)" stroke="#D7D0C3" stroke-width="2"/>
+  <ellipse cx="725" cy="395" rx="64" ry="11" fill="#D5CFC3"/>
+  <path d="M685 392 C676 340, 682 285, 706 262 L744 262 C768 285, 774 340, 765 392 Z" fill="#F9F7F2" stroke="#D8D2C5" stroke-width="2"/>
+  <rect x="708" y="246" width="34" height="18" rx="4" fill="url(#brass)"/>
+  <path d="M650 246 L800 246 L782 146 L668 146 Z" fill="#FFFDF8" stroke="#D8D1C2" stroke-width="2"/>
+  <ellipse cx="725" cy="146" rx="57" ry="10" fill="#F3EFE6" stroke="#D8D1C2" stroke-width="1.5"/>
+  <ellipse cx="255" cy="395" rx="92" ry="12" fill="#D5CFC3"/>
+  <path d="M185 305 C185 215, 325 215, 325 305" stroke="#1E293B" stroke-width="18" stroke-linecap="round" fill="none"/>
+  <path d="M196 305 C196 228, 314 228, 314 305" stroke="#475569" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <rect x="160" y="294" width="42" height="78" rx="20" fill="#0F172A" stroke="#334155" stroke-width="2"/>
+  <rect x="308" y="294" width="42" height="78" rx="20" fill="#0F172A" stroke="#334155" stroke-width="2"/>
+  <rect x="172" y="308" width="16" height="50" rx="8" fill="#1E293B"/>
+  <rect x="322" y="308" width="16" height="50" rx="8" fill="#1E293B"/>
+  <rect x="385" y="232" width="195" height="162" rx="12" fill="#1E3A5F" stroke="#152B47" stroke-width="2"/>
+  <path d="M442 232 L482 268 L522 232" fill="#152B47"/>
+  <rect x="410" y="286" width="54" height="58" rx="4" fill="#193253" stroke="#2B4C77" stroke-width="1.5"/>
+  <rect x="500" y="286" width="54" height="58" rx="4" fill="#193253" stroke="#2B4C77" stroke-width="1.5"/>
+  <circle cx="482" cy="296" r="4.5" fill="#D6C6A5"/>
+  <circle cx="482" cy="328" r="4.5" fill="#D6C6A5"/>
+  <circle cx="482" cy="360" r="4.5" fill="#D6C6A5"/>
+  <rect x="458" y="318" width="52" height="84" rx="10" fill="#5C3A21"/>
+  <circle cx="484" cy="360" r="32" fill="#E2E8F0" stroke="#94A3B8" stroke-width="3"/>
+  <circle cx="484" cy="360" r="25" fill="#0F172A"/>
+  <line x1="484" y1="360" x2="484" y2="344" stroke="#F8FAFC" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="484" y1="360" x2="497" y2="365" stroke="#FB641B" stroke-width="2" stroke-linecap="round"/>
+</svg>`);
+
+        const HEADPHONES_IMG = svgDataUri(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" fill="none"><rect width="640" height="480" fill="#F4F3EF"/><rect x="110" y="365" width="420" height="36" rx="8" fill="#E6E2D8"/><ellipse cx="320" cy="365" rx="110" ry="12" fill="#D5D0C5"/><path d="M210 245 C210 120, 430 120, 430 245" stroke="#1E293B" stroke-width="24" stroke-linecap="round"/><path d="M224 245 C224 138, 416 138, 416 245" stroke="#64748B" stroke-width="5" stroke-linecap="round"/><rect x="176" y="232" width="54" height="106" rx="26" fill="#0F172A" stroke="#334155" stroke-width="3"/><rect x="410" y="232" width="54" height="106" rx="26" fill="#0F172A" stroke="#334155" stroke-width="3"/><rect x="218" y="246" width="22" height="78" rx="11" fill="#334155"/><rect x="400" y="246" width="22" height="78" rx="11" fill="#334155"/><circle cx="203" cy="285" r="14" fill="#1E293B" stroke="#475569" stroke-width="2"/><circle cx="437" cy="285" r="14" fill="#1E293B" stroke="#475569" stroke-width="2"/></svg>`);
+        const SMARTWATCH_IMG = svgDataUri(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" fill="none"><rect width="640" height="480" fill="#F4F3EF"/><rect x="140" y="365" width="360" height="36" rx="8" fill="#E6E2D8"/><rect x="278" y="88" width="84" height="304" rx="16" fill="#5C3A21" stroke="#3E2513" stroke-width="3"/><line x1="290" y1="100" x2="290" y2="380" stroke="#8C5D3C" stroke-width="2" stroke-dasharray="6 6"/><line x1="350" y1="100" x2="350" y2="380" stroke="#8C5D3C" stroke-width="2" stroke-dasharray="6 6"/><rect x="382" y="222" width="16" height="36" rx="5" fill="#94A3B8"/><circle cx="320" cy="240" r="76" fill="#E2E8F0" stroke="#94A3B8" stroke-width="5"/><circle cx="320" cy="240" r="62" fill="#0F172A"/><circle cx="320" cy="240" r="52" stroke="#1E293B" stroke-width="2"/><line x1="320" y1="240" x2="320" y2="202" stroke="#F8FAFC" stroke-width="4" stroke-linecap="round"/><line x1="320" y1="240" x2="350" y2="254" stroke="#2874F0" stroke-width="3.5" stroke-linecap="round"/><circle cx="320" cy="240" r="5" fill="#FB641B"/></svg>`);
+        const SNEAKERS_IMG = svgDataUri(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" fill="none"><rect width="640" height="480" fill="#F1F3F6"/><rect x="100" y="355" width="440" height="36" rx="8" fill="#E2E8F0"/><ellipse cx="325" cy="355" rx="170" ry="12" fill="#CBD5E1"/><path d="M140 315 C140 270, 178 212, 232 212 L274 242 C315 245, 392 252, 472 285 C504 298, 514 320, 504 334 L144 334 Z" fill="#475569" stroke="#334155" stroke-width="3"/><path d="M136 330 L506 326 C512 342, 496 352, 474 352 L148 352 C134 352, 130 340, 136 330 Z" fill="#FAF8F5" stroke="#CBD5E1" stroke-width="2"/><path d="M272 246 L316 264 M294 252 L338 270 M316 258 L360 276" stroke="#E2E8F0" stroke-width="5" stroke-linecap="round"/><path d="M210 285 L340 285" stroke="#94A3B8" stroke-width="3" stroke-dasharray="8 6"/></svg>`);
+        const JACKET_IMG = svgDataUri(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" fill="none"><rect width="640" height="480" fill="#F5F5F4"/><path d="M220 105 L275 88 L320 116 L365 88 L420 105 L495 215 L452 242 L416 184 L416 390 L224 390 L224 184 L188 242 L145 215 Z" fill="#1E3A5F" stroke="#152B47" stroke-width="3" stroke-linejoin="round"/><path d="M275 88 L320 142 L365 88" fill="#152B47"/><line x1="320" y1="142" x2="320" y2="390" stroke="#0F1F35" stroke-width="3"/><rect x="242" y="185" width="58" height="68" rx="4" fill="#193253" stroke="#2B4C77" stroke-width="2"/><rect x="340" y="185" width="58" height="68" rx="4" fill="#193253" stroke="#2B4C77" stroke-width="2"/><circle cx="320" cy="172" r="5" fill="#D6C6A5"/><circle cx="320" cy="222" r="5" fill="#D6C6A5"/><circle cx="320" cy="272" r="5" fill="#D6C6A5"/><circle cx="320" cy="322" r="5" fill="#D6C6A5"/></svg>`);
+        const LAMP_IMG = svgDataUri(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" fill="none"><defs><linearGradient id="lampBrass" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#E5C16C"/><stop offset="100%" stop-color="#B08935"/></linearGradient><radialGradient id="glow" cx="50%" cy="40%" r="50%"><stop offset="0%" stop-color="#FFE6A3" stop-opacity="0.65"/><stop offset="100%" stop-color="#FFE6A3" stop-opacity="0"/></radialGradient></defs><rect width="640" height="480" fill="#F4F1EA"/><circle cx="320" cy="210" r="185" fill="url(#glow)"/><rect x="140" y="382" width="360" height="32" rx="8" fill="#E6E1D6"/><ellipse cx="320" cy="382" rx="85" ry="12" fill="#D4CEC2"/><path d="M268 380 C254 316, 264 252, 294 226 L346 226 C376 252, 386 316, 372 380 Z" fill="#FAF8F3" stroke="#D8D2C5" stroke-width="2.5"/><rect x="298" y="206" width="44" height="22" rx="4" fill="url(#lampBrass)"/><path d="M214 206 L426 206 L400 92 L240 92 Z" fill="#FFFDF7" stroke="#D8D1C2" stroke-width="2.5"/><ellipse cx="320" cy="92" rx="80" ry="12" fill="#F3EFE6" stroke="#D8D1C2" stroke-width="2"/></svg>`);
+        const BACKPACK_IMG = svgDataUri(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" fill="none"><rect width="640" height="480" fill="#F1F3F6"/><rect x="135" y="376" width="370" height="34" rx="8" fill="#E2E8F0"/><path d="M276 110 C276 80, 364 80, 364 110" stroke="#7C4A26" stroke-width="14" stroke-linecap="round" fill="none"/><rect x="210" y="110" width="220" height="268" rx="34" fill="#1E293B" stroke="#0F172A" stroke-width="3"/><rect x="234" y="220" width="172" height="126" rx="16" fill="#273549" stroke="#334155" stroke-width="2"/><rect x="234" y="142" width="172" height="58" rx="12" fill="#273549" stroke="#334155" stroke-width="2"/><rect x="298" y="130" width="44" height="14" rx="4" fill="#8C532B"/><line x1="256" y1="220" x2="384" y2="220" stroke="#94A3B8" stroke-width="3"/></svg>`);
+
         const STARTER_PRODUCTS = [
           {
             id: 'apx-101',
@@ -1291,7 +1287,7 @@
             price: 4999,
             description:
               'Hybrid active noise cancellation up to 42dB, 40mm dynamic drivers, 50-hour battery life with USB-C fast charging, and memory-foam protein leather ear cushions.',
-            images: ['/src/assets/images/product_wireless_headphones_1795006533172.jpg'],
+            images: [HEADPHONES_IMG],
             inStock: true,
             outOfStock: false,
             codAvailable: true,
@@ -1324,7 +1320,7 @@
             price: 6499,
             description:
               'Brushed 316L stainless steel bezel with AMOLED display, stitched full-grain espresso leather strap, continuous heart-rate tracking, and 5ATM water resistance.',
-            images: ['/src/assets/images/product_smartwatch_steel_1795006533824.jpg'],
+            images: [SMARTWATCH_IMG],
             inStock: true,
             outOfStock: false,
             codAvailable: true,
@@ -1349,7 +1345,7 @@
             price: 3299,
             description:
               'Breathable engineered mesh upper paired with dual-density EVA midsole cushioning and high-abrasion carbon rubber traction outsole for daily road mileage.',
-            images: ['/src/assets/images/product_urban_sneakers_1795006534560.jpg'],
+            images: [SNEAKERS_IMG],
             inStock: true,
             outOfStock: false,
             codAvailable: true,
@@ -1374,7 +1370,7 @@
             price: 2499,
             description:
               '340 GSM garment-washed organic cotton twill overshirt in deep navy. Features twin chest utility pockets, reinforced felled seams, and natural horn buttons.',
-            images: ['/src/assets/images/product_cotton_jacket_1795006534437.jpg'],
+            images: [JACKET_IMG],
             inStock: true,
             outOfStock: false,
             codAvailable: true,
@@ -1399,7 +1395,7 @@
             price: 3799,
             description:
               'Hand-finished matte ivory stoneware base paired with a brushed solid brass collar, natural woven linen drum shade, and braided fabric power cord (E27 warm LED included).',
-            images: ['/src/assets/images/product_ceramic_lamp_1795006535676.jpg'],
+            images: [LAMP_IMG],
             inStock: true,
             outOfStock: false,
             codAvailable: false,
@@ -1424,7 +1420,7 @@
             price: 2899,
             description:
               'Water-resistant 1680D ballistic nylon commuter pack with full-grain leather trim, suspended 16-inch padded laptop sleeve, and YKK AquaGuard zippers.',
-            images: ['/src/assets/images/product_leather_backpack_1795006536152.jpg'],
+            images: [BACKPACK_IMG],
             inStock: false,
             outOfStock: true,
             codAvailable: true,
@@ -1444,14 +1440,15 @@
           },
         ];
 
-        // -----------------------------------------------------------------
-        // IN-MEMORY APPLICATION STATE (Strictly Zero localStorage)
-        // -----------------------------------------------------------------
+        // Strictly In-Memory State (Zero localStorage / sessionStorage / IndexedDB)
+        const tabId = 'tab-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+        let syncChannel = null;
+
         const state = {
           products: structuredClone(STARTER_PRODUCTS),
-          orders: [], // Customer orders synced with data/orders.json
-          pendingReviews: [], // Holds reviews submitted in read-only mode awaiting Admin GitHub sync
-          cart: [], // { productId, qty }
+          orders: [],
+          pendingReviews: [],
+          cart: [],
           activeCategory: 'All',
           searchQuery: '',
           sortBy: 'featured',
@@ -1461,8 +1458,9 @@
           modalQty: 1,
           reviewRating: 5,
           isAdminAuthenticated: false,
+          isAdminOpen: false,
           adminActiveTab: 'editor',
-          stagedImages: [], // { id, type: 'url' | 'file', src, file?, name }
+          stagedImages: [],
           github: {
             owner: DEFAULT_REPO_CONFIG.owner,
             repo: DEFAULT_REPO_CONFIG.repo,
@@ -1471,13 +1469,16 @@
             reviewToken: DEFAULT_REPO_CONFIG.reviewToken,
             connected: false,
             lastSha: null,
+            lastProductsEtag: null,
+            lastOrdersSha: null,
+            lastOrdersEtag: null,
             lastSyncedAt: null,
           },
           checkoutOrderReceipt: null,
         };
 
         // -----------------------------------------------------------------
-        // UTILITY HELPERS
+        // UTILITIES
         // -----------------------------------------------------------------
         function formatINR(amount) {
           const num = Number(amount) || 0;
@@ -1503,7 +1504,6 @@
           );
         }
 
-        // UTF-8 safe Base64 encoding/decoding for GitHub Contents API (supports ₹ & Unicode)
         function encodeBase64Utf8(str) {
           const bytes = new TextEncoder().encode(str);
           let binary = '';
@@ -1534,10 +1534,7 @@
                 reject(new Error('Could not encode image file.'));
                 return;
               }
-              resolve({
-                dataUrl: result,
-                base64: result.slice(commaIndex + 1),
-              });
+              resolve({ dataUrl: result, base64: result.slice(commaIndex + 1) });
             };
             reader.onerror = () => reject(new Error('Failed to read image file.'));
             reader.readAsDataURL(file);
@@ -1547,10 +1544,153 @@
         function computeAverageRating(reviews) {
           if (!Array.isArray(reviews) || reviews.length === 0) return { avg: 0, count: 0 };
           const sum = reviews.reduce((acc, r) => acc + (Number(r.rating) || 0), 0);
+          return { avg: Math.round((sum / reviews.length) * 10) / 10, count: reviews.length };
+        }
+
+        function normalizeProduct(raw) {
+          const inStock = raw.outOfStock === true ? false : raw.inStock !== false;
           return {
-            avg: Math.round((sum / reviews.length) * 10) / 10,
-            count: reviews.length,
+            id: String(raw.id || 'apx-' + Date.now()),
+            name: String(raw.name || 'Untitled Product'),
+            category: String(raw.category || 'Accessories'),
+            price: Number(raw.price) || 0,
+            description: String(raw.description || ''),
+            images: Array.isArray(raw.images) ? raw.images.filter(Boolean).slice(0, MAX_PRODUCT_IMAGES) : [],
+            inStock,
+            outOfStock: !inStock,
+            codAvailable: Boolean(raw.codAvailable),
+            sevenDaysReturn: Boolean(raw.sevenDaysReturn),
+            reviews: Array.isArray(raw.reviews) ? raw.reviews : [],
+            createdAt: raw.createdAt || new Date().toISOString(),
+            updatedAt: raw.updatedAt || new Date().toISOString(),
           };
+        }
+
+        function normalizeOrder(raw) {
+          return {
+            orderId: String(raw.orderId || 'APX' + Date.now()),
+            customerName: String(raw.customerName || ''),
+            phone: String(raw.phone || ''),
+            pin: String(raw.pin || ''),
+            address: String(raw.address || ''),
+            items: Array.isArray(raw.items) ? raw.items : [],
+            itemCount: Number(raw.itemCount) || 0,
+            subtotal: Number(raw.subtotal) || 0,
+            shipping: Number(raw.shipping) || 0,
+            total: Number(raw.total) || 0,
+            paymentMethod: String(raw.paymentMethod || 'Cash on Delivery'),
+            status: String(raw.status || 'Pending'),
+            createdAt: raw.createdAt || new Date().toISOString(),
+            syncedToGithub: Boolean(raw.syncedToGithub),
+          };
+        }
+
+        function mergeProductsById(remoteProducts, localProducts, options = {}) {
+          const deletedSet = new Set(options.deletedIds || []);
+          const preferLocalSet = new Set(options.preferLocalIds || []);
+          const map = new Map();
+
+          for (const r of remoteProducts) {
+            if (!deletedSet.has(r.id)) map.set(r.id, normalizeProduct(r));
+          }
+
+          for (const l of localProducts) {
+            if (deletedSet.has(l.id)) continue;
+            const existing = map.get(l.id);
+            if (!existing) {
+              map.set(l.id, normalizeProduct(l));
+              continue;
+            }
+            const reviewMap = new Map();
+            for (const rev of existing.reviews) reviewMap.set(rev.id, rev);
+            for (const rev of l.reviews) {
+              const prev = reviewMap.get(rev.id);
+              if (!prev || rev.syncedToGithub) reviewMap.set(rev.id, rev);
+            }
+            const localTime = Date.parse(l.updatedAt || '') || 0;
+            const remoteTime = Date.parse(existing.updatedAt || '') || 0;
+            const useLocal = preferLocalSet.has(l.id) || localTime >= remoteTime;
+            map.set(l.id, normalizeProduct({ ...(useLocal ? l : existing), reviews: Array.from(reviewMap.values()) }));
+          }
+
+          const orderedIds = [];
+          const seen = new Set();
+          for (const l of localProducts) {
+            if (!deletedSet.has(l.id) && map.has(l.id) && !seen.has(l.id)) {
+              orderedIds.push(l.id);
+              seen.add(l.id);
+            }
+          }
+          for (const r of remoteProducts) {
+            if (!deletedSet.has(r.id) && map.has(r.id) && !seen.has(r.id)) {
+              orderedIds.push(r.id);
+              seen.add(r.id);
+            }
+          }
+          return orderedIds.map((id) => map.get(id));
+        }
+
+        function mergeOrdersById(remoteOrders, localOrders, options = {}) {
+          const deletedSet = new Set(options.deletedOrderIds || []);
+          const preferLocalSet = new Set(options.preferLocalOrderIds || []);
+          const map = new Map();
+
+          for (const r of remoteOrders) {
+            if (!deletedSet.has(r.orderId)) map.set(r.orderId, normalizeOrder(r));
+          }
+          for (const l of localOrders) {
+            if (deletedSet.has(l.orderId)) continue;
+            const existing = map.get(l.orderId);
+            if (!existing || preferLocalSet.has(l.orderId)) map.set(l.orderId, normalizeOrder(l));
+          }
+
+          return Array.from(map.values()).sort((a, b) => (Date.parse(b.createdAt || '') || 0) - (Date.parse(a.createdAt || '') || 0));
+        }
+
+        function resolveRepoFromEnvironment() {
+          const params = new URLSearchParams(window.location.search || '');
+          const repoParam = params.get('repo');
+          const branchParam = params.get('branch');
+
+          if (repoParam && repoParam.includes('/')) {
+            const [owner, repo] = repoParam.split('/');
+            if (owner && owner.trim() && repo && repo.trim()) {
+              return { owner: owner.trim(), repo: repo.trim(), branch: (branchParam || DEFAULT_REPO_CONFIG.branch || 'main').trim() };
+            }
+          }
+
+          const host = (window.location.hostname || '').toLowerCase();
+          if (host.endsWith('.github.io')) {
+            const owner = host.slice(0, -'.github.io'.length);
+            const segments = (window.location.pathname || '/').split('/').filter(Boolean);
+            const repo = segments[0] || owner + '.github.io';
+            if (owner) {
+              return { owner, repo, branch: (branchParam || DEFAULT_REPO_CONFIG.branch || 'main').trim() };
+            }
+          }
+
+          if (DEFAULT_REPO_CONFIG.owner && DEFAULT_REPO_CONFIG.repo) {
+            return {
+              owner: DEFAULT_REPO_CONFIG.owner.trim(),
+              repo: DEFAULT_REPO_CONFIG.repo.trim(),
+              branch: (DEFAULT_REPO_CONFIG.branch || 'main').trim(),
+            };
+          }
+
+          return { owner: '', repo: '', branch: DEFAULT_REPO_CONFIG.branch || 'main' };
+        }
+
+        function syncUrlWithRepo(owner, repo, branch) {
+          if (!owner || !repo) return;
+          try {
+            const url = new URL(window.location.href);
+            url.searchParams.set('repo', owner + '/' + repo);
+            if (branch && branch !== 'main') url.searchParams.set('branch', branch);
+            else url.searchParams.delete('branch');
+            window.history.replaceState(null, '', url.toString());
+          } catch {
+            // ignore sandboxed history restrictions
+          }
         }
 
         function showToast(message, type = 'info') {
@@ -1603,7 +1743,125 @@
         }
 
         // -----------------------------------------------------------------
-        // GITHUB REST API SYNC ENGINE
+        // BROADCAST CHANNEL CROSS-TAB LIVE SYNC (ZERO LOCALSTORAGE)
+        // -----------------------------------------------------------------
+        function postSyncMessage(payload) {
+          if (!syncChannel) return;
+          try {
+            syncChannel.postMessage({ ...payload, senderId: tabId });
+          } catch {
+            // ignore closed channel
+          }
+        }
+
+        function initBroadcastChannel() {
+          if (typeof BroadcastChannel === 'undefined') return;
+          try {
+            syncChannel = new BroadcastChannel(BROADCAST_CHANNEL_NAME);
+            syncChannel.onmessage = (event) => {
+              const msg = event.data;
+              if (!msg || msg.senderId === tabId) return;
+
+              if (msg.type === 'REQUEST_STATE_SYNC') {
+                postSyncMessage({
+                  type: 'FULL_STATE_SYNC',
+                  owner: state.github.owner,
+                  repo: state.github.repo,
+                  branch: state.github.branch,
+                  connected: state.github.connected,
+                  products: state.products,
+                  orders: state.orders,
+                  pendingReviews: state.pendingReviews,
+                  lastSha: state.github.lastSha,
+                  lastSyncedAt: state.github.lastSyncedAt,
+                });
+                return;
+              }
+
+              if (msg.type === 'FULL_STATE_SYNC') {
+                if (Array.isArray(msg.products) && msg.products.length > 0) {
+                  state.products = msg.products.map(normalizeProduct);
+                }
+                if (Array.isArray(msg.orders) && msg.orders.length > 0) {
+                  state.orders = mergeOrdersById(msg.orders, state.orders);
+                }
+                if (Array.isArray(msg.pendingReviews) && msg.pendingReviews.length > 0) {
+                  state.pendingReviews = msg.pendingReviews;
+                }
+                if (msg.owner && msg.repo && !state.github.owner) {
+                  state.github.owner = msg.owner;
+                  state.github.repo = msg.repo;
+                  state.github.branch = msg.branch || 'main';
+                  state.github.connected = msg.connected;
+                  state.github.lastSha = msg.lastSha;
+                  state.github.lastSyncedAt = msg.lastSyncedAt;
+                  syncUrlWithRepo(msg.owner, msg.repo, state.github.branch);
+                }
+                refreshAllOpenViews();
+                return;
+              }
+
+              if (msg.type === 'GITHUB_CONFIG_UPDATED') {
+                state.github.owner = msg.owner;
+                state.github.repo = msg.repo;
+                state.github.branch = msg.branch || 'main';
+                state.github.lastProductsEtag = null;
+                state.github.lastOrdersEtag = null;
+                syncUrlWithRepo(msg.owner, msg.repo, state.github.branch);
+                refreshAllOpenViews();
+                return;
+              }
+
+              if (msg.type === 'CATALOG_UPDATED') {
+                state.products = (msg.products || []).map(normalizeProduct);
+                if (msg.owner) state.github.owner = msg.owner;
+                if (msg.repo) state.github.repo = msg.repo;
+                if (msg.branch) state.github.branch = msg.branch;
+                state.github.connected = Boolean(state.github.owner && state.github.repo);
+                if (msg.lastSha !== undefined) state.github.lastSha = msg.lastSha;
+                state.github.lastSyncedAt = msg.lastSyncedAt || new Date().toISOString();
+                refreshAllOpenViews();
+                return;
+              }
+
+              if (msg.type === 'ORDERS_UPDATED') {
+                state.orders = (msg.orders || []).map(normalizeOrder);
+                refreshAllOpenViews();
+                return;
+              }
+
+              if (msg.type === 'PENDING_REVIEWS_UPDATED') {
+                state.pendingReviews = msg.pendingReviews || [];
+                refreshAllOpenViews();
+              }
+            };
+
+            postSyncMessage({ type: 'REQUEST_STATE_SYNC' });
+          } catch {
+            // BroadcastChannel unsupported
+          }
+        }
+
+        function refreshAllOpenViews() {
+          renderStorefront();
+          if (state.activeProductId) {
+            if (state.products.some((p) => p.id === state.activeProductId)) {
+              renderProductModalContent();
+            } else {
+              closeProductModal();
+            }
+          }
+          renderCartDrawer();
+          if (state.isAdminAuthenticated) {
+            updateAdminRepoUI();
+            renderAdminCatalogTable();
+            renderAdminOrders();
+            renderAdminReviewQueue();
+          }
+        }
+
+        // -----------------------------------------------------------------
+        // GITHUB REST API SYNC ENGINE (ETAG + FETCH-MERGE-COMMIT)
         // -----------------------------------------------------------------
         function getActiveWriteToken(allowReviewToken = false) {
           if (state.github.adminToken && state.github.adminToken.trim()) {
@@ -1615,13 +1873,10 @@
           return '';
         }
 
-        function buildGitHubHeaders(token) {
-          const headers = {
-            Accept: 'application/vnd.github+json',
-          };
-          if (token) {
-            headers.Authorization = `Bearer ${token}`;
-          }
+        function buildGitHubHeaders(token, etag = null) {
+          const headers = { Accept: 'application/vnd.github+json' };
+          if (token) headers.Authorization = `Bearer ${token}`;
+          if (etag) headers['If-None-Match'] = etag;
           return headers;
         }
 
@@ -1629,12 +1884,8 @@
           let detail = `GitHub API error (${res.status})`;
           try {
             const body = await res.json();
-            if (body && body.message) {
-              detail = body.message;
-            }
-          } catch {
-            // ignore JSON parse failure
-          }
+            if (body && body.message) detail = body.message;
+          } catch {}
           if (res.status === 401) return 'GitHub authentication failed (401). Verify your Personal Access Token.';
           if (res.status === 403) return `GitHub access denied or rate limited (403): ${detail}`;
           if (res.status === 404) return `Repository or file not found (404): ${detail}`;
@@ -1642,21 +1893,35 @@
           return detail;
         }
 
-        async function fetchCatalogFromGitHub(silent = false) {
+        async function fetchCatalogFromGitHub(silent = false, options = {}) {
           const { owner, repo, branch } = state.github;
           if (!owner || !repo) return false;
 
-          state.isLoadingCatalog = true;
-          renderCatalogLoader(true);
+          const showLoader = options.showLoader ?? !silent;
+          const forceBypassCache = options.forceBypassCache ?? !silent;
+
+          if (showLoader) {
+            state.isLoadingCatalog = true;
+            renderCatalogLoader(true);
+          }
 
           const token = getActiveWriteToken(true);
-          const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data/products.json?ref=${encodeURIComponent(branch || 'main')}&_t=${Date.now()}`;
+          const useEtag = Boolean(!forceBypassCache && !token && state.github.lastProductsEtag);
+          const cacheBust = forceBypassCache || token ? `&_t=${Date.now()}` : '';
+          const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data/products.json?ref=${encodeURIComponent(branch || 'main')}${cacheBust}`;
 
           try {
-            const res = await fetch(apiUrl, { headers: buildGitHubHeaders(token) });
+            const res = await fetch(apiUrl, {
+              headers: buildGitHubHeaders(token, useEtag ? state.github.lastProductsEtag : null),
+              cache: 'no-store',
+            });
+
+            if (res.status === 304) return true;
+
             if (res.status === 404) {
               state.github.connected = true;
               state.github.lastSha = null;
+              state.github.lastProductsEtag = null;
               if (!silent) {
                 showToast('Repo connected. data/products.json does not exist yet—push catalog to initialize it.', 'warning');
               }
@@ -1665,13 +1930,12 @@
             }
 
             if (!res.ok) {
-              // Try raw GitHub fallback for unauthenticated public reads if rate-limited
               if (!token && (res.status === 403 || res.status === 429)) {
                 const rawUrl = `https://raw.githubusercontent.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/${encodeURIComponent(branch || 'main')}/data/products.json?_t=${Date.now()}`;
-                const rawRes = await fetch(rawUrl);
+                const rawRes = await fetch(rawUrl, { cache: 'no-store' });
                 if (rawRes.ok) {
                   const rawJson = await rawRes.json();
-                  applyLoadedCatalog(rawJson, null);
+                  applyLoadedCatalog(rawJson, null, rawRes.headers.get('etag'));
                   if (!silent) showToast('Storefront synced from GitHub.', 'success');
                   return true;
                 }
@@ -1680,74 +1944,54 @@
             }
 
             const payload = await res.json();
-            const decodedText = decodeBase64Utf8(payload.content || '');
-            const parsed = JSON.parse(decodedText);
-            applyLoadedCatalog(parsed, payload.sha || null);
+            const parsed = JSON.parse(decodeBase64Utf8(payload.content || ''));
+            applyLoadedCatalog(parsed, payload.sha || null, res.headers.get('etag'));
             if (!silent) {
               showToast(`Loaded ${state.products.length} products from ${owner}/${repo}.`, 'success');
             }
             return true;
           } catch (err) {
-            if (!silent) {
-              showToast(err.message || 'Unable to fetch catalog from GitHub.', 'error');
-            }
+            if (!silent) showToast(err.message || 'Unable to fetch catalog from GitHub.', 'error');
             return false;
           } finally {
-            state.isLoadingCatalog = false;
-            renderCatalogLoader(false);
-            renderStorefront();
-            updateAdminRepoUI();
+            if (showLoader) {
+              state.isLoadingCatalog = false;
+              renderCatalogLoader(false);
+            }
+            refreshAllOpenViews();
           }
         }
 
-        function applyLoadedCatalog(json, sha) {
+        function applyLoadedCatalog(json, sha, etag) {
           const list = Array.isArray(json) ? json : Array.isArray(json.products) ? json.products : [];
           state.products = list.map(normalizeProduct);
           state.github.connected = true;
           state.github.lastSha = sha;
+          if (etag !== undefined) state.github.lastProductsEtag = etag;
           state.github.lastSyncedAt = new Date().toISOString();
         }
 
-        function normalizeProduct(raw) {
-          const inStock = raw.outOfStock === true ? false : raw.inStock !== false;
-          return {
-            id: String(raw.id || 'apx-' + Date.now()),
-            name: String(raw.name || 'Untitled Product'),
-            category: String(raw.category || 'Accessories'),
-            price: Number(raw.price) || 0,
-            description: String(raw.description || ''),
-            images: Array.isArray(raw.images) ? raw.images.filter(Boolean).slice(0, MAX_PRODUCT_IMAGES) : [],
-            inStock: inStock,
-            outOfStock: !inStock,
-            codAvailable: Boolean(raw.codAvailable),
-            sevenDaysReturn: Boolean(raw.sevenDaysReturn),
-            reviews: Array.isArray(raw.reviews) ? raw.reviews : [],
-            createdAt: raw.createdAt || new Date().toISOString(),
-            updatedAt: raw.updatedAt || new Date().toISOString(),
-          };
+        function parseUploadableDataUrl(dataUrl) {
+          const match = String(dataUrl || '').match(/^data:image\/([a-zA-Z0-9+.-]+);base64,(.+)$/);
+          if (!match) return null;
+          const subtype = match[1].toLowerCase();
+          if (subtype.includes('svg')) return null;
+          const ext = subtype === 'jpeg' ? 'jpg' : subtype.replace(/[^a-z0-9]/g, '') || 'jpg';
+          return { ext, base64: match[2] };
         }
 
-        async function uploadImageFileToGitHub(file, productSlug, index) {
+        async function uploadBase64ImageToGitHub(base64, ext, productSlug, index) {
           const { owner, repo, branch } = state.github;
           const token = getActiveWriteToken(false);
-          if (!owner || !repo || !token) {
-            throw new Error('GitHub repo and Admin PAT are required to upload images.');
-          }
+          if (!owner || !repo || !token) throw new Error('GitHub repo and Admin PAT are required to upload images.');
 
-          const extMatch = (file.name || '').match(/\.([a-zA-Z0-9]+)$/);
-          const ext = extMatch ? extMatch[1].toLowerCase() : 'jpg';
           const fileName = `${productSlug}-${Date.now()}-${index}.${ext}`;
           const filePath = `assets/products/${fileName}`;
-
-          const { base64 } = await fileToBase64Payload(file);
           const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${filePath}`;
 
           const res = await fetch(apiUrl, {
             method: 'PUT',
-            headers: {
-              ...buildGitHubHeaders(token),
-              'Content-Type': 'application/json',
-            },
+            headers: { ...buildGitHubHeaders(token), 'Content-Type': 'application/json' },
             body: JSON.stringify({
               message: `Upload product image ${fileName} via Appex Collection`,
               content: base64,
@@ -1755,99 +1999,133 @@
             }),
           });
 
-          if (!res.ok) {
-            throw new Error(await parseGitHubError(res));
-          }
-
-          const data = await res.json();
-          if (data?.content?.download_url) {
-            return data.content.download_url;
-          }
-          return `https://raw.githubusercontent.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/${encodeURIComponent(branch || 'main')}/${filePath}`;
-        }
-
-        async function fetchLatestProductsSha(token) {
-          const { owner, repo, branch } = state.github;
-          const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data/products.json?ref=${encodeURIComponent(branch || 'main')}&_t=${Date.now()}`;
-          const res = await fetch(apiUrl, { headers: buildGitHubHeaders(token) });
-          if (res.status === 404) return null;
           if (!res.ok) throw new Error(await parseGitHubError(res));
           const data = await res.json();
-          return data.sha || null;
+          return data?.content?.download_url || `https://raw.githubusercontent.com/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/${encodeURIComponent(branch || 'main')}/${filePath}`;
         }
 
-        async function commitCatalogToGitHub(commitMessage, allowReviewToken = false, retryCount = 0) {
+        async function uploadImageFileToGitHub(file, productSlug, index) {
+          const extMatch = (file.name || '').match(/\.([a-zA-Z0-9]+)$/);
+          const ext = extMatch ? extMatch[1].toLowerCase() : 'jpg';
+          const { base64 } = await fileToBase64Payload(file);
+          return uploadBase64ImageToGitHub(base64, ext, productSlug, index);
+        }
+
+        async function resolveProductImagesForGitHub(products) {
+          if (!getActiveWriteToken(false)) return products;
+          const updated = [];
+          for (const prod of products) {
+            const slug = slugify(prod.name);
+            const nextImages = [];
+            let changed = false;
+            for (let i = 0; i < prod.images.length && i < MAX_PRODUCT_IMAGES; i++) {
+              const src = prod.images[i];
+              const parsed = parseUploadableDataUrl(src);
+              if (parsed) {
+                nextImages.push(await uploadBase64ImageToGitHub(parsed.base64, parsed.ext, slug, i + 1));
+                changed = true;
+              } else {
+                nextImages.push(src);
+              }
+            }
+            updated.push(changed ? { ...prod, images: nextImages } : prod);
+          }
+          return updated;
+        }
+
+        async function fetchRemoteCatalogForMerge(token) {
+          const { owner, repo, branch } = state.github;
+          const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data/products.json?ref=${encodeURIComponent(branch || 'main')}&_t=${Date.now()}`;
+          const res = await fetch(apiUrl, { headers: buildGitHubHeaders(token), cache: 'no-store' });
+          if (res.status === 404) return { sha: null, products: [] };
+          if (!res.ok) throw new Error(await parseGitHubError(res));
+          const data = await res.json();
+          const parsed = JSON.parse(decodeBase64Utf8(data.content || ''));
+          const list = Array.isArray(parsed) ? parsed : Array.isArray(parsed?.products) ? parsed.products : [];
+          return { sha: data.sha || null, products: list.map(normalizeProduct) };
+        }
+
+        async function commitCatalogToGitHub(commitMessage, allowReviewToken = false, options = {}) {
           const { owner, repo, branch } = state.github;
           const token = getActiveWriteToken(allowReviewToken);
+          if (!owner || !repo || !token) throw new Error('GitHub repository and token must be configured to commit changes.');
 
-          if (!owner || !repo || !token) {
-            throw new Error('GitHub repository and token must be configured to commit changes.');
-          }
+          const retryCount = options.retryCount ?? 0;
+          const preparedLocal = await resolveProductImagesForGitHub(state.products);
+          const remote = await fetchRemoteCatalogForMerge(token);
 
-          const latestSha = await fetchLatestProductsSha(token);
+          const mergedProducts = options.replaceAll
+            ? preparedLocal.map(normalizeProduct)
+            : remote.products.length > 0
+              ? mergeProductsById(remote.products, preparedLocal, {
+                  deletedIds: options.deletedIds,
+                  preferLocalIds: options.preferLocalIds,
+                })
+              : preparedLocal.map(normalizeProduct);
+
           const payloadObj = {
             storeName: 'Appex Collection',
             currency: 'INR',
             updatedAt: new Date().toISOString(),
-            products: state.products,
+            products: mergedProducts,
           };
 
-          const encodedContent = encodeBase64Utf8(JSON.stringify(payloadObj, null, 2));
           const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data/products.json`;
-
           const body = {
             message: commitMessage,
-            content: encodedContent,
+            content: encodeBase64Utf8(JSON.stringify(payloadObj, null, 2)),
             branch: branch || 'main',
           };
-          if (latestSha) {
-            body.sha = latestSha;
-          }
+          if (remote.sha) body.sha = remote.sha;
 
           const res = await fetch(apiUrl, {
             method: 'PUT',
-            headers: {
-              ...buildGitHubHeaders(token),
-              'Content-Type': 'application/json',
-            },
+            headers: { ...buildGitHubHeaders(token), 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
           });
 
-          if (res.status === 409 && retryCount < 1) {
-            return commitCatalogToGitHub(commitMessage, allowReviewToken, retryCount + 1);
+          if (res.status === 409 && retryCount < 2) {
+            state.products = preparedLocal;
+            return commitCatalogToGitHub(commitMessage, allowReviewToken, { ...options, retryCount: retryCount + 1 });
           }
-
-          if (!res.ok) {
-            throw new Error(await parseGitHubError(res));
-          }
+          if (!res.ok) throw new Error(await parseGitHubError(res));
 
           const result = await res.json();
+          state.products = mergedProducts;
           state.github.connected = true;
           state.github.lastSha = result?.content?.sha || null;
+          state.github.lastProductsEtag = res.headers.get('etag');
           state.github.lastSyncedAt = new Date().toISOString();
+
+          postSyncMessage({
+            type: 'CATALOG_UPDATED',
+            products: state.products,
+            lastSha: state.github.lastSha,
+            lastSyncedAt: state.github.lastSyncedAt,
+            owner: state.github.owner,
+            repo: state.github.repo,
+            branch: state.github.branch,
+          });
           updateAdminRepoUI();
           return result;
         }
 
-        async function fetchJsonFileSha(filePath, token) {
-          const { owner, repo, branch } = state.github;
-          const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${filePath}?ref=${encodeURIComponent(branch || 'main')}&_t=${Date.now()}`;
-          const res = await fetch(apiUrl, { headers: buildGitHubHeaders(token) });
-          if (res.status === 404) return null;
-          if (!res.ok) throw new Error(await parseGitHubError(res));
-          const data = await res.json();
-          return data.sha || null;
-        }
-
-        async function fetchOrdersFromGitHub(silent = false) {
+        async function fetchOrdersFromGitHub(silent = false, options = {}) {
           const { owner, repo, branch } = state.github;
           if (!owner || !repo) return false;
 
+          const forceBypassCache = options.forceBypassCache ?? !silent;
           const token = getActiveWriteToken(true);
-          const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data/orders.json?ref=${encodeURIComponent(branch || 'main')}&_t=${Date.now()}`;
+          const useEtag = Boolean(!forceBypassCache && !token && state.github.lastOrdersEtag);
+          const cacheBust = forceBypassCache || token ? `&_t=${Date.now()}` : '';
+          const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data/orders.json?ref=${encodeURIComponent(branch || 'main')}${cacheBust}`;
 
           try {
-            const res = await fetch(apiUrl, { headers: buildGitHubHeaders(token) });
+            const res = await fetch(apiUrl, {
+              headers: buildGitHubHeaders(token, useEtag ? state.github.lastOrdersEtag : null),
+              cache: 'no-store',
+            });
+            if (res.status === 304) return true;
             if (res.status === 404) {
               if (!silent) showToast('No data/orders.json file in repository yet.', 'info');
               return false;
@@ -1856,12 +2134,11 @@
 
             const payload = await res.json();
             const parsed = JSON.parse(decodeBase64Utf8(payload.content || ''));
-            const remoteOrders = Array.isArray(parsed.orders) ? parsed.orders : [];
-
-            // Keep any unsynced in-session orders merged cleanly without duplicating orderId
-            const remoteIds = new Set(remoteOrders.map((o) => o.orderId));
-            const unsyncedLocal = state.orders.filter((o) => !remoteIds.has(o.orderId));
-            state.orders = [...unsyncedLocal, ...remoteOrders];
+            const remoteOrders = Array.isArray(parsed.orders) ? parsed.orders.map(normalizeOrder) : [];
+            const unsyncedLocal = state.orders.filter((o) => !o.syncedToGithub);
+            state.orders = mergeOrdersById(remoteOrders, unsyncedLocal);
+            state.github.lastOrdersSha = payload.sha || null;
+            state.github.lastOrdersEtag = res.headers.get('etag');
 
             if (!silent) showToast(`Loaded ${remoteOrders.length} order(s) from GitHub.`, 'success');
             if (state.isAdminAuthenticated) {
@@ -1875,46 +2152,64 @@
           }
         }
 
-        async function commitOrdersToGitHub(commitMessage, allowPublicToken = false, retryCount = 0) {
+        async function commitOrdersToGitHub(commitMessage, allowPublicToken = false, options = {}) {
           const { owner, repo, branch } = state.github;
           const token = getActiveWriteToken(allowPublicToken);
+          if (!owner || !repo || !token) throw new Error('GitHub repository and token must be configured to sync orders.');
 
-          if (!owner || !repo || !token) {
-            throw new Error('GitHub repository and token must be configured to sync orders.');
+          const retryCount = options.retryCount ?? 0;
+          const readUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data/orders.json?ref=${encodeURIComponent(branch || 'main')}&_t=${Date.now()}`;
+          let remoteSha = null;
+          let remoteOrders = [];
+
+          const readRes = await fetch(readUrl, { headers: buildGitHubHeaders(token), cache: 'no-store' });
+          if (readRes.ok) {
+            const remotePayload = await readRes.json();
+            remoteSha = remotePayload.sha || null;
+            const parsed = JSON.parse(decodeBase64Utf8(remotePayload.content || ''));
+            remoteOrders = Array.isArray(parsed?.orders) ? parsed.orders.map(normalizeOrder) : [];
+          } else if (readRes.status !== 404) {
+            throw new Error(await parseGitHubError(readRes));
           }
 
-          const latestSha = await fetchJsonFileSha('data/orders.json', token);
+          const mergedOrders = mergeOrdersById(remoteOrders, state.orders, {
+            deletedOrderIds: options.deletedOrderIds,
+            preferLocalOrderIds: options.preferLocalOrderIds,
+          }).map((o) => ({ ...o, syncedToGithub: true }));
+
           const payloadObj = {
             storeName: 'Appex Collection',
             currency: 'INR',
             updatedAt: new Date().toISOString(),
-            orders: state.orders,
+            orders: mergedOrders,
           };
 
-          const encodedContent = encodeBase64Utf8(JSON.stringify(payloadObj, null, 2));
-          const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data/orders.json`;
-
+          const writeUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/data/orders.json`;
           const body = {
             message: commitMessage,
-            content: encodedContent,
+            content: encodeBase64Utf8(JSON.stringify(payloadObj, null, 2)),
             branch: branch || 'main',
           };
-          if (latestSha) body.sha = latestSha;
+          if (remoteSha) body.sha = remoteSha;
 
-          const res = await fetch(apiUrl, {
+          const writeRes = await fetch(writeUrl, {
             method: 'PUT',
-            headers: {
-              ...buildGitHubHeaders(token),
-              'Content-Type': 'application/json',
-            },
+            headers: { ...buildGitHubHeaders(token), 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
           });
 
-          if (res.status === 409 && retryCount < 1) {
-            return commitOrdersToGitHub(commitMessage, allowPublicToken, retryCount + 1);
+          if (writeRes.status === 409 && retryCount < 2) {
+            state.orders = mergedOrders;
+            return commitOrdersToGitHub(commitMessage, allowPublicToken, { ...options, retryCount: retryCount + 1 });
           }
-          if (!res.ok) throw new Error(await parseGitHubError(res));
-          return res.json();
+          if (!writeRes.ok) throw new Error(await parseGitHubError(writeRes));
+
+          const result = await writeRes.json();
+          state.orders = mergedOrders;
+          state.github.lastOrdersSha = result?.content?.sha || null;
+          state.github.lastOrdersEtag = writeRes.headers.get('etag');
+          postSyncMessage({ type: 'ORDERS_UPDATED', orders: state.orders });
+          return result;
         }
 
         // -----------------------------------------------------------------
@@ -1932,36 +2227,28 @@
             return matchesCat && matchesQuery;
           });
 
-          if (state.sortBy === 'price-asc') {
-            list = [...list].sort((a, b) => a.price - b.price);
-          } else if (state.sortBy === 'price-desc') {
-            list = [...list].sort((a, b) => b.price - a.price);
-          } else if (state.sortBy === 'rating-desc') {
-            list = [...list].sort(
-              (a, b) => computeAverageRating(b.reviews).avg - computeAverageRating(a.reviews).avg
-            );
+          if (state.sortBy === 'price-asc') list = [...list].sort((a, b) => a.price - b.price);
+          else if (state.sortBy === 'price-desc') list = [...list].sort((a, b) => b.price - a.price);
+          else if (state.sortBy === 'rating-desc') {
+            list = [...list].sort((a, b) => computeAverageRating(b.reviews).avg - computeAverageRating(a.reviews).avg);
           }
           return list;
         }
 
         function renderCategoryTabs() {
           const container = document.getElementById('categoryTabs');
-          container.innerHTML = CATEGORIES.map((cat) => {
+          container.innerHTML = '';
+          for (const cat of CATEGORIES) {
             const active = state.activeCategory === cat;
-            return `
-              <button
-                type="button"
-                onclick="app.setCategory('${escapeHtml(cat)}')"
-                class="px-3.5 py-1.5 rounded-md text-xs font-semibold whitespace-nowrap shrink-0 transition-colors ${
-                  active
-                    ? 'bg-brand text-white'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-                }"
-              >
-                ${escapeHtml(cat)}
-              </button>
-            `;
-          }).join('');
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.textContent = cat;
+            btn.className = `px-3.5 py-1.5 rounded-md text-xs font-semibold whitespace-nowrap shrink-0 transition-colors ${
+              active ? 'bg-brand text-white' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+            }`;
+            btn.onclick = () => app.setCategory(cat);
+            container.appendChild(btn);
+          }
         }
 
         function renderCatalogLoader(show) {
@@ -1987,21 +2274,14 @@
           const clearBtn = document.getElementById('clearFiltersBtn');
           const refreshBtn = document.getElementById('syncRefreshBtn');
 
-          headingEl.textContent =
-            state.activeCategory === 'All' ? 'All Products' : state.activeCategory;
-          metaEl.textContent = `Showing ${list.length} ${list.length === 1 ? 'item' : 'items'}`;
+          headingEl.textContent = state.activeCategory === 'All' ? 'All Products' : state.activeCategory;
+          const syncSuffix = state.github.lastSyncedAt
+            ? ` · Synced ${new Date(state.github.lastSyncedAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}`
+            : '';
+          metaEl.textContent = `Showing ${list.length} ${list.length === 1 ? 'item' : 'items'}${syncSuffix}`;
 
-          if (state.activeCategory !== 'All' || state.searchQuery.trim() !== '') {
-            clearBtn.classList.remove('hidden');
-          } else {
-            clearBtn.classList.add('hidden');
-          }
-
-          if (state.github.owner && state.github.repo) {
-            refreshBtn.classList.remove('hidden');
-          } else {
-            refreshBtn.classList.add('hidden');
-          }
+          clearBtn.classList.toggle('hidden', state.activeCategory === 'All' && state.searchQuery.trim() === '');
+          refreshBtn.classList.toggle('hidden', !(state.github.owner && state.github.repo));
 
           if (list.length === 0) {
             grid.innerHTML = '';
@@ -2018,11 +2298,13 @@
               const stockClass = product.inStock ? 'text-emerald-700' : 'text-red-700';
 
               return `
-                <article
-                  onclick="app.openProductModal('${escapeHtml(product.id)}')"
-                  class="product-card bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col cursor-pointer hover:shadow-md focus-within:ring-2 focus-within:ring-brand"
-                >
-                  <div class="aspect-[4/3] bg-slate-50 border-b border-slate-100 overflow-hidden relative">
+                <article class="product-card bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col hover:shadow-md focus-within:ring-2 focus-within:ring-brand">
+                  <button
+                    type="button"
+                    onclick="app.openProductModal('${escapeHtml(product.id)}')"
+                    aria-label="View details for ${escapeHtml(product.name)}"
+                    class="aspect-[4/3] w-full bg-slate-50 border-b border-slate-100 overflow-hidden relative block text-left focus:outline-none"
+                  >
                     ${
                       primaryImage
                         ? `<img
@@ -2033,12 +2315,12 @@
                             onerror="app.handleImgError(this, '${escapeHtml(product.name)}')"
                             class="w-full h-full object-cover"
                           />`
-                        : `<div class="w-full h-full flex flex-col items-center justify-center p-4 text-center bg-slate-100 text-slate-400">
+                        : `<div class="w-full h-full flex flex-col items-center justify-center p-4 text-center bg-gradient-to-br from-slate-100 to-slate-200 text-slate-400">
                             <i class="fa-solid fa-image text-2xl mb-1.5"></i>
-                            <span class="text-xs font-medium text-slate-500">${escapeHtml(product.name)}</span>
+                            <span class="text-xs font-medium text-slate-600 line-clamp-2">${escapeHtml(product.name)}</span>
                           </div>`
                     }
-                  </div>
+                  </button>
 
                   <div class="p-5 flex-1 flex flex-col">
                     <div class="flex items-center justify-between gap-2 text-xs mb-1.5">
@@ -2049,7 +2331,13 @@
                     </div>
 
                     <h3 class="text-base font-semibold text-slate-900 leading-snug line-clamp-2 mb-3">
-                      ${escapeHtml(product.name)}
+                      <button
+                        type="button"
+                        onclick="app.openProductModal('${escapeHtml(product.id)}')"
+                        class="text-left hover:text-brand transition-colors focus:outline-none"
+                      >
+                        ${escapeHtml(product.name)}
+                      </button>
                     </h3>
 
                     <div class="mt-auto space-y-3">
@@ -2070,7 +2358,8 @@
                         </div>
                         <button
                           type="button"
-                          onclick="event.stopPropagation(); app.quickAddToCart('${escapeHtml(product.id)}')"
+                          onclick="app.quickAddToCart('${escapeHtml(product.id)}')"
+                          aria-label="Add ${escapeHtml(product.name)} to bag"
                           ${product.inStock ? '' : 'disabled'}
                           class="px-3 py-1.5 rounded-md text-xs font-semibold transition-colors whitespace-nowrap shrink-0 ${
                             product.inStock
@@ -2089,27 +2378,34 @@
             .join('');
         }
 
+        function syncBodyScrollLock() {
+          const anyOpen =
+            Boolean(state.activeProductId) ||
+            !document.getElementById('cartDrawer').classList.contains('translate-x-full') ||
+            !document.getElementById('adminLoginModal').classList.contains('hidden') ||
+            !document.getElementById('adminDashboardModal').classList.contains('hidden');
+          document.body.classList.toggle('overflow-hidden', anyOpen);
+        }
+
         // -----------------------------------------------------------------
         // PRODUCT DETAIL MODAL & CUSTOMER REVIEWS
         // -----------------------------------------------------------------
         function openProductModal(productId) {
           const product = state.products.find((p) => p.id === productId);
           if (!product) return;
-
           state.activeProductId = productId;
           state.modalImageIndex = 0;
           state.modalQty = 1;
           state.reviewRating = 5;
-
           renderProductModalContent();
           document.getElementById('productModal').classList.remove('hidden');
-          document.body.classList.add('overflow-hidden');
+          syncBodyScrollLock();
         }
 
         function closeProductModal() {
           document.getElementById('productModal').classList.add('hidden');
-          document.body.classList.remove('overflow-hidden');
           state.activeProductId = null;
+          syncBodyScrollLock();
         }
 
         function renderProductModalContent() {
@@ -2130,13 +2426,12 @@
               : 'No reviews yet';
 
           const stockBadge = document.getElementById('modalStockBadge');
-          if (product.inStock) {
-            stockBadge.className = 'inline-flex items-center gap-1.5 text-emerald-700';
-            stockBadge.innerHTML = '<i class="fa-solid fa-circle-check"></i><span>In Stock</span>';
-          } else {
-            stockBadge.className = 'inline-flex items-center gap-1.5 text-red-700';
-            stockBadge.innerHTML = '<i class="fa-solid fa-circle-xmark"></i><span>Out of Stock</span>';
-          }
+          stockBadge.className = product.inStock
+            ? 'inline-flex items-center gap-1.5 text-emerald-700'
+            : 'inline-flex items-center gap-1.5 text-red-700';
+          stockBadge.innerHTML = product.inStock
+            ? '<i class="fa-solid fa-circle-check"></i><span>In Stock</span>'
+            : '<i class="fa-solid fa-circle-xmark"></i><span>Out of Stock</span>';
 
           document.getElementById('modalCodInfo').innerHTML = product.codAvailable
             ? '<i class="fa-solid fa-money-bill-wave text-emerald-600"></i><span>Cash on Delivery Available</span>'
@@ -2146,16 +2441,12 @@
             ? '<i class="fa-solid fa-rotate-left text-brand"></i><span>7 Days Easy Return</span>'
             : '<i class="fa-solid fa-ban text-slate-400"></i><span>Final Sale (Non-returnable)</span>';
 
-          const addBtn = document.getElementById('modalAddToCartBtn');
-          const buyBtn = document.getElementById('modalBuyNowBtn');
-          addBtn.disabled = !product.inStock;
-          buyBtn.disabled = !product.inStock;
+          document.getElementById('modalAddToCartBtn').disabled = !product.inStock;
+          document.getElementById('modalBuyNowBtn').disabled = !product.inStock;
 
-          // Gallery rendering
           const images = product.images.length ? product.images : [''];
           const safeIndex = Math.min(state.modalImageIndex, images.length - 1);
           const mainImgEl = document.getElementById('modalMainImage');
-          // Reset previous fallback node if any
           const prevFallback = mainImgEl.parentElement.querySelector('div');
           if (prevFallback) prevFallback.remove();
           mainImgEl.classList.remove('hidden');
@@ -2178,11 +2469,12 @@
                   <button
                     type="button"
                     onclick="app.selectModalImage(${idx})"
+                    aria-label="Select image ${idx + 1}"
                     class="aspect-[4/3] rounded-lg overflow-hidden border-2 transition-colors bg-slate-50 ${
                       idx === safeIndex ? 'border-brand' : 'border-slate-200 hover:border-slate-300'
                     }"
                   >
-                    <img src="${escapeHtml(src)}" alt="Preview ${idx + 1}" referrerpolicy="no-referrer" class="w-full h-full object-cover" />
+                    <img src="${escapeHtml(src)}" alt="Preview ${idx + 1}" referrerpolicy="no-referrer" onerror="app.handleImgError(this, 'Preview')" class="w-full h-full object-cover" />
                   </button>
                 `
               )
@@ -2191,7 +2483,6 @@
             thumbsContainer.innerHTML = '';
           }
 
-          // Review List & Star Picker
           renderModalReviews(product);
           renderReviewStarPicker();
         }
@@ -2203,9 +2494,9 @@
           const container = document.getElementById('modalReviewsList');
           const hintEl = document.getElementById('reviewSyncHint');
           if (getActiveWriteToken(true) && state.github.owner && state.github.repo) {
-            hintEl.textContent = 'Reviews sync directly to the live store catalog.';
+            hintEl.textContent = 'Reviews sync directly to GitHub and all connected devices.';
           } else if (state.github.owner && state.github.repo) {
-            hintEl.textContent = 'Reviews display immediately and queue for admin approval sync.';
+            hintEl.textContent = 'Reviews appear across open tabs and queue for Admin GitHub commit.';
           } else {
             hintEl.textContent = 'Share your experience with this product.';
           }
@@ -2226,11 +2517,7 @@
                 `<i class="fa-solid fa-star text-xs ${i < rev.rating ? 'text-amber-500' : 'text-slate-200'}"></i>`
               ).join('');
               const dateStr = rev.createdAt
-                ? new Date(rev.createdAt).toLocaleDateString('en-IN', {
-                    day: 'numeric',
-                    month: 'short',
-                    year: 'numeric',
-                  })
+                ? new Date(rev.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
                 : '';
 
               return `
@@ -2238,11 +2525,7 @@
                   <div class="flex items-center justify-between gap-2 mb-1.5">
                     <div class="flex items-center gap-2">
                       <span class="text-sm font-semibold text-slate-900">${escapeHtml(rev.author)}</span>
-                      ${
-                        rev.syncedToGithub === false
-                          ? '<span class="text-[11px] text-amber-700 font-medium">· Pending sync</span>'
-                          : ''
-                      }
+                      ${rev.syncedToGithub === false ? '<span class="text-[11px] text-amber-700 font-medium">· Pending sync</span>' : ''}
                     </div>
                     <span class="text-xs text-slate-400 font-mono tabular-nums">${escapeHtml(dateStr)}</span>
                   </div>
@@ -2305,19 +2588,25 @@
               reviewObj.syncedToGithub = true;
               product.reviews.push(reviewObj);
               product.updatedAt = new Date().toISOString();
-              await commitCatalogToGitHub(`Add customer review for ${product.name}`, true);
+              await commitCatalogToGitHub(`Add customer review for ${product.name}`, true, { preferLocalIds: [product.id] });
               showToast('Review published and synced to GitHub!', 'success');
             } else {
               product.reviews.push(reviewObj);
-              state.pendingReviews.push({
-                productId: product.id,
-                productName: product.name,
-                review: reviewObj,
+              state.pendingReviews.push({ productId: product.id, productName: product.name, review: reviewObj });
+              postSyncMessage({
+                type: 'CATALOG_UPDATED',
+                products: state.products,
+                lastSha: state.github.lastSha,
+                lastSyncedAt: state.github.lastSyncedAt,
+                owner: state.github.owner,
+                repo: state.github.repo,
+                branch: state.github.branch,
               });
+              postSyncMessage({ type: 'PENDING_REVIEWS_UPDATED', pendingReviews: state.pendingReviews });
               showToast(
                 state.github.owner
                   ? 'Review posted in session & queued for Admin GitHub approval.'
-                  : 'Review added to this session.',
+                  : 'Review added across open tabs in this session.',
                 'info'
               );
             }
@@ -2325,11 +2614,8 @@
             document.getElementById('reviewAuthorInput').value = '';
             document.getElementById('reviewCommentInput').value = '';
             state.reviewRating = 5;
-            renderProductModalContent();
-            renderStorefront();
-            if (state.isAdminAuthenticated) renderAdminReviewQueue();
+            refreshAllOpenViews();
           } catch (err) {
-            // Rollback optimistic push on hard GitHub error
             product.reviews = product.reviews.filter((r) => r.id !== reviewObj.id);
             showToast(err.message || 'Could not save review to GitHub.', 'error');
           } finally {
@@ -2350,11 +2636,8 @@
 
           state.checkoutOrderReceipt = null;
           const existing = state.cart.find((item) => item.productId === productId);
-          if (existing) {
-            existing.qty += qty;
-          } else {
-            state.cart.push({ productId, qty });
-          }
+          if (existing) existing.qty += qty;
+          else state.cart.push({ productId, qty });
 
           updateCartBadge();
           renderCartDrawer();
@@ -2376,22 +2659,20 @@
           renderCartDrawer();
           document.getElementById('cartDrawerBackdrop').classList.remove('hidden');
           document.getElementById('cartDrawer').classList.remove('translate-x-full');
-          document.body.classList.add('overflow-hidden');
+          syncBodyScrollLock();
         }
 
         function closeCart() {
           document.getElementById('cartDrawerBackdrop').classList.add('hidden');
           document.getElementById('cartDrawer').classList.add('translate-x-full');
-          document.body.classList.remove('overflow-hidden');
+          syncBodyScrollLock();
         }
 
         function stepCartItem(productId, delta) {
           const item = state.cart.find((c) => c.productId === productId);
           if (!item) return;
           item.qty += delta;
-          if (item.qty <= 0) {
-            state.cart = state.cart.filter((c) => c.productId !== productId);
-          }
+          if (item.qty <= 0) state.cart = state.cart.filter((c) => c.productId !== productId);
           updateCartBadge();
           renderCartDrawer();
         }
@@ -2411,7 +2692,7 @@
                 </span>
                 <h3 class="text-lg font-bold text-slate-900">Order #${escapeHtml(receipt.orderId)} Confirmed</h3>
                 <p class="text-xs text-slate-600 leading-relaxed">
-                  Thank you, <strong>${escapeHtml(receipt.customerName)}</strong>. Your Cash on Delivery order is scheduled for dispatch to PIN <strong>${escapeHtml(receipt.pin)}</strong>.
+                  Thank you, <strong>${escapeHtml(receipt.customerName)}</strong>. Your order is scheduled for dispatch to PIN <strong>${escapeHtml(receipt.pin)}</strong>.
                 </p>
                 <div class="pt-3 border-t border-emerald-200 text-xs text-left space-y-1.5 text-slate-700">
                   <div class="flex justify-between"><span>Items (${receipt.itemCount})</span><span class="font-mono tabular-nums">${formatINR(receipt.subtotal)}</span></div>
@@ -2432,10 +2713,23 @@
             return;
           }
 
-          const totalCount = state.cart.reduce((s, i) => s + i.qty, 0);
-          subtitleEl.textContent = `${totalCount} ${totalCount === 1 ? 'item' : 'items'}`;
+          let subtotal = 0;
+          let itemCount = 0;
+          let allCodEligible = true;
+          const validEntries = [];
 
-          if (state.cart.length === 0) {
+          for (const entry of state.cart) {
+            const p = state.products.find((prod) => prod.id === entry.productId);
+            if (!p || entry.qty <= 0) continue;
+            subtotal += p.price * entry.qty;
+            itemCount += entry.qty;
+            if (!p.codAvailable) allCodEligible = false;
+            validEntries.push({ p, qty: entry.qty });
+          }
+
+          subtitleEl.textContent = `${itemCount} ${itemCount === 1 ? 'item' : 'items'}`;
+
+          if (validEntries.length === 0) {
             bodyEl.innerHTML = `
               <div class="py-16 text-center space-y-3">
                 <div class="w-14 h-14 rounded-xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
@@ -2448,27 +2742,16 @@
               </div>
             `;
             footerEl.innerHTML = `
-              <button
-                type="button"
-                onclick="app.closeCart()"
-                class="w-full h-11 rounded-lg bg-brand hover:bg-brand-dark text-white text-sm font-semibold transition-colors"
-              >
+              <button type="button" onclick="app.closeCart()" class="w-full h-11 rounded-lg bg-brand hover:bg-brand-dark text-white text-sm font-semibold transition-colors">
                 Browse Products
               </button>
             `;
             return;
           }
 
-          let subtotal = 0;
-          let allCodEligible = true;
-
-          const itemsHtml = state.cart
-            .map((entry) => {
-              const p = state.products.find((prod) => prod.id === entry.productId);
-              if (!p) return '';
-              subtotal += p.price * entry.qty;
-              if (!p.codAvailable) allCodEligible = false;
-              return `
+          const itemsHtml = validEntries
+            .map(
+              ({ p, qty }) => `
                 <div class="flex gap-3.5 pb-4 border-b border-slate-100">
                   <div class="w-20 h-16 rounded-lg bg-slate-100 overflow-hidden shrink-0 border border-slate-200">
                     ${
@@ -2481,17 +2764,17 @@
                     <p class="text-sm font-semibold text-slate-900 truncate">${escapeHtml(p.name)}</p>
                     <p class="text-xs text-slate-500 mt-0.5">${p.codAvailable ? 'COD Eligible' : 'Prepaid Only'}</p>
                     <div class="mt-2 flex items-center justify-between gap-2">
-                      <span class="text-sm font-bold font-mono tabular-nums text-slate-900">${formatINR(p.price * entry.qty)}</span>
+                      <span class="text-sm font-bold font-mono tabular-nums text-slate-900">${formatINR(p.price * qty)}</span>
                       <div class="flex items-center border border-slate-200 rounded-md h-7">
                         <button type="button" onclick="app.stepCartItem('${escapeHtml(p.id)}', -1)" class="w-7 h-full text-xs text-slate-600 hover:bg-slate-100">-</button>
-                        <span class="w-7 text-center text-xs font-mono tabular-nums font-semibold">${entry.qty}</span>
+                        <span class="w-7 text-center text-xs font-mono tabular-nums font-semibold">${qty}</span>
                         <button type="button" onclick="app.stepCartItem('${escapeHtml(p.id)}', 1)" class="w-7 h-full text-xs text-slate-600 hover:bg-slate-100">+</button>
                       </div>
                     </div>
                   </div>
                 </div>
-              `;
-            })
+              `
+            )
             .join('');
 
           const shipping = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE;
@@ -2500,7 +2783,7 @@
           bodyEl.innerHTML = `
             <div class="space-y-4">${itemsHtml}</div>
             <form id="codCheckoutForm" onsubmit="app.placeCodOrder(event)" class="pt-2 space-y-3">
-              <p class="text-xs font-bold text-slate-900 uppercase tracking-wide">
+              <p class="text-xs font-bold text-slate-900 tracking-wide">
                 ${allCodEligible ? 'Cash on Delivery Details' : 'Delivery & Order Details (Prepaid items included)'}
               </p>
               <input id="chkCustomerName" type="text" required placeholder="Full Name" class="w-full h-10 px-3 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand" />
@@ -2527,11 +2810,7 @@
                 <span class="font-mono tabular-nums">${formatINR(total)}</span>
               </div>
             </div>
-            <button
-              type="submit"
-              form="codCheckoutForm"
-              class="w-full h-11 rounded-lg bg-action hover:bg-action-hover text-white text-sm font-bold transition-colors"
-            >
+            <button type="submit" form="codCheckoutForm" class="w-full h-11 rounded-lg bg-action hover:bg-action-hover text-white text-sm font-bold transition-colors">
               Confirm Order (${formatINR(total)})
             </button>
           `;
@@ -2550,20 +2829,15 @@
           let allCodEligible = true;
           const orderedItems = [];
 
-          state.cart.forEach((entry) => {
+          for (const entry of state.cart) {
             const p = state.products.find((prod) => prod.id === entry.productId);
-            if (p) {
-              subtotal += p.price * entry.qty;
-              itemCount += entry.qty;
-              if (!p.codAvailable) allCodEligible = false;
-              orderedItems.push({
-                productId: p.id,
-                name: p.name,
-                price: p.price,
-                qty: entry.qty,
-              });
-            }
-          });
+            if (!p) continue;
+            subtotal += p.price * entry.qty;
+            itemCount += entry.qty;
+            if (!p.codAvailable) allCodEligible = false;
+            orderedItems.push({ productId: p.id, name: p.name, price: p.price, qty: entry.qty });
+          }
+
           const shipping = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE;
           const total = subtotal + shipping;
           const orderId = 'APX' + String(Date.now()).slice(-6);
@@ -2586,41 +2860,28 @@
           };
 
           state.orders.unshift(orderRecord);
-
           const canCommitOrder = Boolean(state.github.owner && state.github.repo && getActiveWriteToken(true));
+
           if (canCommitOrder) {
             try {
-              orderRecord.syncedToGithub = true;
-              await commitOrdersToGitHub(`New customer order #${orderId}`, true);
+              await commitOrdersToGitHub(`New customer order #${orderId}`, true, { preferLocalOrderIds: [orderId] });
               showToast(`Order #${orderId} confirmed and saved to GitHub!`, 'success');
             } catch (err) {
-              orderRecord.syncedToGithub = false;
               showToast(`Order #${orderId} placed in session (GitHub sync failed: ${err.message}).`, 'warning');
             }
           } else {
+            postSyncMessage({ type: 'ORDERS_UPDATED', orders: state.orders });
             showToast('Order confirmed! Viewable in Admin Console -> Orders.', 'success');
           }
 
-          state.checkoutOrderReceipt = {
-            orderId,
-            customerName: name,
-            pin,
-            itemCount,
-            subtotal,
-            shipping,
-            total,
-          };
+          state.checkoutOrderReceipt = { orderId, customerName: name, pin, itemCount, subtotal, shipping, total };
           state.cart = [];
           updateCartBadge();
-          renderCartDrawer();
-          if (state.isAdminAuthenticated) {
-            renderAdminOrders();
-            updateAdminRepoUI();
-          }
+          refreshAllOpenViews();
         }
 
         // -----------------------------------------------------------------
-        // HIDDEN ADMIN PANEL & PRODUCT MANAGEMENT
+        // ADMIN PANEL
         // -----------------------------------------------------------------
         function openAdminAuth() {
           if (state.isAdminAuthenticated) {
@@ -2630,11 +2891,13 @@
           document.getElementById('adminPasswordInput').value = '';
           document.getElementById('adminAuthError').classList.add('hidden');
           document.getElementById('adminLoginModal').classList.remove('hidden');
+          syncBodyScrollLock();
           setTimeout(() => document.getElementById('adminPasswordInput').focus(), 50);
         }
 
         function closeAdminAuth() {
           document.getElementById('adminLoginModal').classList.add('hidden');
+          syncBodyScrollLock();
         }
 
         function verifyAdminPassword(event) {
@@ -2653,8 +2916,9 @@
         }
 
         function openAdminDashboard() {
+          state.isAdminOpen = true;
           document.getElementById('adminDashboardModal').classList.remove('hidden');
-          document.body.classList.add('overflow-hidden');
+          syncBodyScrollLock();
           syncGitHubInputsFromState();
           updateAdminRepoUI();
           renderAdminMediaPreviews();
@@ -2663,20 +2927,20 @@
           renderAdminReviewQueue();
           switchAdminTab(state.adminActiveTab);
           if (state.github.owner && state.github.repo) {
-            fetchOrdersFromGitHub(true);
+            fetchOrdersFromGitHub(true, { forceBypassCache: true });
           }
         }
 
         function lockAdminPanel() {
+          state.isAdminOpen = false;
           document.getElementById('adminDashboardModal').classList.add('hidden');
-          document.body.classList.remove('overflow-hidden');
+          syncBodyScrollLock();
         }
 
         function switchAdminTab(tabKey) {
           state.adminActiveTab = tabKey;
           document.querySelectorAll('.admin-tab-panel').forEach((panel) => panel.classList.add('hidden'));
           document.getElementById(`adminTab-${tabKey}`).classList.remove('hidden');
-
           document.querySelectorAll('.admin-tab-btn').forEach((btn) => {
             const active = btn.dataset.adminTab === tabKey;
             btn.className = `admin-tab-btn px-4 py-2 rounded-lg text-xs font-semibold whitespace-nowrap shrink-0 transition-colors ${
@@ -2723,17 +2987,34 @@
           state.github.branch = document.getElementById('ghBranchInput').value.trim() || 'main';
           state.github.adminToken = document.getElementById('ghAdminTokenInput').value.trim();
           state.github.reviewToken = document.getElementById('ghReviewTokenInput').value.trim();
+          state.github.lastProductsEtag = null;
+          state.github.lastOrdersEtag = null;
+
+          syncUrlWithRepo(state.github.owner, state.github.repo, state.github.branch);
+          postSyncMessage({
+            type: 'GITHUB_CONFIG_UPDATED',
+            owner: state.github.owner,
+            repo: state.github.repo,
+            branch: state.github.branch,
+          });
 
           const btn = document.getElementById('ghConnectPullBtn');
           btn.disabled = true;
           btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Connecting...</span>';
 
           try {
-            await fetchCatalogFromGitHub(false);
-            await fetchOrdersFromGitHub(true);
-            renderAdminCatalogTable();
-            renderAdminOrders();
-            renderAdminReviewQueue();
+            const ok = await fetchCatalogFromGitHub(false, { showLoader: false, forceBypassCache: true });
+            if (ok) await fetchOrdersFromGitHub(true, { forceBypassCache: true });
+            postSyncMessage({
+              type: 'CATALOG_UPDATED',
+              products: state.products,
+              lastSha: state.github.lastSha,
+              lastSyncedAt: state.github.lastSyncedAt,
+              owner: state.github.owner,
+              repo: state.github.repo,
+              branch: state.github.branch,
+            });
+            refreshAllOpenViews();
           } finally {
             btn.disabled = false;
             btn.innerHTML = '<i class="fa-solid fa-plug-circle-check"></i><span>Connect &amp; Pull data/products.json</span>';
@@ -2752,11 +3033,20 @@
             return;
           }
 
+          syncUrlWithRepo(state.github.owner, state.github.repo, state.github.branch);
+          postSyncMessage({
+            type: 'GITHUB_CONFIG_UPDATED',
+            owner: state.github.owner,
+            repo: state.github.repo,
+            branch: state.github.branch,
+          });
+
           const btn = document.getElementById('ghSeedPushBtn');
           btn.disabled = true;
           btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Pushing JSON...</span>';
           try {
-            await commitCatalogToGitHub('Sync Appex Collection catalog via Admin Console');
+            await commitCatalogToGitHub('Sync Appex Collection catalog via Admin Console', false, { replaceAll: true });
+            refreshAllOpenViews();
             showToast('Catalog pushed to data/products.json on GitHub!', 'success');
           } catch (err) {
             showToast(err.message || 'Failed to push catalog to GitHub.', 'error');
@@ -2766,15 +3056,11 @@
           }
         }
 
-        // Enforce 4 stock/policy checkboxes clearly while keeping In Stock / Out of Stock synchronized
         function handleStockCheckbox(source) {
           const chkOut = document.getElementById('chkOutOfStock');
           const chkIn = document.getElementById('chkInStock');
-          if (source === 'outOfStock') {
-            chkIn.checked = !chkOut.checked;
-          } else {
-            chkOut.checked = !chkIn.checked;
-          }
+          if (source === 'outOfStock') chkIn.checked = !chkOut.checked;
+          else chkOut.checked = !chkIn.checked;
         }
 
         async function handleAdminImageFiles(fileList) {
@@ -2813,19 +3099,16 @@
           const input = document.getElementById('prodImageUrlInput');
           const url = input.value.trim();
           if (!url) return;
-
           if (state.stagedImages.length >= MAX_PRODUCT_IMAGES) {
             showToast(`Maximum ${MAX_PRODUCT_IMAGES} images allowed per product.`, 'warning');
             return;
           }
-
           try {
             new URL(url);
           } catch {
             showToast('Please enter a valid https:// image URL.', 'warning');
             return;
           }
-
           state.stagedImages.push({
             id: 'img-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
             type: 'url',
@@ -2918,7 +3201,6 @@
 
         async function saveAdminProduct(event) {
           event.preventDefault();
-
           const editId = document.getElementById('editProductId').value.trim();
           const name = document.getElementById('prodNameInput').value.trim();
           const price = Number(document.getElementById('prodPriceInput').value);
@@ -2952,10 +3234,8 @@
                 if (hasGitHubWrite) {
                   uploadedCount++;
                   submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i><span>Uploading image ${uploadedCount}/${fileItems.length}...</span>`;
-                  const uploadedUrl = await uploadImageFileToGitHub(item.file, slug, uploadedCount);
-                  finalImageUrls.push(uploadedUrl);
+                  finalImageUrls.push(await uploadImageFileToGitHub(item.file, slug, uploadedCount));
                 } else {
-                  // Session preview fallback if Admin hasn't entered GitHub PAT yet
                   finalImageUrls.push(item.src);
                 }
               }
@@ -2988,18 +3268,24 @@
 
             if (hasGitHubWrite) {
               submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Committing data/products.json...</span>';
-              await commitCatalogToGitHub(`${existingProduct ? 'Update' : 'Add'} product: ${name}`);
-              showToast(`"${name}" saved and pushed live to GitHub!`, 'success');
+              await commitCatalogToGitHub(`${existingProduct ? 'Update' : 'Add'} product: ${name}`, false, {
+                preferLocalIds: [productRecord.id],
+              });
+              showToast(`"${name}" saved and pushed live to GitHub & all tabs!`, 'success');
             } else {
-              showToast(
-                `"${name}" updated in live session. Configure GitHub Sync Settings to persist to repository.`,
-                'warning'
-              );
+              postSyncMessage({
+                type: 'CATALOG_UPDATED',
+                products: state.products,
+                lastSha: state.github.lastSha,
+                lastSyncedAt: state.github.lastSyncedAt,
+                owner: state.github.owner,
+                repo: state.github.repo,
+                branch: state.github.branch,
+              });
+              showToast(`"${name}" updated across open tabs. Connect GitHub PAT to persist across devices.`, 'warning');
             }
 
-            renderStorefront();
-            renderAdminCatalogTable();
-            updateAdminRepoUI();
+            refreshAllOpenViews();
             resetAdminProductForm();
           } catch (err) {
             showToast(err.message || 'Failed to save product.', 'error');
@@ -3015,33 +3301,45 @@
 
           const previousProducts = [...state.products];
           state.products = state.products.filter((p) => p.id !== productId);
-          renderStorefront();
-          renderAdminCatalogTable();
-          updateAdminRepoUI();
+          postSyncMessage({
+            type: 'CATALOG_UPDATED',
+            products: state.products,
+            lastSha: state.github.lastSha,
+            lastSyncedAt: state.github.lastSyncedAt,
+            owner: state.github.owner,
+            repo: state.github.repo,
+            branch: state.github.branch,
+          });
+          refreshAllOpenViews();
 
           if (state.github.owner && state.github.repo && getActiveWriteToken(false)) {
             try {
-              await commitCatalogToGitHub(`Remove product: ${target.name}`);
+              await commitCatalogToGitHub(`Remove product: ${target.name}`, false, { deletedIds: [productId] });
+              refreshAllOpenViews();
               showToast(`Deleted "${target.name}" and synced GitHub.`, 'success');
             } catch (err) {
               state.products = previousProducts;
-              renderStorefront();
-              renderAdminCatalogTable();
+              postSyncMessage({
+                type: 'CATALOG_UPDATED',
+                products: state.products,
+                lastSha: state.github.lastSha,
+                lastSyncedAt: state.github.lastSyncedAt,
+                owner: state.github.owner,
+                repo: state.github.repo,
+                branch: state.github.branch,
+              });
+              refreshAllOpenViews();
               showToast(err.message || 'Failed to delete from GitHub.', 'error');
             }
           } else {
-            showToast(`Removed "${target.name}" from session catalog.`, 'info');
+            showToast(`Removed "${target.name}" from active session tabs.`, 'info');
           }
         }
 
         function renderAdminCatalogTable() {
           const tbody = document.getElementById('adminCatalogTableBody');
           if (state.products.length === 0) {
-            tbody.innerHTML = `
-              <tr>
-                <td colspan="6" class="py-8 text-center text-slate-500 text-sm">No products in catalog.</td>
-              </tr>
-            `;
+            tbody.innerHTML = `<tr><td colspan="6" class="py-8 text-center text-slate-500 text-sm">No products in catalog.</td></tr>`;
             return;
           }
 
@@ -3052,11 +3350,7 @@
                   <td class="py-3 px-4">
                     <div class="flex items-center gap-3">
                       <div class="w-11 h-9 rounded bg-slate-100 border border-slate-200 overflow-hidden shrink-0">
-                        ${
-                          p.images[0]
-                            ? `<img src="${escapeHtml(p.images[0])}" alt="" referrerpolicy="no-referrer" class="w-full h-full object-cover" />`
-                            : ''
-                        }
+                        ${p.images[0] ? `<img src="${escapeHtml(p.images[0])}" alt="" referrerpolicy="no-referrer" class="w-full h-full object-cover" />` : ''}
                       </div>
                       <span class="font-semibold text-slate-900 line-clamp-1">${escapeHtml(p.name)}</span>
                     </div>
@@ -3070,20 +3364,8 @@
                     ${p.codAvailable ? 'COD' : 'Prepaid'} · ${p.sevenDaysReturn ? '7d Return' : 'No Return'}
                   </td>
                   <td class="py-3 px-4 text-right whitespace-nowrap space-x-2">
-                    <button
-                      type="button"
-                      onclick="app.editAdminProduct('${escapeHtml(p.id)}')"
-                      class="px-2.5 py-1.5 rounded border border-slate-200 hover:bg-slate-100 text-xs font-semibold text-slate-700"
-                    >
-                      Edit
-                    </button>
-                    <button
-                      type="button"
-                      onclick="app.deleteAdminProduct('${escapeHtml(p.id)}')"
-                      class="px-2.5 py-1.5 rounded border border-red-200 hover:bg-red-50 text-xs font-semibold text-red-700"
-                    >
-                      Delete
-                    </button>
+                    <button type="button" onclick="app.editAdminProduct('${escapeHtml(p.id)}')" class="px-2.5 py-1.5 rounded border border-slate-200 hover:bg-slate-100 text-xs font-semibold text-slate-700">Edit</button>
+                    <button type="button" onclick="app.deleteAdminProduct('${escapeHtml(p.id)}')" class="px-2.5 py-1.5 rounded border border-red-200 hover:bg-red-50 text-xs font-semibold text-red-700">Delete</button>
                   </td>
                 </tr>
               `
@@ -3108,31 +3390,14 @@
           container.innerHTML = state.orders
             .map((order) => {
               const dateStr = order.createdAt
-                ? new Date(order.createdAt).toLocaleString('en-IN', {
-                    day: 'numeric',
-                    month: 'short',
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit',
-                  })
+                ? new Date(order.createdAt).toLocaleString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
                 : '';
-
               const itemsSummary = (order.items || [])
                 .map(
-                  (it) =>
-                    `<li class="flex justify-between gap-2 text-xs text-slate-700">
-                      <span>${it.qty} × ${escapeHtml(it.name)}</span>
-                      <span class="font-mono tabular-nums">${formatINR(it.price * it.qty)}</span>
-                    </li>`
+                  (it) => `<li class="flex justify-between gap-2 text-xs text-slate-700"><span>${it.qty} × ${escapeHtml(it.name)}</span><span class="font-mono tabular-nums">${formatINR(it.price * it.qty)}</span></li>`
                 )
                 .join('');
-
-              const statusOptions = statuses
-                .map(
-                  (st) =>
-                    `<option value="${st}" ${order.status === st ? 'selected' : ''}>${st}</option>`
-                )
-                .join('');
+              const statusOptions = statuses.map((st) => `<option value="${st}" ${order.status === st ? 'selected' : ''}>${st}</option>`).join('');
 
               return `
                 <div class="border border-slate-200 rounded-xl p-4 sm:p-5 bg-white space-y-3">
@@ -3149,35 +3414,17 @@
                       </div>
                       <p class="text-xs text-slate-400 mt-0.5 font-mono">${escapeHtml(dateStr)}</p>
                     </div>
-
                     <div class="flex items-center gap-2">
-                      <select
-                        onchange="app.updateOrderStatus('${escapeHtml(order.orderId)}', this.value)"
-                        class="h-8 px-2.5 rounded-lg border border-slate-200 bg-slate-50 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand"
-                      >
-                        ${statusOptions}
-                      </select>
-                      <button
-                        type="button"
-                        onclick="app.deleteAdminOrder('${escapeHtml(order.orderId)}')"
-                        aria-label="Delete order"
-                        class="h-8 px-2.5 rounded-lg border border-red-200 hover:bg-red-50 text-xs font-semibold text-red-700"
-                      >
-                        Delete
-                      </button>
+                      <select onchange="app.updateOrderStatus('${escapeHtml(order.orderId)}', this.value)" class="h-8 px-2.5 rounded-lg border border-slate-200 bg-slate-50 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand">${statusOptions}</select>
+                      <button type="button" onclick="app.deleteAdminOrder('${escapeHtml(order.orderId)}')" class="h-8 px-2.5 rounded-lg border border-red-200 hover:bg-red-50 text-xs font-semibold text-red-700">Delete</button>
                     </div>
                   </div>
-
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3 border-t border-slate-100">
                     <div class="text-xs text-slate-600 space-y-1">
                       <p class="font-semibold text-slate-900 text-sm">${escapeHtml(order.customerName)}</p>
-                      <p>
-                        Phone: <a href="tel:${escapeHtml(order.phone)}" class="font-mono text-brand hover:underline">${escapeHtml(order.phone)}</a>
-                        · PIN: <span class="font-mono font-semibold text-slate-800">${escapeHtml(order.pin)}</span>
-                      </p>
+                      <p>Phone: <a href="tel:${escapeHtml(order.phone)}" class="font-mono text-brand hover:underline">${escapeHtml(order.phone)}</a> · PIN: <span class="font-mono font-semibold text-slate-800">${escapeHtml(order.pin)}</span></p>
                       <p class="leading-relaxed">${escapeHtml(order.address)}</p>
                     </div>
-
                     <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 space-y-1.5">
                       <ul class="space-y-1">${itemsSummary}</ul>
                       <div class="pt-2 border-t border-slate-200 flex justify-between text-xs font-bold text-slate-900">
@@ -3196,11 +3443,11 @@
           const order = state.orders.find((o) => o.orderId === orderId);
           if (!order) return;
           order.status = newStatus;
+          postSyncMessage({ type: 'ORDERS_UPDATED', orders: state.orders });
 
           if (state.github.owner && state.github.repo && getActiveWriteToken(false)) {
             try {
-              order.syncedToGithub = true;
-              await commitOrdersToGitHub(`Update order #${orderId} status to ${newStatus}`);
+              await commitOrdersToGitHub(`Update order #${orderId} status to ${newStatus}`, false, { preferLocalOrderIds: [orderId] });
               renderAdminOrders();
               showToast(`Order #${orderId} marked as ${newStatus}.`, 'success');
             } catch (err) {
@@ -3214,17 +3461,18 @@
         async function deleteAdminOrder(orderId) {
           const prev = [...state.orders];
           state.orders = state.orders.filter((o) => o.orderId !== orderId);
-          renderAdminOrders();
-          updateAdminRepoUI();
+          postSyncMessage({ type: 'ORDERS_UPDATED', orders: state.orders });
+          refreshAllOpenViews();
 
           if (state.github.owner && state.github.repo && getActiveWriteToken(false)) {
             try {
-              await commitOrdersToGitHub(`Delete order #${orderId}`);
+              await commitOrdersToGitHub(`Delete order #${orderId}`, false, { deletedOrderIds: [orderId] });
+              refreshAllOpenViews();
               showToast(`Order #${orderId} deleted from GitHub.`, 'success');
             } catch (err) {
               state.orders = prev;
-              renderAdminOrders();
-              updateAdminRepoUI();
+              postSyncMessage({ type: 'ORDERS_UPDATED', orders: state.orders });
+              refreshAllOpenViews();
               showToast(err.message || 'Failed to delete order from GitHub.', 'error');
             }
           } else {
@@ -3243,9 +3491,6 @@
           btn.disabled = true;
           btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1.5"></i>Syncing...';
           try {
-            state.orders.forEach((o) => {
-              o.syncedToGithub = true;
-            });
             await commitOrdersToGitHub(`Sync ${state.orders.length} customer order(s)`);
             renderAdminOrders();
             showToast('Orders synced to data/orders.json on GitHub!', 'success');
@@ -3263,11 +3508,7 @@
           syncAllBtn.disabled = state.pendingReviews.length === 0;
 
           if (state.pendingReviews.length === 0) {
-            container.innerHTML = `
-              <div class="border border-slate-200 rounded-xl p-8 text-center text-sm text-slate-500">
-                No pending visitor reviews in the queue.
-              </div>
-            `;
+            container.innerHTML = `<div class="border border-slate-200 rounded-xl p-8 text-center text-sm text-slate-500">No pending visitor reviews in the queue.</div>`;
             return;
           }
 
@@ -3277,18 +3518,10 @@
                 <div class="border border-slate-200 rounded-xl p-4 bg-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div>
                     <p class="text-xs font-semibold text-brand">${escapeHtml(entry.productName)}</p>
-                    <p class="text-sm font-bold text-slate-900 mt-0.5">
-                      ${escapeHtml(entry.review.author)} · <span class="font-mono text-amber-600">${entry.review.rating}/5 ★</span>
-                    </p>
+                    <p class="text-sm font-bold text-slate-900 mt-0.5">${escapeHtml(entry.review.author)} · <span class="font-mono text-amber-600">${entry.review.rating}/5 ★</span></p>
                     <p class="text-sm text-slate-600 mt-1">${escapeHtml(entry.review.comment)}</p>
                   </div>
-                  <button
-                    type="button"
-                    onclick="app.dismissPendingReview('${escapeHtml(entry.review.id)}')"
-                    class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-600 self-start sm:self-center shrink-0"
-                  >
-                    Dismiss
-                  </button>
+                  <button type="button" onclick="app.dismissPendingReview('${escapeHtml(entry.review.id)}')" class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-xs font-semibold text-slate-600 self-start sm:self-center shrink-0">Dismiss</button>
                 </div>
               `
             )
@@ -3308,14 +3541,16 @@
           btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1.5"></i>Syncing...';
 
           try {
+            const preferIds = Array.from(new Set(state.pendingReviews.map((e) => e.productId)));
             state.pendingReviews.forEach((entry) => {
               entry.review.syncedToGithub = true;
             });
-            await commitCatalogToGitHub(`Approve & sync ${state.pendingReviews.length} customer review(s)`);
+            await commitCatalogToGitHub(`Approve & sync ${state.pendingReviews.length} customer review(s)`, false, {
+              preferLocalIds: preferIds,
+            });
             state.pendingReviews = [];
-            renderAdminReviewQueue();
-            updateAdminRepoUI();
-            renderStorefront();
+            postSyncMessage({ type: 'PENDING_REVIEWS_UPDATED', pendingReviews: [] });
+            refreshAllOpenViews();
             showToast('All pending customer reviews committed to GitHub!', 'success');
           } catch (err) {
             showToast(err.message || 'Failed to sync pending reviews.', 'error');
@@ -3329,65 +3564,83 @@
           const entry = state.pendingReviews.find((e) => e.review.id === reviewId);
           if (entry) {
             const p = state.products.find((prod) => prod.id === entry.productId);
-            if (p) {
-              p.reviews = p.reviews.filter((r) => r.id !== reviewId);
-            }
+            if (p) p.reviews = p.reviews.filter((r) => r.id !== reviewId);
           }
           state.pendingReviews = state.pendingReviews.filter((e) => e.review.id !== reviewId);
-          renderAdminReviewQueue();
-          updateAdminRepoUI();
-          renderStorefront();
+          postSyncMessage({ type: 'PENDING_REVIEWS_UPDATED', pendingReviews: state.pendingReviews });
+          postSyncMessage({
+            type: 'CATALOG_UPDATED',
+            products: state.products,
+            lastSha: state.github.lastSha,
+            lastSyncedAt: state.github.lastSyncedAt,
+            owner: state.github.owner,
+            repo: state.github.repo,
+            branch: state.github.branch,
+          });
+          refreshAllOpenViews();
         }
 
         // -----------------------------------------------------------------
-        // INITIALIZATION & EVENT BINDING
+        // INITIALIZATION & BACKGROUND CROSS-DEVICE LIVE SYNC LOOP
         // -----------------------------------------------------------------
-        function parseQueryRepoParams() {
-          const params = new URLSearchParams(window.location.search);
-          const repoParam = params.get('repo');
-          const branchParam = params.get('branch');
-          if (repoParam && repoParam.includes('/')) {
-            const [owner, repo] = repoParam.split('/');
-            if (owner && repo) {
-              state.github.owner = owner.trim();
-              state.github.repo = repo.trim();
-              if (branchParam) state.github.branch = branchParam.trim();
-            }
+        function runBackgroundSync() {
+          if (document.visibilityState !== 'visible') return;
+          if (!state.github.owner || !state.github.repo) return;
+          fetchCatalogFromGitHub(true, { showLoader: false, forceBypassCache: false });
+          if (state.isAdminOpen) {
+            fetchOrdersFromGitHub(true, { forceBypassCache: false });
           }
         }
 
         function init() {
           document.getElementById('currentYear').textContent = String(new Date().getFullYear());
+          document.getElementById('heroShowcaseImg').src = HERO_SHOWCASE_IMG;
 
-          const searchEl = document.getElementById('searchInput');
-          searchEl.addEventListener('input', (e) => {
+          const handleSearchInput = (e) => {
             state.searchQuery = e.target.value;
+            const desktopInput = document.getElementById('searchInput');
+            const mobileInput = document.getElementById('mobileSearchInput');
+            if (desktopInput && desktopInput !== e.target) desktopInput.value = state.searchQuery;
+            if (mobileInput && mobileInput !== e.target) mobileInput.value = state.searchQuery;
             renderStorefront();
-          });
+          };
 
-          // Hidden Admin Keyboard Shortcut: Ctrl+Shift+A or Alt+Shift+A
+          document.getElementById('searchInput').addEventListener('input', handleSearchInput);
+          document.getElementById('mobileSearchInput').addEventListener('input', handleSearchInput);
+
           document.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey || e.altKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
               e.preventDefault();
               openAdminAuth();
             }
             if (e.key === 'Escape') {
-              closeProductModal();
-              closeCart();
-              closeAdminAuth();
+              if (!document.getElementById('adminLoginModal').classList.contains('hidden')) closeAdminAuth();
+              else if (!document.getElementById('adminDashboardModal').classList.contains('hidden')) lockAdminPanel();
+              else if (state.activeProductId) closeProductModal();
+              else if (!document.getElementById('cartDrawer').classList.contains('translate-x-full')) closeCart();
             }
           });
 
-          parseQueryRepoParams();
+          const resolved = resolveRepoFromEnvironment();
+          state.github.owner = resolved.owner;
+          state.github.repo = resolved.repo;
+          state.github.branch = resolved.branch;
+
+          initBroadcastChannel();
           renderStorefront();
           updateCartBadge();
 
           if (state.github.owner && state.github.repo) {
-            fetchCatalogFromGitHub(true);
+            fetchCatalogFromGitHub(true, { showLoader: true, forceBypassCache: true });
           }
+
+          setInterval(runBackgroundSync, POLL_INTERVAL_MS);
+          document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') runBackgroundSync();
+          });
+          window.addEventListener('focus', runBackgroundSync);
         }
 
-        // Public API exposed for clean inline handlers
         window.app = {
           setCategory: (cat) => {
             state.activeCategory = cat;
@@ -3403,10 +3656,11 @@
             state.searchQuery = '';
             state.sortBy = 'featured';
             document.getElementById('searchInput').value = '';
+            document.getElementById('mobileSearchInput').value = '';
             document.getElementById('sortSelect').value = 'featured';
             renderStorefront();
           },
-          refreshFromGitHub: () => fetchCatalogFromGitHub(false),
+          refreshFromGitHub: () => fetchCatalogFromGitHub(false, { showLoader: true, forceBypassCache: true }),
           handleImgError,
           openProductModal,
           closeProductModal,
@@ -3419,9 +3673,7 @@
             document.getElementById('modalQtyValue').textContent = String(state.modalQty);
           },
           addModalProductToCart: (buyNow) => {
-            if (state.activeProductId) {
-              addToCart(state.activeProductId, state.modalQty, buyNow);
-            }
+            if (state.activeProductId) addToCart(state.activeProductId, state.modalQty, buyNow);
           },
           quickAddToCart: (id) => addToCart(id, 1, false),
           setReviewRating: (val) => {
@@ -3452,7 +3704,7 @@
           editAdminProduct,
           saveAdminProduct,
           deleteAdminProduct,
-          refreshOrdersFromGitHub: () => fetchOrdersFromGitHub(false),
+          refreshOrdersFromGitHub: () => fetchOrdersFromGitHub(false, { forceBypassCache: true }),
           syncOrdersToGitHub,
           updateOrderStatus,
           deleteAdminOrder,
@@ -3481,11 +3733,8 @@
           },
         };
 
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', init);
-        } else {
-          init();
-        }
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+        else init();
       })();
     </script>
   </body>
